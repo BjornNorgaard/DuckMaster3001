@@ -1,5 +1,7 @@
-# semesterprojekt3
+# Semesterprojekt 3
+================
 
-x<dfghoæids<jæfzdpob 
-fbkgpdf<j pogxdijf <
-fzposiz oijpoij oij
+Dette repo indeholder source-koden til hele vores system.
+
+For at skrive kode til projektet (og dette repo):
+[COLLABORATING](https://github.com/BjornNorgaard/semesterprojekt3/blob/master/COLLABORATING)
