@@ -17,7 +17,7 @@ Giv branchen et navn, der kort giver en idé om, hvad branchen indeholder kode t
 
 5. Commit ændringen  
 Hvis du kun har ændret i eksisterende filer:  
-`git commit -m "<besked til admin>`  
+`git commit -m "<besked til admin>"`  
 Hvis du har lavet nye filer:  
 `git add .`
 `git commit -m "<besked til admin>"`
