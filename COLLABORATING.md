@@ -7,8 +7,8 @@
 
 2. Lav en ny branch  
 `git checkout -b <ny-branch-navn>`  
-Navnet skal være på følgende form: forbogstav-branchNavn
-Så hvis Bjørn vil oprette en branch: b-branchNavn
+Navnet skal være på følgende form: forbogstav-branchNavn.
+Så hvis Bjørn vil oprette en branch: b-branchNavn.
 Giv branchen et navn, der kort giver en idé om, hvad branchen indeholder kode til. (F.eks. seriel, ny-menu, nasa-rumskib-software).
 
 3. Skriv kode, det bedste du har lært.
