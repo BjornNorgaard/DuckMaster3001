@@ -1,8 +1,8 @@
 ## Semesterprojekt 3
 #######################
 
-Hello you
+Hello!
 
-This is a description of this project.
+Something something about git, bla bla.
 
 Done.
