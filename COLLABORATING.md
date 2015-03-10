@@ -1,5 +1,3 @@
- # Kode til projektet #
-
 **Bemærk: Tekst mellem < og > betyder "indsæt egen tekst her", og krokodille-næbbene skal IKKE med. Feks. kan du indsætte 
 `duckmaster` i stedet for `<ny-branch-navn>`.**
 
@@ -21,8 +19,7 @@ Giv branchen et navn, der kort giver en idé om, hvad branchen indeholder kode t
 Hvis du kun har ændret i eksisterende filer:  
 `git commit -m "<besked til admin>"`  
 Hvis du har lavet nye filer:  
-`git add .`
-Og så derefter:
+`git add .` 
 `git commit -m "<besked til admin>"`
 
 6. Enten fortsæt med at skrive mere kode efter commit'en (gå tilbage til pkt. 3)  
