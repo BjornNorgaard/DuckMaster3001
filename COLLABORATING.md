@@ -1,7 +1,7 @@
 **Bemærk: Tekst mellem < og > betyder "indsæt egen tekst her", og krokodille-næbbene skal IKKE med. Feks. kan du indsætte 
 `duckmaster` i stedet for `<ny-branch-navn>`.**
 
-1. Klon repo Semesterprojekt2  
+1. Klon repo til semesterprojektet (_SKAL KUN GØRES ÉN GANG!_)  
 `git@github.com:BjornNorgaard/DuckMaster3001.git`
 
 2. Lav en ny branch  
@@ -23,7 +23,7 @@ Hvis du kun har ændret i eksisterende filer:
 `git commit -m "<besked til admin>"`  
 Hvis du har lavet nye filer:  
 `git add <ny-fil>`  
-Og commit derefter koden for at lave et "snapshot".  
+Commit derefter koden for at lave et "snapshot".  
 `git commit -m "<besked til admin>"`
 
 6. Enten fortsæt med at skrive mere kode efter commit'en (gå tilbage til pkt. 3)  
