@@ -12,6 +12,9 @@ Så hvis jeg vil oprette en branch, som skal bruges til koden for brugerklassen:
 Giv branchen et navn, der kort giver en idé om, hvad branchen indeholder kode til. (F.eks. seriel, ny-menu, nasa-rumskib-software).
 
 3. Skriv kode, det bedste du har lært.
+Sørg løbende for at updatere din branch så den er magen til `master`:  
+`git pull origin master`  
+Dette er især vigtigt hvis flere skriver kode samtidigt!
 
 4. Test det kode du har lavet
 
