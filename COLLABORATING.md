@@ -23,7 +23,7 @@ Hvis du kun har ændret i eksisterende filer:
 `git commit -m "<besked til admin>"`  
 Hvis du har lavet nye filer:  
 `git add <ny-fil>`  
-Og commit derefter koden for at lave et "snapshot".
+Og commit derefter koden for at lave et "snapshot".  
 `git commit -m "<besked til admin>"`
 
 6. Enten fortsæt med at skrive mere kode efter commit'en (gå tilbage til pkt. 3)  
