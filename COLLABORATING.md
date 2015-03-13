@@ -1,7 +1,7 @@
 **Bemærk: Tekst mellem < og > betyder "indsæt egen tekst her", og krokodille-næbbene skal IKKE med. Feks. kan du indsætte 
 `duckmaster` i stedet for `<ny-branch-navn>`.**
 
-1. Klon repo til semesterprojektet (*Skal kun gøres én gang!*)  
+1. Klon repo til semesterprojektet (**Skal kun gøres én gang!**)  
 `git@github.com:BjornNorgaard/DuckMaster3001.git`
 
 2. Lav en ny branch  
