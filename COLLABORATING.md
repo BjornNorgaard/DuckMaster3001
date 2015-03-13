@@ -33,4 +33,4 @@ Eller hvis du er færdig - gå videre til push.
 og branch-navn er selvfølgelig navnet på den branch du er på nu.
 
 8. Opret pull request:
-Gå ind på repo på [github](https://github.com/BjornNorgaard/DuckMaster3001) og tryk på *opret pull request*.
+Gå ind på repo på [github](https://github.com/BjornNorgaard/DuckMaster3001) og tryk på "*opret pull request*".
