@@ -2,7 +2,6 @@
 
 #include"Node.h"
 
-
 template<typename T>
 class LLToolkit
 {
@@ -28,7 +27,6 @@ public:
 		}
 	}
 
-
 	// Precondition: prevPtr points to Node just before insertion point
 	// Postcondition: A new Node with data=info has been inserted into the list after prevPtr
 	void insert(Node<T>*& prevPtr, T data)
@@ -37,7 +35,6 @@ public:
 		Node<T>* next = prevPtr->next;
 		prevPtr->next = new Node<T>(data, next);
 	}
-
 
 	// Precondition: prevPtr points to Node just before Node to remove
 	// Postcondition: The Node after prevPtr has been removed from the list 
@@ -49,7 +46,6 @@ public:
 		prevPtr->next = condemned->next;
 		delete prevPtr->next;
 	}
-
 
 	// Precondition: sourcePtr is the head pointer of a linked list.
 	// Postcondition: A pointer to a copy of the linked list is returned. The original list is 
@@ -81,7 +77,6 @@ public:
 	// Postcondition: All nodes of the list have been deleted, and the headPtr is NULL.
 	void clear(Node<T>* headPtr)
 	{
-
 		while (headPtr != NULL)
 		{
 			Node<T>* prevPtr = headPtr;
@@ -89,12 +84,11 @@ public:
 			delete prevPtr;
 		}
 		return headPtr;
-
 	}
 
 	// Precondition: headPtr is the head pointer of a linked list.
 	// Postcondition: The data item of each Node in the list has been printed to the screen in an
-	// easily readable way, e.g. ì3 - 4 - 7 -/î
+	// easily readable way, e.g. ‚Äú3 - 4 - 7 -/‚Äù
 	void print(Node<T>* headPtr)
 	{
 		while (headPtr != NULL)
@@ -165,15 +159,15 @@ public:
 	{
 		Node<T> *tailPtr;
 
-		//k¯rer en l¯kke for at finde sidste plads
-		//i head1 sÂ listerne kan sÊttes sammen.
+		//k√∏rer en l√∏kke for at finde sidste plads
+		//i head1 s√• listerne kan s√¶ttes sammen.
 		while (head1 != NULL)
 		{
 			tailPtr = head1;
 			head1 = head1->next;
 		}
 		
-		//TailPtr bliver nu brugt til at sÊtte de lister sammen
+		//TailPtr bliver nu brugt til at s√¶tte de lister sammen
 		tailPtr->next = head2;
 	}
 
@@ -184,7 +178,7 @@ public:
 		Node<T> *tailPtr;
 		Node<T> *tempPtr = headPtr;
 
-		//k¯rer en l¯kke for at finde sidste vÊrdi i listen
+		//k√∏rer en l√∏kke for at finde sidste v√¶rdi i listen
 		while (tempPtr != NULL)
 		{
 			tailPtr = tempPtr;
@@ -193,8 +187,6 @@ public:
 
 		insert(tailPtr, headPtr->info);
 		headPtr = headPtr->next;
-		
-		
 	}
 
 	// Precondition: head points to the head of a linked list
@@ -204,8 +196,7 @@ public:
 		Node<T> *tailPtr;
 		Node<T> *tempPtr = head;
 
-
-		//en while l¯kke til at finde den sidste vÊrdi i den linkede liste
+		//en while l√∏kke til at finde den sidste v√¶rdi i den linkede liste
 		while (tempPtr->next != NULL)
 		{
 			tailPtr = tempPtr;
@@ -217,4 +208,3 @@ public:
 		delete tempPtr;
 	}
 };
-
