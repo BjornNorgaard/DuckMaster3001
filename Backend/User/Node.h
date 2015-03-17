@@ -1,10 +1,10 @@
-#ifndef NODE_H_
-#define NODE_H_
+#pragma once
 
 #include<cstdlib>
 
 template<typename T>
-class Node {
+class Node
+{
 public:
 	Node(const T& i = T(), Node<T>* n = NULL)
 		: info(i), next(n)
@@ -15,5 +15,3 @@ public:
 	T info;
 	Node<T>* next;
 };
-
-#endif // NODE_H_
