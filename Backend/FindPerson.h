@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FINDPERSON_H_
+#define FINDPERSON_H_
 
 #include "LLToolkit.h"
 #include "Person.h"
@@ -17,3 +18,5 @@ private:
 	Node<Person>* tailPtr;
 	bool findPersonInList();
 };
+
+#endif // FINDPERSON_H_
