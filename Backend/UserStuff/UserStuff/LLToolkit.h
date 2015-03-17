@@ -17,7 +17,6 @@ public:
 	// Precondition: headPtr points to the head of a list with at least 1 element
 	// Postcondition: The head element has been removed and headPtr is updated to point to the new 
 	// head element
-
 	void headRemove(Node<T>*& headPtr)
 	{
 		if (headPtr != NULL)
