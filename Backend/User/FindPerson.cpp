@@ -1,4 +1,4 @@
-
+/*
 #include"FindPerson.h"
 
 FindPerson::FindPerson()
@@ -32,3 +32,4 @@ bool FindPerson::findPersonInList()
 	//Searches and finds person in list and returns pointer to the node with the person in it
 	//through call by reference, also returns true.
 }
+*/

@@ -3,6 +3,6 @@
 class SuperUser : public Person {
 public:
 	SuperUser();
-	virtual ~SuperUser();
+	//virtual ~SuperUser();
 private:
 };
