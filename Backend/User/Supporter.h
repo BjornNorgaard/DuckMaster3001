@@ -2,7 +2,7 @@
 
 class Supporter : public SuperUser {
 public:
-	virtual ~Supporter();
+	//virtual ~Supporter();
 private:
 
 };

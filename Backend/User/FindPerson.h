@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include "LLToolkit.h"
@@ -17,3 +18,4 @@ private:
 	Node<Person>* tailPtr;
 	bool findPersonInList();
 };
+*/
