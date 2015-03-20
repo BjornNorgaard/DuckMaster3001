@@ -33,4 +33,14 @@ Eller hvis du er færdig - gå videre til push.
 og branch-navn er selvfølgelig navnet på den branch du er på nu.
 
 8. Opret pull request:
-Gå ind på repo på [github](https://github.com/BjornNorgaard/DuckMaster3001) og opret ny pull request (guide kommer).
+Gå ind på repo på [github](https://github.com/BjornNorgaard/DuckMaster3001) og opret ny pull request.
+
+![Opret pull request](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_01.png)
+
+![Bekræft pull request](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_02.png)
+
+![Merge branch](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_03.png)
+
+![Confirm merge](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_04.png)
+
+![Delete branch](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_05.png)
