@@ -40,12 +40,12 @@ Gå ind på repo på [github](https://github.com/BjornNorgaard/DuckMaster3001) o
 ![Bekræft pull request](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_02.png)
 
 Sæt en af os andre på som *assignee* og vent på svar.  
-Når de nødvendige ændringer er lavet vil personen som har kigget din kode igennem vælge at *merge* din branch.
+Når de nødvendige ændringer er lavet skal du igen *commit* og *push* og så vil din *assignee* kunne se ændringerne og beslutte om koden er klar til at blive *merget* ind på master.
 
 ![Merge branch](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_03.png)
 
 ![Confirm merge](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_04.png)
 
-Nedstående skal **KUN** gøres hvis personen selv beder om det i sin pull request
+Nedstående skal **KUN** gøres hvis personen selv beder om det i sin pull request.
 
 ![Delete branch](https://github.com/BjornNorgaard/DuckMaster3001/blob/master/Pictures/CollaborationGuide/pull_request_05.png)
