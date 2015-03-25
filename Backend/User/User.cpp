@@ -2,12 +2,13 @@
 #include "User.h"
 #include <iostream>
 
+//Mangler: Check af CPR-Nummer
+
 
 User::User(string firstName, string lastName, string cprNumber) 
     : Person(firstName, lastName){
 	
 	headPtr_ = NULL;
-	tailPtr_ = NULL;
 	setUserLevel();
 	setBrugerInfo(firstName, lastName, cprNumber);
 }

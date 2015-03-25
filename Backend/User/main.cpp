@@ -1,4 +1,5 @@
 #include"User.h"
+#include"SuperUser.h"
 #include"Person.h"
 #include <iostream>
 
@@ -8,7 +9,7 @@ int main() {
 
 	Person *ptr[4] = {
 		new User("Anders", "Carlsen", "2201034231"),
-		new User("Martin", "Carpentier", "2201921697"),
+		new SuperUser("Martin", "Carpentier"),
 		new User("Ole", "Pedersen", "1352316054"),
 		new User("Niels", "Nielsen", "3243235423")
 	};

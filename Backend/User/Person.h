@@ -16,7 +16,7 @@ public:
 	virtual void printPills() = 0;
 	virtual bool deletePills(string, int) = 0;
 	int getUserLevel();
-	virtual void printUserInfo() = 0;
+	virtual void printUserInfo();
 	//virtual ~Person();
 
 private:
