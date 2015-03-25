@@ -1,7 +1,9 @@
 #ifndef LLTOOLKIT_H_
 #define LLTOOLKIT_H_
+#include <iostream>
 #include "Node.h"
 
+using namespace std;
 
 template<typename T>
 class LLToolkit

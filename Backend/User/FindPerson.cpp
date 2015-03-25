@@ -8,7 +8,6 @@ FindPerson::FindPerson() {
 }
 
 bool FindPerson::addPerson(string firstName, string lastName, int userLevel) {
-
    switch(userLevel) {
       case 1:
          break;
