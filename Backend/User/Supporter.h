@@ -19,4 +19,4 @@ class Supporter : public Person {
 
 };
 
-#endif
+#endif // SUPPORTER_H_
