@@ -12,7 +12,7 @@ void Person::getBrugerInfo(string& firstName, string& lastName) {
 }
 
 void Person::setBrugerInfo(string firstName, string lastName) {
-	
+
 	if ( firstName == "NaN" ) {
 		cout << "Firstname is empty, please try to write it again" << endl;
 		return;
@@ -21,9 +21,9 @@ void Person::setBrugerInfo(string firstName, string lastName) {
 		cout << "Lastname is empty, please try to write it again" << endl;
 		return;
 	}
-	
+
 	firstName_ = firstName;
-	lastName_ = lastName;	
+	lastName_ = lastName;
 }
 
 void Person::setUserLevel(int userLevel) {
@@ -51,4 +51,4 @@ int Person::getUserLevel() {
 void Person::printUserInfo() {
 	cout << "User is a " << (userLevel_ == 1 ? "normal user" : "") << (userLevel_ == 2 ? "super user" : "") << (userLevel_ == 3 ? "supporter" : "") << endl;
 	cout << "and hes/ her name is " << firstName_ << " " << lastName_ << endl;
-} 
+}

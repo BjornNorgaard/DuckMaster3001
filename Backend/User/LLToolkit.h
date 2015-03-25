@@ -1,6 +1,6 @@
-#pragma once
-
-#include"Node.h"
+#ifndef LLTOOLKIT_H_
+#define LLTOOLKIT_H_
+#include "Node.h"
 
 
 template<typename T>
@@ -217,3 +217,4 @@ public:
 	}
 };
 
+#endif // LLTOOLKIT_H_
