@@ -12,9 +12,9 @@ public:
 	virtual void getBrugerInfo(string&, string&);
 	virtual void setBrugerInfo(string, string);
 	virtual void setUserLevel(int);
-	virtual void addPills(string, int) = 0;
-	virtual void printPills() = 0;
+	virtual bool addPills(string, int) = 0;
 	virtual bool deletePills(string, int) = 0;
+	virtual void printPills() = 0;
 	int getUserLevel();
 	virtual void printUserInfo();
 	//virtual ~Person();
