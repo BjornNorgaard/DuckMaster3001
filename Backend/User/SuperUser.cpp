@@ -16,16 +16,12 @@ void SuperUser::setBrugerInfo(string firstName, string lastName) {
 }
 
 void SuperUser::getBrugerInfo(string& firstName, string& lastName) {
-	Supporter::getBrugerInfo(&firstName, &lastName);
+	Supporter::getBrugerInfo(firstName, lastName);
 }
 
-void SuperUser::setUserLevel() {
-	Supporter::setUserLevel(2);
-}
-
-
-void SuperUser::addPills(string pillName, int amount){
+bool SuperUser::addPills(string pillName, int amount){
 	cout << "SYSTEM: SuperUser kan ikke bruge piller" << endl;
+	return false;
 }
 
 void SuperUser::printPills() {

@@ -17,7 +17,7 @@ void User::setUserLevel() {
 	Person::setUserLevel(1);
 }
 
-void User::addPills(string pillName, int amount)
+bool User::addPills(string pillName, int amount)
 {
 	if (amount >= 1 && amount < 10)
 	{
@@ -26,7 +26,9 @@ void User::addPills(string pillName, int amount)
 			p1.Pilletype = pillName;
 
 			PilleListe_.headInsert(headPtr_, p1);
+			return true;
 	}
+	return false;
 }
 
 bool User::deletePills(string pillType, int amount) {
