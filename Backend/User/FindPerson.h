@@ -13,12 +13,12 @@ using namespace std;
 class FindPerson {
 public:
     FindPerson();
-    bool addPerson(string CPR, string firstName, string lastName, int userLevel);
-    bool deletePerson();
-    bool changePersonInfo();
+    bool addPerson(string cpr, string firstName, string lastName, int userLevel);
+    bool deletePerson(string cpr);
+    bool changePersonInfo(string cpr);
     bool checkForTakenPills();
     void printUsers();
-    bool findPersonInList(Node<Person*>*& nodePtr);
+    bool findPersonInList(string cpr, Node<Person*>*& nodePtr);
 private:
     LLToolkit<Person*> pTool_;
     Node<Person*>* headPtr_;
