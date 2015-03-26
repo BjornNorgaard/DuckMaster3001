@@ -18,11 +18,11 @@ public:
     bool changePersonInfo();
     bool checkForTakenPills();
     void printUsers();
+    bool findPersonInList(Node<Person*>*& nodePtr);
 private:
     LLToolkit<Person*> pTool_;
     Node<Person*>* headPtr_;
     Node<Person*>* tailPtr_;
-    bool findPersonInList(Node<Person*>* nodePtr);
 };
 
 #endif // FINDPERSON_H_

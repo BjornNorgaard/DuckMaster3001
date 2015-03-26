@@ -37,9 +37,16 @@ bool FindPerson::addPerson(string CPR, string firstName, string lastName, int us
 
 bool FindPerson::deletePerson() {
     Node<Person*>* foundPtr;
-    if (findPersonInList(&foundPtr) == false) return false;
+    if (findPersonInList(foundPtr) == false) return false;
 
-    if (headPtr_ == )
+    delete foundPtr->info;
+
+    if (foundPtr == headPtr_) {
+        pTool_.headRemove(foundPtr);
+    } else {
+        pTool_.remove(foundPtr);
+    }
+
     return true;
 }
 
@@ -53,7 +60,11 @@ bool checkForTakenPills() {
    return true;
 }
 
-bool FindPerson::findPersonInList(&nodePtr) {
+bool FindPerson::findPersonInList(string cpr, Node<Person*>*& nodePtr) {
+    headPtr = headPtr_;
+    while (headPtr != NULL) {
+        if ()
+    }
     //Searches and finds person in list and returns pointer to the node with the person in it
     //through call by reference, also returns true.
     return true;
