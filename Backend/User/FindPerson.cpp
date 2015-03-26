@@ -32,26 +32,33 @@ bool FindPerson::addPerson(string CPR, string firstName, string lastName, int us
     }
 
     pTool_.headInsert(headPtr_, newUser);
-    delete newUser;
     return true;
 }
 
 bool FindPerson::deletePerson() {
+    Node<Person*>* foundPtr;
+    if (findPersonInList(&foundPtr) == false) return false;
 
+    if (headPtr_ == )
+    return true;
 }
 
 bool FindPerson::changePersonInfo() {
-
+    //findPersonInList();
+    return true;
 }
 
 bool checkForTakenPills() {
-
+   cout << "Sure." << endl;
+   return true;
 }
 
-bool FindPerson::findPersonInList() {
+bool FindPerson::findPersonInList(&nodePtr) {
     //Searches and finds person in list and returns pointer to the node with the person in it
     //through call by reference, also returns true.
+    return true;
 }
 
 void printUsers() {
+    cout << "Users in the system: " << endl;
 }

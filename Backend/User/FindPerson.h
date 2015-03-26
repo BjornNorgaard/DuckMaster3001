@@ -22,7 +22,7 @@ private:
     LLToolkit<Person*> pTool_;
     Node<Person*>* headPtr_;
     Node<Person*>* tailPtr_;
-    bool findPersonInList();
+    bool findPersonInList(Node<Person*>* nodePtr);
 };
 
 #endif // FINDPERSON_H_
