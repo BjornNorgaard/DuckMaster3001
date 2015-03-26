@@ -17,7 +17,7 @@ public:
     }
 
     // Precondition: headPtr points to the head of a list with at least 1 element
-    // Postcondition: The head element has been removed and headPtr is updated to point to the new 
+    // Postcondition: The head element has been removed and headPtr is updated to point to the new
     // head element
     void headRemove(Node<T>*& headPtr)
     {
@@ -41,7 +41,7 @@ public:
 
 
     // Precondition: prevPtr points to Node just before Node to remove
-    // Postcondition: The Node after prevPtr has been removed from the list 
+    // Postcondition: The Node after prevPtr has been removed from the list
     void remove(Node<T>*& prevPtr)
     {
         if (prevPtr == NULL) return;
@@ -53,7 +53,7 @@ public:
 
 
     // Precondition: sourcePtr is the head pointer of a linked list.
-    // Postcondition: A pointer to a copy of the linked list is returned. The original list is 
+    // Postcondition: A pointer to a copy of the linked list is returned. The original list is
     // unaltered.
     Node<T>* copy(Node<T>* sourcePtr)
     {

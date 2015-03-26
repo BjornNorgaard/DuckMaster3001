@@ -5,9 +5,9 @@
 //Mangler: Check af CPR-Nummer
 
 
-User::User(string firstName, string lastName, string cprNumber) 
+User::User(string firstName, string lastName, string cprNumber)
     : Person(firstName, lastName){
-	
+
 	headPtr_ = NULL;
 	setUserLevel();
 	setBrugerInfo(firstName, lastName, cprNumber);
@@ -32,13 +32,13 @@ bool User::addPills(string pillName, int amount)
 }
 
 bool User::deletePills(string pillType, int amount) {
-	
+
 	//Tjekker om pillen er på første plads i vores linked list
 	if (headPtr_->info.Pilletype == pillType) {
 		PilleListe_.headRemove(headPtr_);
 		cout << "SYSTEM: Pillen " << headPtr_->info.Pilletype << " bliver slettet fra brugerens pilleprofil" << endl;
 	}
-		
+
 
 	//hvis ikke kører den resten igennem
 	Node<Pilledata>* tmpPtr = headPtr_;
@@ -65,7 +65,7 @@ bool User::deletePills(string pillType, int amount) {
 
 void User::printPills() {
 	Node<Pilledata>* tmpPtr = headPtr_;
-	
+
 	while (tmpPtr != NULL)
 	{
 		cout << "User needs " << tmpPtr->info.antal << " " << tmpPtr->info.Pilletype << endl;

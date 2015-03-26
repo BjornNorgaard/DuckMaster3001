@@ -9,12 +9,12 @@ public:
     //virtual ~Supporter();
     virtual void getBrugerInfo(string&, string&);
     virtual void setBrugerInfo(string, string);
-    virtual void setUserLevel(int) = 0;
-    virtual bool addPills(string, int) = 0;
-    virtual bool deletePills(string, int) = 0;
-    virtual void printPills() = 0;
+    virtual void setUserLevel(int);
+    virtual bool addPills(string, int);
+    virtual bool deletePills(string, int);
+    virtual void printPills();
     int getUserLevel();
-    virtual void printUserInfo() = 0;
+    virtual void printUserInfo();
 private:
 
 };
