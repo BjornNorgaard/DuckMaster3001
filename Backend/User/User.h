@@ -13,12 +13,12 @@ struct Pilledata {
 
 class User : public Person {
 public:
-    User(string firstName, string lastName, string cprNumber);
+    User(string cprNumber, string firstName, string lastName);
     virtual bool addPills(string, int);
     virtual void printPills();
     virtual bool deletePills(string, int);
-    virtual void getBrugerInfo(string& firstName, string& lastName, string& cprNumber);
-    virtual void setBrugerInfo(string firstName, string lastName, string cprNumber);
+    virtual void getBrugerInfo(string& cprNumber, string& firstName, string& lastName);
+    virtual void setBrugerInfo(string cprNumber, string firstName, string lastName);
     virtual void printUserInfo();
     //virtual ~User();
 private:
@@ -26,5 +26,4 @@ private:
     LLToolkit<Pilledata> PilleListe_;
     Pilledata Piller_;
     Node<Pilledata>* headPtr_;
-    string cprNumber_;
 };
