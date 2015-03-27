@@ -11,6 +11,7 @@ User::User(string cprNumber, string firstName, string lastName)
 
         headPtr_ = NULL;
         setUserLevel();
+        setName(cprNumber, firstName, lastName);
     }
 
 void User::setUserLevel() {
@@ -73,15 +74,19 @@ void User::printPills() {
     }
 }
 
-void User::getBrugerInfo(string& firstName, string& lastName, string& cprNumber) {
+void User::getName(string& firstName, string& lastName, string& cprNumber) {
 	Person::getName(firstName, lastName);
 	Person::getCPR(cprNumber);
 }
 
-void User::setBrugerInfo(string firstName, string lastName, string cprNumber) {
+void User::setName(string firstName, string lastName, string cprNumber) {
 	Person::setName(firstName, lastName);
 	Person::setCPR((cprNumber.size() == 10 ? cprNumber : "0000000000"));
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0ade0d7e1cc39db9325477fabe9ec85c40089aa6
 
 void User::printUserInfo() {
     Person::printUserInfo();

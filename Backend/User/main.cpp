@@ -1,5 +1,5 @@
 #include <iostream>
-#include <conio.h>
+#include <ncurses.h>
 #include "FindPerson.h"
 #include "SuperUser.h"
 #include "Person.h"

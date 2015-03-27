@@ -20,8 +20,8 @@ public:
     virtual bool addPills(string, int);
     virtual void printPills();
     virtual bool deletePills(string, int);
-    virtual void getBrugerInfo(string& cprNumber, string& firstName, string& lastName);
-    virtual void setBrugerInfo(string cprNumber, string firstName, string lastName);
+    virtual void getName(string& cprNumber, string& firstName, string& lastName);
+    virtual void setName(string cprNumber, string firstName, string lastName);
     virtual void printUserInfo();
     //virtual ~User();
 private:
