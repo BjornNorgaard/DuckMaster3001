@@ -74,12 +74,12 @@ void User::printPills() {
 }
 
 void User::getBrugerInfo(string& firstName, string& lastName, string& cprNumber) {
-	Person::getBrugerInfo(firstName, lastName);
+	Person::getName(firstName, lastName);
 	cprNumber = cprNumber_;
 }
 
 void User::setBrugerInfo(string firstName, string lastName, string cprNumber) {
-	Person::setBrugerInfo(firstName, lastName);
+	Person::setName(firstName, lastName);
 	cprNumber_ = (cprNumber.size() == 10 ? cprNumber : "0000000000");
 }
 

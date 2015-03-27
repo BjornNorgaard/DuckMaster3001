@@ -8,16 +8,20 @@ Supporter::Supporter(string firstName, string lastName) : Person(firstName, last
 }
 
 void Supporter::getBrugerInfo(string& firstName, string& lastName) {
-    Person::getBrugerInfo(firstName, lastName);
+    Person::getName(firstName, lastName);
 }
 
 void Supporter::setBrugerInfo(string firstName, string lastName) {
-    Person::setBrugerInfo(firstName, lastName);
+    Person::setName(firstName, lastName);
 }
 
 
 bool Supporter::addPills(string, int) {
     return false;
+}
+
+void Supporter::setUserLevel(int userLevel) {
+	Person::setUserLevel(userLevel);
 }
 
 bool Supporter::deletePills(string, int) {

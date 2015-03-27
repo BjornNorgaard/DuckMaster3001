@@ -19,7 +19,7 @@ public:
     virtual void printPills() = 0;
     int getUserLevel();
     virtual void printUserInfo();
-    //virtual ~Person();
+    //~Person();
 private:
     int userLevel_;
     string firstName_;

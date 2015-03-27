@@ -1,3 +1,6 @@
+#ifndef _USER_H_
+#define _USER_H_
+
 #include "Person.h"
 #include "LLToolkit.h"
 #include <string>
@@ -28,3 +31,5 @@ private:
     Node<Pilledata>* headPtr_;
     string cprNumber_;
 };
+
+#endif
