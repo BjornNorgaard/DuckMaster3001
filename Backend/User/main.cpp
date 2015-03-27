@@ -60,7 +60,8 @@ int main() {
 
 			if (userLevel == 1) {
 				cout << endl << "Write normal users CPR-number for database" << endl;
-				cout << endl << endl << cpr << endl;
+
+				cin.ignore(1, '\n');
 				getline(cin, cpr);
 
 				findP.addPerson(cpr, firstName, lastName, userLevel);

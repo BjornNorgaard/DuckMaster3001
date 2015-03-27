@@ -7,11 +7,10 @@ using namespace std;
 //Mangler: Check af CPR-Nummer
 
 User::User(string cprNumber, string firstName, string lastName)
-    : Person(firstName, lastName){
+    : Person(cprNumber, firstName, lastName){
 
         headPtr_ = NULL;
         setUserLevel();
-        setBrugerInfo(cprNumber, firstName, lastName);
     }
 
 void User::setUserLevel() {
@@ -76,13 +75,13 @@ void User::printPills() {
 
 void User::getBrugerInfo(string& firstName, string& lastName, string& cprNumber) {
 	Person::getName(firstName, lastName);
-	cprNumber = cprNumber_;
+	Person::getCPR(cprNumber);
 }
 
 void User::setBrugerInfo(string firstName, string lastName, string cprNumber) {
 	Person::setName(firstName, lastName);
-	cprNumber_ = (cprNumber.size() == 10 ? cprNumber : "0000000000");
-
+	Person::setCPR((cprNumber.size() == 10 ? cprNumber : "0000000000"));
+}
 
 void User::printUserInfo() {
     Person::printUserInfo();
