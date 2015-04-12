@@ -1,5 +1,5 @@
 var http = require('http');
-var url = requre('url');
+var url = require('url');
 var port = 8000;
 var msgLength = 100;
 
@@ -8,18 +8,31 @@ var besked = {
 	msg: "Har ikke taget sine piller"
 }
 
+var msgDerp = JSON.stringify(besked);
+
 var postOptions = {
-	host: localhost,
+	host: '127.0.0.1',
 	port: port, 
-	path: "/duckmaster3001_raspberry", 
-	method: "POST",
+	path: '/duckmaster3001_raspberry', 
+	method: 'POST',
 	header: {
-		"Content-type": "application/json",
-		"Content-length": msgLength
+		'Content-Type': 'application/json',
+		'Content-Length': msgDerp.length
 	}
 }
 
-var httpRequest = http.request(postOptions, function(result){});
+var transmit = function() {
+	var httpRequest = http.request(postOptions, function(result){});
 
-httpRequest.write(JSON.stingify(besked);
-httpRequest.end();
+	httpRequest.write(msgDerp);
+	httpRequest.end();
+	
+	setTimeout(transmit, 2000);
+	p("Sender");
+}
+
+var p = function(output) {
+	console.log(output);
+}
+
+transmit();
