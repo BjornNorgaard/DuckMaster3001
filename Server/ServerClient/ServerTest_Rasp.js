@@ -2,6 +2,7 @@ var http = require('http');
 var url = require('url');
 var port = 8000;
 var msgLength = 100;
+var retryAttempt = 0;
 
 var besked = {
 	name: "Derpbina",
@@ -23,12 +24,21 @@ var postOptions = {
 
 var transmit = function() {
 	var httpRequest = http.request(postOptions, function(result){});
-
+	
+	httpRequest.on("error", function(e){	
+		if(retryAttempt <= 20) {
+			transmit();
+			p(retryAttempt);
+		
+			retryAttempt++;
+		}
+		else if(retryAttempt == 20) {
+			p(e);
+		}
+	})
+	
 	httpRequest.write(msgDerp);
 	httpRequest.end();
-	
-	setTimeout(transmit, 2000);
-	p("Sender");
 }
 
 var p = function(output) {

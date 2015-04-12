@@ -3,6 +3,10 @@ var url = require('url');
 var msgLog = [];
 var port = 8000;
 
+var p = function(output) {
+	console.log(output);
+} 
+
 var derpFunc = function(request, response) {
 	var pathname = url.parse(request.url).pathname;
 	
@@ -13,14 +17,14 @@ var derpFunc = function(request, response) {
 			
 			// Receive part of the data
 			request.on("data", function(data) {
-				p("request.on: data");	
+				p("data");
 				body += data;
 			})
 			
 			// Done receiving data, now saving
 			request.on("end", function() {
 				var msg = JSON.parse(body);
-				
+				p("end");
 				// do stuff with data
 				msgLog.push(msg);
 				
@@ -43,16 +47,12 @@ var derpFunc = function(request, response) {
 			}
 			
 			response.writeHeader(200, {"Content-Type": "application/json"});
-			response.write(JSON.stingify(sendData));
+			response.write(JSON.stringify(sendData));
 		}
 	}
 	
 	response.end();
 }
-
-/* var p = function(output) {
-	console.log(output);
-} */
 
 http.createServer(derpFunc).listen(port);
 
