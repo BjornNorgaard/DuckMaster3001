@@ -1,8 +1,9 @@
 var http = require('http');
 var url = requre('url');
 var msgLog = [];
+var port = 8000;
 
-http.createServer(derpFunc)
+http.createServer(derpFunc).listen(port);
 
 var derpFunc = function(request, response) {
 	var pathname = url.parse(request.url).pathname;
@@ -22,6 +23,8 @@ var derpFunc = function(request, response) {
 				
 				// do stuff with data
 				msgLog.push(msg);
+				
+				console.log(msg);
 			}
 			
 			// responses that all went well
