@@ -17,14 +17,17 @@ var derpFunc = function(request, response) {
 			
 			// Receive part of the data
 			request.on("data", function(data) {
-				p("data");
+				p("receiving...");
+				
+				// assembling full dataset
 				body += data;
 			})
 			
 			// Done receiving data, now saving
 			request.on("end", function() {
 				var msg = JSON.parse(body);
-				p("end");
+				p("transfer complete!");
+				
 				// do stuff with data
 				msgLog.push(msg);
 				
@@ -55,4 +58,3 @@ var derpFunc = function(request, response) {
 }
 
 http.createServer(derpFunc).listen(port);
-
