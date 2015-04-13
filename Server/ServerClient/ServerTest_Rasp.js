@@ -12,7 +12,7 @@ var besked = {
 var msgDerp = JSON.stringify(besked);
 
 var postOptions = {
-	host: '10.0.0.13',
+	host: '10.30.1.26',
 	port: port, 
 	path: '/duckmaster3001_raspberry', 
 	method: 'POST',
