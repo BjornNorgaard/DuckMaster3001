@@ -1,3 +1,6 @@
+#ifndef _USER_H_
+#define _USER_H_
+
 #include "Person.h"
 #include "LLToolkit.h"
 #include <string>
@@ -13,12 +16,12 @@ struct Pilledata {
 
 class User : public Person {
 public:
-    User(string firstName, string lastName, string cprNumber);
+    User(string cprNumber, string firstName, string lastName);
     virtual bool addPills(string, int);
     virtual void printPills();
     virtual bool deletePills(string, int);
-    virtual void getBrugerInfo(string& firstName, string& lastName, string& cprNumber);
-    virtual void setBrugerInfo(string firstName, string lastName, string cprNumber);
+    virtual void getName(string& cprNumber, string& firstName, string& lastName);
+    virtual void setName(string cprNumber, string firstName, string lastName);
     virtual void printUserInfo();
     //virtual ~User();
 private:
@@ -26,5 +29,6 @@ private:
     LLToolkit<Pilledata> PilleListe_;
     Pilledata Piller_;
     Node<Pilledata>* headPtr_;
-    string cprNumber_;
 };
+
+#endif
