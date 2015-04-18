@@ -1,16 +1,16 @@
-#ifndef RENAME_H
-#define RENAME_H
+#ifndef ADDUSER_H
+#define ADDUSER_H
 
-#include <QMainWindow>
+#include <QWidget>
+#include <QFont>
 #include <QPushButton>
 
-class Rename : public QWidget
+class AddUser : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Rename(QWidget *parent = 0);
-    ~Rename();
+    AddUser(QWidget *parent = 0);
 
 private slots:
     void closeCurrentWindow();
@@ -19,7 +19,6 @@ private:
     QFont f_;
     QPushButton *back;
     QPushButton *accept;
-
 };
 
-#endif // RENAME_H
+#endif // ADDUSER_H

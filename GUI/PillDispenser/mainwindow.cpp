@@ -5,9 +5,14 @@
 #include <QFont>
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, Database *db) :
     QWidget(parent)
 {
+    //Window Definitions
+    db_ = db;
+    R = new Rename;
+    add_ = new AddUser(this);
+
     QFont f1;
     vbox = new QVBoxLayout();
     hbox = new QHBoxLayout(this);
@@ -15,19 +20,15 @@ MainWindow::MainWindow(QWidget *parent) :
     f1.setPointSize(23);
 
 
-    QListWidget *lw = new QListWidget(this);
-    /*
-     * for( Every person in database )
-     *     lw->addItem(Person)
-     *
-    */
+    lw = new QListWidget(this);
+    db->createList(lw);
 
     lw->setFont(f1);
-    lw->addItem("Anders Hansen");
-    lw->addItem("Birthe Fransen");
-    lw->addItem("Jonas Thomson");
-    lw->addItem("Daniel Johnny Pontoppidan");
-    lw->addItem("Elsa Mogensen");
+    //lw->addItem("Anders Hansen");
+    //lw->addItem("Birthe Fransen");
+    //lw->addItem("Jonas Thomson");
+    //lw->addItem("Daniel Johnny Pontoppidan");
+    //lw->addItem("Elsa Mogensen");
 
     dispenseButton();
     changePillsButton();
@@ -56,7 +57,12 @@ void MainWindow::dispenseButton()
     dispense->setFont(f);
     vbox->addWidget(dispense);
 
-    connect(dispense, SIGNAL(clicked()), qApp, SLOT(quit()));
+    connect(dispense, SIGNAL(clicked()), this, SLOT(dispenseButtonClicked()));
+}
+
+void MainWindow::dispenseButtonClicked()
+{
+
 }
 
 void MainWindow::changePillsButton()
@@ -66,7 +72,12 @@ void MainWindow::changePillsButton()
     changePills->setFont(fSmallButton);
     vbox->addWidget(changePills);
 
-    connect(changePills, SIGNAL(clicked()), qApp, SLOT(quit()));
+    connect(changePills, SIGNAL(clicked()), this, SLOT(changePillsButtonClicked()));
+}
+
+void MainWindow::changePillsButtonClicked()
+{
+
 }
 
 void MainWindow::removeButton()
@@ -76,22 +87,30 @@ void MainWindow::removeButton()
     remove->setFont(fSmallButton);
     vbox->addWidget(remove);
 
-    connect(remove, SIGNAL(clicked()), qApp, SLOT(quit()));
+    connect(remove, SIGNAL(clicked()), this, SLOT(removeButtonClicked()));
+}
+
+void MainWindow::removeButtonClicked()
+{
+
 }
 
 void MainWindow::renameButton()
 {
-    QPushButton *rename = new QPushButton("Rename", this);
+    rename = new QPushButton("Rename", this);
     rename->setFixedSize(300, 70);
     rename->setFont(fSmallButton);
     vbox->addWidget(rename);
 
-    connect(rename, SIGNAL(clicked()), this, SLOT(renameWindowOpen()));
+    connect(rename, SIGNAL(clicked()), this, SLOT(renameButtonClicked()));
 }
 
-void MainWindow::renameWindowOpen()
+void MainWindow::renameButtonClicked()
 {
-    R = new Rename();
+    Qt::WindowFlags flags = add_->windowFlags();
+    R->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    R->setWindowModality(Qt::WindowModal);
+    R->move(400, 300);
     R->show();
 }
 
@@ -102,5 +121,15 @@ void MainWindow::addUserButton()
     add->setFont(fSmallButton);
     vbox->addWidget(add);
 
-    connect(add, SIGNAL(clicked()), qApp, SLOT(quit()));
+    connect(add, SIGNAL(clicked()), this, SLOT(addUserButtonClicked()));
+}
+
+void MainWindow::addUserButtonClicked()
+{
+    Qt::WindowFlags flags = add_->windowFlags();
+    add_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    add_->setWindowModality(Qt::WindowModal);
+    add_->move(400, 300);
+    add_->show();
+    //add_->activateWindow();
 }

@@ -7,9 +7,9 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QStatusBar>
-#include "rename.h"
+#include "AddUser.h"
 
-Rename::Rename(QWidget *parent)
+AddUser::AddUser(QWidget *parent)
     : QWidget(parent)
 {
     //Font Definitions
@@ -56,13 +56,7 @@ Rename::Rename(QWidget *parent)
 
 }
 
-void Rename::closeCurrentWindow()
+void AddUser::closeCurrentWindow()
 {
     this->close();
 }
-
-Rename::~Rename()
-{
-
-}
-
