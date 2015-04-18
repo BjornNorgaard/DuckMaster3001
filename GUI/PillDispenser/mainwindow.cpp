@@ -86,11 +86,12 @@ void MainWindow::renameButton()
     rename->setFont(fSmallButton);
     vbox->addWidget(rename);
 
-    connect(rename, SIGNAL(clicked()), qApp, SLOT(renameWindowOpen()));
+    connect(rename, SIGNAL(clicked()), this, SLOT(renameWindowOpen()));
 }
 
 void MainWindow::renameWindowOpen()
 {
+    R = new Rename();
     R->show();
 }
 

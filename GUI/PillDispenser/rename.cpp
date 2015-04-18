@@ -1,10 +1,10 @@
 #include "rename.h"
 
-Rename::Rename(QWidget *parent) : QWidget(parent)
+Rename::Rename(QMainWindow *parent) :
+    QMainWindow(parent)
 {
 
 }
-
 Rename::~Rename()
 {
 

@@ -1,13 +1,14 @@
 #ifndef RENAME_H
 #define RENAME_H
 
+#include <QMainWindow>
 #include <QWidget>
 
-class Rename : public QWidget
+class Rename : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit Rename(QWidget *parent = 0);
+    explicit Rename(QMainWindow *parent = 0);
     ~Rename();
 
 signals:
