@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <string>
 #include <QListWidget>
 #include "Database.hpp"
 #include "rename.h"
@@ -28,9 +29,14 @@ private:
     //Custom_Windows
     Rename *R;
     AddUser *add_;
+    Rename *R2;
+
+    QString personInfo_;
+
 
     Database* db_;
     QListWidget *lw;
+    QListWidgetItem *lwit;
     QVBoxLayout *vbox;
     QHBoxLayout *hbox;
     QFont fSmallButton;
@@ -43,6 +49,8 @@ private slots:
     void addUserButtonClicked();
     void removeButtonClicked();
     void changePillsButtonClicked();
+    //List click
+    void setItem(QListWidgetItem*);
 };
 
 #endif // MAINWINDOW_H

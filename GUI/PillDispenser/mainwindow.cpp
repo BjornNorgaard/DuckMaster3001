@@ -10,7 +10,9 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
 {
     //Window Definitions
     db_ = db;
-    R = new Rename;
+    lwit = NULL;
+    R = new Rename(this);
+    R2 = new Rename;
     add_ = new AddUser(this);
 
     QFont f1;
@@ -22,13 +24,10 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
 
     lw = new QListWidget(this);
     db->createList(lw);
+    lw->sortItems(Qt::AscendingOrder);
 
     lw->setFont(f1);
-    //lw->addItem("Anders Hansen");
-    //lw->addItem("Birthe Fransen");
-    //lw->addItem("Jonas Thomson");
-    //lw->addItem("Daniel Johnny Pontoppidan");
-    //lw->addItem("Elsa Mogensen");
+    personInfo_ = "NaN,NaN,000000-0000";
 
     dispenseButton();
     changePillsButton();
@@ -38,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
 
     vbox->setSpacing(1);
     vbox->addStretch(3);
+
+    connect(lw, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(setItem(QListWidgetItem*)));
 
     hbox->addWidget(lw);
     hbox->addSpacing(5);
@@ -58,11 +59,22 @@ void MainWindow::dispenseButton()
     vbox->addWidget(dispense);
 
     connect(dispense, SIGNAL(clicked()), this, SLOT(dispenseButtonClicked()));
+
+}
+
+//Sets the variable fokus on the currently
+//marked item on the list
+void MainWindow::setItem(QListWidgetItem* item)
+{
+   personInfo_ = item->text().toCaseFolded();
+   lwit = item;
 }
 
 void MainWindow::dispenseButtonClicked()
 {
-
+    //Send message to user equal to
+    //Pills having to be dispensed
+    //for current selected user
 }
 
 void MainWindow::changePillsButton()
@@ -92,7 +104,18 @@ void MainWindow::removeButton()
 
 void MainWindow::removeButtonClicked()
 {
+    if(lwit == NULL)
+    {
+        //Open Window telling user
+        //to choose a user
+    } else {
+        delete lwit;
+        lwit = NULL;
+    }
 
+    //Add code for deleting user from Data
+    //base (could be from a different
+    //object/ class
 }
 
 void MainWindow::renameButton()
@@ -107,10 +130,10 @@ void MainWindow::renameButton()
 
 void MainWindow::renameButtonClicked()
 {
-    Qt::WindowFlags flags = add_->windowFlags();
-    R->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    R->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     R->setWindowModality(Qt::WindowModal);
     R->move(400, 300);
+    R->setInfo(personInfo_);
     R->show();
 }
 

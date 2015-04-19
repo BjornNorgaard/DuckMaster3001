@@ -15,6 +15,7 @@ Rename::Rename(QWidget *parent)
     //Font Definitions
     QFont f;
     QFont f1;
+    AW_ = new AcceptPopup;
     f.setPointSize(25);
     f1.setPointSize(17);
 
@@ -27,13 +28,13 @@ Rename::Rename(QWidget *parent)
                                   ":", this);
     occupation->setFont(f1);
 
-    QLineEdit *le1 = new QLineEdit(this);
+    le1 = new QLineEdit(this);
     le1->setFixedSize(300, 50);
     le1->setFont(f);
-    QLineEdit *le2 = new QLineEdit(this);
+    le2 = new QLineEdit(this);
     le2->setFixedSize(300, 50);
     le2->setFont(f);
-    QLineEdit *le3 = new QLineEdit(this);
+    le3 = new QLineEdit(this);
     le3->setFixedSize(300, 50);
     le3->setFont(f);
 
@@ -41,24 +42,79 @@ Rename::Rename(QWidget *parent)
     connect(back, SIGNAL(clicked()), this , SLOT(closeCurrentWindow()));
 
     accept = new QPushButton("Accept", this);
+    connect(accept, SIGNAL(clicked()), this , SLOT(openNewWindow()));
 
-    QGridLayout *grid = new QGridLayout();
+    QGridLayout *smallGrid = new QGridLayout();
+    QGridLayout *mainGrid = new QGridLayout();
 
-    grid->addWidget(name, 0, 0);
-    grid->addWidget(le1, 0, 1);
-    grid->addWidget(age, 1, 0);
-    grid->addWidget(le2, 1, 1);
-    grid->addWidget(occupation, 2, 0);
-    grid->addWidget(le3, 2, 1);
-    grid->addWidget(back, 3,0);
-    grid->addWidget(accept,3,1);
-    setLayout(grid);
+    smallGrid->addWidget(back, 0, 0);
+    smallGrid->addWidget(accept, 0, 1);
+
+    mainGrid->addWidget(name, 0, 0);
+    mainGrid->addWidget(le1, 0, 1);
+    mainGrid->addWidget(age, 1, 0);
+    mainGrid->addWidget(le2, 1, 1);
+    mainGrid->addWidget(occupation, 2, 0);
+    mainGrid->addWidget(le3, 2, 1);
+    mainGrid->addLayout(smallGrid,3,1);
+
+
+    setLayout(mainGrid);
 
 }
 
 void Rename::closeCurrentWindow()
 {
     this->close();
+}
+
+void Rename::openNewWindow()
+{
+    this->close();
+    AW_->setParent(this);
+    Qt::WindowFlags flags = AW_->windowFlags();
+    AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    AW_->setWindowModality(Qt::WindowModal);
+    AW_->move(470, 320);
+    AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+    AW_->show();
+}
+
+//Takes a string with full personinfo
+//And splits it up for use
+void Rename::setInfo(QString name)
+{
+    //Creates a list of strings for use
+    //with firstname, lastname and cpr
+    QStringList list = name.split(",");
+
+    lastName = list[0];
+    firstName = list[1];
+    cpr = list[2];
+
+    firstName = firstName.simplified();
+    firstName.replace( " ", "" );
+    firstName = capitalize(firstName);
+
+    lastName = lastName.simplified();
+    lastName.replace( " ", "" );
+    lastName = capitalize(lastName);
+
+    cpr = cpr.simplified();
+    cpr.replace( " ", "" );
+
+    le1->setText(firstName);
+    le2->setText(lastName);
+    le3->setText(cpr);
+}
+
+QString Rename::capitalize(const QString &str)
+{
+    QString tmp = str;
+    // if you want to ensure all other letters are lowercase:
+    tmp = tmp.toLower();
+   tmp[0] = str[0].toUpper();
+   return tmp;
 }
 
 Rename::~Rename()

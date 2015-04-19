@@ -1,7 +1,6 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QApplication>
 #include <QTextEdit>
 #include <QFrame>
 #include <QMainWindow>
@@ -15,6 +14,7 @@ AddUser::AddUser(QWidget *parent)
     //Font Definitions
     QFont f;
     QFont f1;
+    AW_ = new AcceptPopup;
     f.setPointSize(25);
     f1.setPointSize(17);
 
@@ -41,8 +41,13 @@ AddUser::AddUser(QWidget *parent)
     connect(back, SIGNAL(clicked()), this , SLOT(closeCurrentWindow()));
 
     accept = new QPushButton("Accept", this);
+    connect(accept, SIGNAL(clicked()), this, SLOT(acceptCurrentWindow()));
 
     QGridLayout *grid = new QGridLayout();
+    QGridLayout *smallGrid = new QGridLayout();
+
+    smallGrid->addWidget(back,0,0);
+    smallGrid->addWidget(accept, 0, 1);
 
     grid->addWidget(name, 0, 0);
     grid->addWidget(le1, 0, 1);
@@ -50,13 +55,22 @@ AddUser::AddUser(QWidget *parent)
     grid->addWidget(le2, 1, 1);
     grid->addWidget(occupation, 2, 0);
     grid->addWidget(le3, 2, 1);
-    grid->addWidget(back, 3,0);
-    grid->addWidget(accept,3,1);
-    setLayout(grid);
+    grid->addLayout(smallGrid, 3, 1);
 
+    setLayout(grid);
 }
 
 void AddUser::closeCurrentWindow()
 {
     this->close();
+}
+
+void AddUser::acceptCurrentWindow()
+{
+    this->close();
+    AW_->setParent(this);
+    AW_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    AW_->setWindowModality(Qt::WindowModal);
+    AW_->move(470, 320);
+    AW_->show();
 }
