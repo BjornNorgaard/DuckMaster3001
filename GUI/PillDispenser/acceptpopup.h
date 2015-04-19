@@ -2,6 +2,7 @@
 #define ACCEPTPOPUP_H
 
 #include <QWidget>
+#include <QListWidget>
 #include <QPushButton>
 #include <QLabel>
 #include <QGridLayout>
@@ -14,10 +15,12 @@ public:
     void setParent(QWidget *p);
     void setNames(const QString, const QString, const QString);
     QString capitalize(const QString &str);
+    void setList(QListWidget* lw);
     ~AcceptPopup();
 
 private:
     QWidget* parent_;
+    QListWidget* lw_;
     QPushButton* back;
     QPushButton* accept;
 

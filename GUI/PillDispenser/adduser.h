@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QFont>
 #include <QPushButton>
+#include <QListWidget>
+#include <QLineEdit>
 #include "acceptpopup.h"
 
 
@@ -15,16 +17,22 @@ class AddUser : public QWidget
 
 public:
     explicit AddUser(QWidget *parent = 0);
+    void setList(QListWidget* lw);
 
 private slots:
     void closeCurrentWindow();
     void acceptCurrentWindow();
 
 private:
+    QListWidget *lw_;
     AcceptPopup* AW_;
     QFont f_;
     QPushButton *back;
     QPushButton *accept;
+
+    QLineEdit *le1;
+    QLineEdit *le2;
+    QLineEdit *le3;
 };
 
 #endif // ADDUSER_H

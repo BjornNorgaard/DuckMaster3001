@@ -63,9 +63,20 @@ AcceptPopup::AcceptPopup(QWidget *parent) : QWidget(parent)
     setLayout(mainGrid);
 }
 
+void AcceptPopup::setList(QListWidget* lw)
+{
+    lw_ = lw;
+}
+
 void AcceptPopup::setParent(QWidget *p)
 {
     parent_ = p;
+}
+
+void AcceptPopup::acceptCurrentWindow()
+{
+    this->close();
+    lw_->addItem(actualLastName->text() + ", " + actualName->text() + ", " + actualCpr->text());
 }
 
 void AcceptPopup::closeCurrentWindow()
@@ -92,11 +103,6 @@ QString AcceptPopup::capitalize(const QString &str)
     tmp = tmp.toLower();
     tmp[0] = str[0].toUpper();
     return tmp;
-}
-
-void AcceptPopup::acceptCurrentWindow()
-{
-
 }
 
 AcceptPopup::~AcceptPopup()

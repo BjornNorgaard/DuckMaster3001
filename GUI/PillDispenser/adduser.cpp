@@ -27,13 +27,13 @@ AddUser::AddUser(QWidget *parent)
                                   ":", this);
     occupation->setFont(f1);
 
-    QLineEdit *le1 = new QLineEdit(this);
+    le1 = new QLineEdit(this);
     le1->setFixedSize(300, 50);
     le1->setFont(f);
-    QLineEdit *le2 = new QLineEdit(this);
+    le2 = new QLineEdit(this);
     le2->setFixedSize(300, 50);
     le2->setFont(f);
-    QLineEdit *le3 = new QLineEdit(this);
+    le3 = new QLineEdit(this);
     le3->setFixedSize(300, 50);
     le3->setFont(f);
 
@@ -72,5 +72,12 @@ void AddUser::acceptCurrentWindow()
     AW_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     AW_->setWindowModality(Qt::WindowModal);
     AW_->move(470, 320);
+    AW_->setNames(le1->text(), le2->text(), le3->text());
+    AW_->setList(lw_);
     AW_->show();
+}
+
+void AddUser::setList(QListWidget* lw)
+{
+    lw_ = lw;
 }

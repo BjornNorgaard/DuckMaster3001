@@ -149,9 +149,9 @@ void MainWindow::addUserButton()
 
 void MainWindow::addUserButtonClicked()
 {
-    Qt::WindowFlags flags = add_->windowFlags();
-    add_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    add_->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     add_->setWindowModality(Qt::WindowModal);
+    add_->setList(lw);
     add_->move(400, 300);
     add_->show();
     //add_->activateWindow();
