@@ -59,8 +59,8 @@ void SPIInterface::transfer(uint8_t* command, uint8_t size) {
 }
 
 bool SPIInterface::dispensePill(uint8_t id, uint8_t amount) {
-    uint8_t size;
-    uint8_t command[3];
+    uint8_t size = 3;
+    uint8_t command[size];
 
     command[0] = 0x01;
     command[1] = id;
