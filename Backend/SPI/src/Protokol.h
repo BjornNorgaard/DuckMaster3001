@@ -1,5 +1,5 @@
-#ifndef SPIINTERFACE_CPP_
-#define SPIINTERFACE_CPP_
+#ifndef PROTOKOL_H
+#define PROTOKOL_H
 
 #include <stdint.h>
 #include <unistd.h>
@@ -11,17 +11,17 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 
-class SPIInterface {
+class Protokol {
 public:
-    SPIInterface();
-    ~SPIInterface();
+    Protokol();
+    ~Protokol();
     bool dispensePill(uint8_t id, uint8_t amount);
 
 private:
     void transfer(uint8_t* command, uint8_t size);
     uint8_t checksum(uint8_t value);
-  
-    int fd; 
+
+    int fd;
     static const char* device;
     static uint8_t bits;
     static uint32_t speed;
@@ -29,4 +29,4 @@ private:
     static uint32_t mode;
 };
 
-#endif // SPIINTERFACE_CPP_
+#endif // PROTOKOL_H

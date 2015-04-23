@@ -1,9 +1,9 @@
-#include "SPIInterface.h"
+#include "Protokol.h"
 
 int main() {
-    SPIInterface spi;
+    Protokol spi;
 
-    spi.dispensePill(1, 2);    
+    spi.dispensePill(1, 3); 
 
     return 0;
 }

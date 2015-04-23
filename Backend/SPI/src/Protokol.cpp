@@ -1,64 +1,61 @@
-#include "SPIInterface.h"
+#include "Protokol.h"
 
 // Default settings for spi device
-const char* SPIInterface::device = "/dev/spidev0.1";
-uint8_t SPIInterface::bits = 8;
-uint32_t SPIInterface::speed = 50000;
-uint16_t SPIInterface::delay = 50;
-uint32_t SPIInterface::mode = SPI_MODE_3;
+const char* Protokol::device = "/dev/spidev0.1";
+uint8_t Protokol::bits = 8;
+uint32_t Protokol::speed = 12000000;
+uint16_t Protokol::delay = 40;
+uint32_t Protokol::mode = SPI_MODE_3;
 
-SPIInterface::SPIInterface() {
+Protokol::Protokol() {
     fd = open(device, O_RDWR);
 
     // Needs error handling badly!!
-
     ioctl(fd, SPI_IOC_WR_MODE, &mode);
-
     ioctl(fd, SPI_IOC_RD_MODE, &mode);
 
     ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
-
     ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
 
     ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
-
     ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
 }
 
-SPIInterface::~SPIInterface() {
-    close(fd);
-}
+Protokol::~Protokol() { close(fd); }
 
-uint8_t SPIInterface::checksum(uint8_t value) {
+uint8_t Protokol::checksum(uint8_t value) {
     // Checksum implementation
     return 0;
 }
 
-void SPIInterface::transfer(uint8_t* command, uint8_t size) {
-    uint8_t tx[size + 2];    
+void Protokol::transfer(uint8_t* command, uint8_t size) {
+    uint8_t msgSize = size + 2;
 
     // Setup the transmit buffer;
+    uint8_t tx[msgSize];
     // First the amount of bytes transferred
-    tx[0] = size + 2;
+    tx[0] = msgSize;
     // Then the command
-    for (size_t i = 1; i < size; i++)
-        tx[i] = *(command + i);
+    for (size_t i = 1; i < size + 1; i++) tx[i] = command[i - 1];
     // Lastly the checksum
-    tx[size+1] = checksum(1);
+    tx[size + 1] = checksum(1);
 
-    struct spi_ioc_transfer tr;
-    tr.tx_buf = (unsigned long)tx;
-    tr.rx_buf = 0;
-    tr.len = tx[0];
-    tr.delay_usecs = delay;
-    tr.speed_hz = speed;
-    tr.bits_per_word = bits;
+    struct spi_ioc_transfer tr[msgSize];
+    for (size_t i = 0; i < msgSize; i++) {
+        tr[i].tx_buf = reinterpret_cast<unsigned long>(&tx[i]);
+        tr[i].rx_buf = 0;
+        tr[i].len = sizeof(tx[i]);
+        tr[i].delay_usecs = delay;
+        tr[i].speed_hz = speed;
+        tr[i].bits_per_word = bits;
+        tr[i].cs_change = 0;
+    }
 
-    // Needs error handling 
-    ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
+    // Needs error handling
+    ioctl(fd, SPI_IOC_MESSAGE(msgSize), &tr);
 }
 
-bool SPIInterface::dispensePill(uint8_t id, uint8_t amount) {
+bool Protokol::dispensePill(uint8_t id, uint8_t amount) {
     uint8_t size = 3;
     uint8_t command[size];
 
