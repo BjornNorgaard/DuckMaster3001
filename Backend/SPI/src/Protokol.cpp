@@ -3,8 +3,8 @@
 // Default settings for spi device
 const char* Protokol::device = "/dev/spidev0.1";
 uint8_t Protokol::bits = 8;
-uint32_t Protokol::speed = 12000000;
-uint16_t Protokol::delay = 40;
+uint32_t Protokol::speed = 10000000;
+uint16_t Protokol::delay = 0;
 uint32_t Protokol::mode = SPI_MODE_3;
 
 Protokol::Protokol() {
@@ -30,6 +30,7 @@ uint8_t Protokol::checksum(uint8_t value) {
 
 void Protokol::transfer(uint8_t* command, uint8_t size) {
     uint8_t msgSize = size + 2;
+    struct spi_ioc_transfer tr[msgSize];
 
     // Setup the transmit buffer;
     uint8_t tx[msgSize];
@@ -40,7 +41,6 @@ void Protokol::transfer(uint8_t* command, uint8_t size) {
     // Lastly the checksum
     tx[size + 1] = checksum(1);
 
-    struct spi_ioc_transfer tr[msgSize];
     for (size_t i = 0; i < msgSize; i++) {
         tr[i].tx_buf = reinterpret_cast<unsigned long>(&tx[i]);
         tr[i].rx_buf = 0;
