@@ -16,15 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     rename.cpp \
     Database.cpp \
-    AddUser.cpp \
     acceptpopup.cpp \
-    errorwindow.cpp
+    errorwindow.cpp \
+    adduser.cpp
 
 HEADERS  += mainwindow.h \
     rename.h \
     Database.hpp \
-    AddUser.h \
     acceptpopup.h \
-    errorwindow.h
+    errorwindow.h \
+    adduser.h
 
 FORMS    += mainwindow.ui

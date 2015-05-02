@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QString>
-#include "AcceptPopup.h"
+#include "acceptpopup.h"
 
 class Rename : public QWidget
 {

@@ -6,7 +6,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QStatusBar>
-#include "AddUser.h"
+#include "adduser.h"
 
 AddUser::AddUser(QWidget *parent)
     : QWidget(parent)

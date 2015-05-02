@@ -9,7 +9,7 @@
 #include <QListWidget>
 #include "Database.hpp"
 #include "rename.h"
-#include "AddUser.h"
+#include "adduser.h"
 
 class MainWindow : public QWidget
 {

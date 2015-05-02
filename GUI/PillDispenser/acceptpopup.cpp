@@ -1,6 +1,6 @@
 #include "acceptpopup.h"
 
-AcceptPopup::AcceptPopup(QWidget *parent) : QWidget(parent)
+AcceptPopup::AcceptPopup(QWidget *parent, chooseWindow ch) : QWidget(parent)
 {
     //Creating custom fonts
     QFont f("Arial Black");
