@@ -1,8 +1,4 @@
-#include <QVBoxLayout>
-#include <QPushButton>
 #include <QApplication>
-#include <QListWidget>
-#include <QFont>
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent, Database *db) :
