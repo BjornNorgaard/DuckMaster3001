@@ -25,6 +25,9 @@ AddUser::AddUser(QWidget *parent)
     age->setFont(f1);
     QLabel *occupation = new QLabel("Cpr-Number"
                                   ":", this);
+    QLabel *CreateUser = new QLabel("Create User", this);
+    CreateUser->setStyleSheet("color: darkBlue; font: cantarel 35px;");
+
     occupation->setFont(f1);
 
     le1 = new QLineEdit(this);
@@ -43,6 +46,7 @@ AddUser::AddUser(QWidget *parent)
     accept = new QPushButton("Accept", this);
     connect(accept, SIGNAL(clicked()), this, SLOT(acceptCurrentWindow()));
 
+    QGridLayout *BiggestGrid = new QGridLayout();
     QGridLayout *grid = new QGridLayout();
     QGridLayout *smallGrid = new QGridLayout();
 
@@ -57,7 +61,10 @@ AddUser::AddUser(QWidget *parent)
     grid->addWidget(le3, 2, 1);
     grid->addLayout(smallGrid, 3, 1);
 
-    setLayout(grid);
+    BiggestGrid->addWidget(CreateUser, 0, 0);
+    BiggestGrid->addLayout(grid, 1, 0);
+
+    setLayout(BiggestGrid);
 }
 
 void AddUser::closeCurrentWindow()

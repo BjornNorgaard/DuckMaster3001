@@ -8,13 +8,15 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
     QWidget(parent)
 {
     //Window Definitions
-    db_ = db;
-    lwit = NULL;
     R = new Rename();
     add_ = new AddUser();
 
 
-    this->setStyleSheet("background: #000000;");
+    db_ = db;
+    lwit = NULL;
+
+
+    this->setStyleSheet("background: #97BDD6;");
     QFont f1;
     vbox = new QVBoxLayout();
     hbox = new QHBoxLayout(this);
