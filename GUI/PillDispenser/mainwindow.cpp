@@ -1,6 +1,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QApplication>
+#include <QMessageBox>
 #include <QListWidget>
 #include <QFont>
 #include "mainwindow.h"
@@ -11,10 +12,11 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
     //Window Definitions
     db_ = db;
     lwit = NULL;
-    R = new Rename(this);
-    R2 = new Rename;
-    add_ = new AddUser(this);
+    R = new Rename();
+    add_ = new AddUser();
 
+
+    this->setStyleSheet("background: #000000;");
     QFont f1;
     vbox = new QVBoxLayout();
     hbox = new QHBoxLayout(this);
@@ -23,8 +25,11 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
 
 
     lw = new QListWidget(this);
+
+    lw->setStyleSheet("background");
     db->createList(lw);
     lw->sortItems(Qt::AscendingOrder);
+    this->setStyleSheet("QComboBox { background-color: blue; }");
 
     lw->setFont(f1);
     personInfo_ = "NaN,NaN,000000-0000";
@@ -47,19 +52,23 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
     setLayout(hbox);
 }
 
-void MainWindow::dispenseButton()
+MainWindow::~MainWindow()
 {
-    QFont f("Arial Black");
-    f.setBold(true);
-    f.setPointSize(30);
+    //ButtonDefinitions
+    delete remove;
+    delete rename;
+    delete changePills;
+    delete add;
+    delete dispense;
 
-    QPushButton *dispense = new QPushButton("Dispense", this);
-    dispense->setFixedSize(300, 150);
-    dispense->setFont(f);
-    vbox->addWidget(dispense);
-
-    connect(dispense, SIGNAL(clicked()), this, SLOT(dispenseButtonClicked()));
-
+    //Custom_Windows
+    delete R;
+    delete add_;
+    delete db_;
+    delete lw;
+    delete lwit;
+    delete vbox;
+    delete hbox;
 }
 
 //Sets the variable fokus on the currently
@@ -68,6 +77,23 @@ void MainWindow::setItem(QListWidgetItem* item)
 {
    personInfo_ = item->text().toCaseFolded();
    lwit = item;
+}
+
+void MainWindow::dispenseButton()
+{
+    QFont f("Arial Black");
+    f.setBold(true);
+    f.setPointSize(30);
+
+    dispense = new QPushButton("Dispense", this);
+    dispense->setFixedSize(300, 150);
+    dispense->setFont(f);
+    vbox->addWidget(dispense);
+    dispense->setStyleSheet("background-color: lightGray;");
+
+
+    connect(dispense, SIGNAL(clicked()), this, SLOT(dispenseButtonClicked()));
+
 }
 
 void MainWindow::dispenseButtonClicked()
@@ -79,10 +105,11 @@ void MainWindow::dispenseButtonClicked()
 
 void MainWindow::changePillsButton()
 {
-    QPushButton *changePills = new QPushButton("Change Pills", this);
+    changePills = new QPushButton("Change Pills", this);
     changePills->setFixedSize(300, 70);
     changePills->setFont(fSmallButton);
     vbox->addWidget(changePills);
+    changePills->setStyleSheet("background-color: lightGray;");
 
     connect(changePills, SIGNAL(clicked()), this, SLOT(changePillsButtonClicked()));
 }
@@ -94,10 +121,11 @@ void MainWindow::changePillsButtonClicked()
 
 void MainWindow::removeButton()
 {
-    QPushButton *remove = new QPushButton("Remove", this);
+    remove = new QPushButton("Remove", this);
     remove->setFixedSize(300, 70);
     remove->setFont(fSmallButton);
     vbox->addWidget(remove);
+    remove->setStyleSheet("background-color: lightGray;");
 
     connect(remove, SIGNAL(clicked()), this, SLOT(removeButtonClicked()));
 }
@@ -124,6 +152,7 @@ void MainWindow::renameButton()
     rename->setFixedSize(300, 70);
     rename->setFont(fSmallButton);
     vbox->addWidget(rename);
+    rename->setStyleSheet("background-color: lightGray;");
 
     connect(rename, SIGNAL(clicked()), this, SLOT(renameButtonClicked()));
 }
@@ -139,10 +168,11 @@ void MainWindow::renameButtonClicked()
 
 void MainWindow::addUserButton()
 {
-    QPushButton *add = new QPushButton("Add User", this);
+    add = new QPushButton("Add User", this);
     add->setFixedSize(300, 70);
     add->setFont(fSmallButton);
     vbox->addWidget(add);
+    add->setStyleSheet("background-color: lightGray;");
 
     connect(add, SIGNAL(clicked()), this, SLOT(addUserButtonClicked()));
 }

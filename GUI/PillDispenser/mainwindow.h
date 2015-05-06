@@ -17,6 +17,7 @@ class MainWindow : public QWidget
 
 public:
     explicit MainWindow(QWidget *parent = 0, Database *db = new Database);
+    ~MainWindow();
 
 private:
     //Buttons
@@ -26,21 +27,24 @@ private:
     void removeButton();
     void changePillsButton();
 
+    //ButtonDefinitions
+    QPushButton *remove;
+    QPushButton *rename;
+    QPushButton *changePills;
+    QPushButton *add;
+    QPushButton *dispense;
+
     //Custom_Windows
     Rename *R;
     AddUser *add_;
-    Rename *R2;
-
     QString personInfo_;
-
-
     Database* db_;
     QListWidget *lw;
     QListWidgetItem *lwit;
     QVBoxLayout *vbox;
     QHBoxLayout *hbox;
     QFont fSmallButton;
-    QPushButton *rename;
+
 
 private slots:
     //Button clicks

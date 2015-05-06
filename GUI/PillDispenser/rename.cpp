@@ -68,6 +68,11 @@ void Rename::closeCurrentWindow()
     this->close();
 }
 
+void setParent(QWidget *p)
+{
+
+}
+
 void Rename::openNewWindow()
 {
     this->close();
