@@ -1,4 +1,4 @@
-#include "Database.hpp"
+#include "database.h"
 
 Database::Database() {
     openDB();
