@@ -51,7 +51,7 @@ OBJECTS_DIR   = ./
 SOURCES       = ../PillDispenser/main.cpp \
 		../PillDispenser/mainwindow.cpp \
 		../PillDispenser/rename.cpp \
-		../PillDispenser/Database.cpp \
+		../PillDispenser/database.cpp \
 		../PillDispenser/acceptpopup.cpp \
 		../PillDispenser/errorwindow.cpp \
 		../PillDispenser/adduser.cpp moc_mainwindow.cpp \
@@ -62,7 +62,7 @@ SOURCES       = ../PillDispenser/main.cpp \
 OBJECTS       = main.o \
 		mainwindow.o \
 		rename.o \
-		Database.o \
+		database.o \
 		acceptpopup.o \
 		errorwindow.o \
 		adduser.o \
@@ -192,13 +192,13 @@ DIST          = /home/ymer123/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/ymer123/Qt/5.4/gcc_64/mkspecs/features/lex.prf \
 		../PillDispenser/PillDispenser.pro ../PillDispenser/mainwindow.h \
 		../PillDispenser/rename.h \
-		../PillDispenser/Database.hpp \
+		../PillDispenser/database.h \
 		../PillDispenser/acceptpopup.h \
 		../PillDispenser/errorwindow.h \
 		../PillDispenser/adduser.h ../PillDispenser/main.cpp \
 		../PillDispenser/mainwindow.cpp \
 		../PillDispenser/rename.cpp \
-		../PillDispenser/Database.cpp \
+		../PillDispenser/database.cpp \
 		../PillDispenser/acceptpopup.cpp \
 		../PillDispenser/errorwindow.cpp \
 		../PillDispenser/adduser.cpp
@@ -495,8 +495,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../PillDispenser/mainwindow.h ../PillDispenser/rename.h ../PillDispenser/Database.hpp ../PillDispenser/acceptpopup.h ../PillDispenser/errorwindow.h ../PillDispenser/adduser.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../PillDispenser/main.cpp ../PillDispenser/mainwindow.cpp ../PillDispenser/rename.cpp ../PillDispenser/Database.cpp ../PillDispenser/acceptpopup.cpp ../PillDispenser/errorwindow.cpp ../PillDispenser/adduser.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../PillDispenser/mainwindow.h ../PillDispenser/rename.h ../PillDispenser/database.h ../PillDispenser/acceptpopup.h ../PillDispenser/errorwindow.h ../PillDispenser/adduser.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../PillDispenser/main.cpp ../PillDispenser/mainwindow.cpp ../PillDispenser/rename.cpp ../PillDispenser/database.cpp ../PillDispenser/acceptpopup.cpp ../PillDispenser/errorwindow.cpp ../PillDispenser/adduser.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../PillDispenser/mainwindow.ui $(DISTDIR)/
 
 
@@ -655,7 +655,7 @@ moc_mainwindow.cpp: /home/ymer123/Qt/5.4/gcc_64/include/QtGui/QFont \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabbar.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
-		../PillDispenser/Database.hpp \
+		../PillDispenser/database.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QDebug \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/QSqlDatabase \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/qsqldatabase.h \
@@ -1336,6 +1336,7 @@ main.o: ../PillDispenser/main.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qguiapplication.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qinputmethod.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/QPalette \
 		../PillDispenser/mainwindow.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/QFont \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
@@ -1368,7 +1369,7 @@ main.o: ../PillDispenser/main.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabbar.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
-		../PillDispenser/Database.hpp \
+		../PillDispenser/database.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QDebug \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/QSqlDatabase \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/qsqldatabase.h \
@@ -1394,12 +1395,9 @@ main.o: ../PillDispenser/main.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/
 		../PillDispenser/adduser.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../PillDispenser/main.cpp
 
-mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QVBoxLayout \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobject.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qnamespace.h \
+mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QApplication \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qapplication.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcoreapplication.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qglobal.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qconfig.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfeatures.h \
@@ -1428,13 +1426,16 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qglobalstatic.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmutex.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qnumeric.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstring.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qchar.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qbytearray.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qrefcount.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qnamespace.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qarraydata.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobject.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qlist.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qalgorithms.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qiterator.h \
@@ -1446,17 +1447,17 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcontainerfwd.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qisenum.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobject_impl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qrect.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmargins.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsize.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qpoint.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qwidget.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qeventloop.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qwindowdefs.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qpoint.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsize.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qcursor.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qwidget.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmargins.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qrect.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpalette.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qcolor.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qrgb.h \
@@ -1484,7 +1485,7 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfont.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfontmetrics.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfontinfo.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qcursor.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qsizepolicy.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qkeysequence.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qevent.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qvariant.h \
@@ -1500,17 +1501,11 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfiledevice.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qvector2d.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QPushButton \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qpushbutton.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qicon.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QApplication \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qapplication.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcoreapplication.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qeventloop.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qguiapplication.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qinputmethod.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QMessageBox \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qdialog.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QListWidget \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlistwidget.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlistview.h \
@@ -1524,6 +1519,7 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qvalidator.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qregularexpression.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qicon.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qslider.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractslider.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
@@ -1534,7 +1530,15 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		../PillDispenser/mainwindow.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qmainwindow.h \
-		../PillDispenser/Database.hpp \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QVBoxLayout \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QPushButton \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../PillDispenser/database.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QDebug \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/QSqlDatabase \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/qsqldatabase.h \
@@ -1718,7 +1722,7 @@ rename.o: ../PillDispenser/rename.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidg
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rename.o ../PillDispenser/rename.cpp
 
-Database.o: ../PillDispenser/Database.cpp ../PillDispenser/Database.hpp \
+database.o: ../PillDispenser/database.cpp ../PillDispenser/database.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QDebug \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qdebug.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qalgorithms.h \
@@ -1850,7 +1854,7 @@ Database.o: ../PillDispenser/Database.cpp ../PillDispenser/Database.hpp \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QString \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QVariant
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Database.o ../PillDispenser/Database.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database.o ../PillDispenser/database.cpp
 
 acceptpopup.o: ../PillDispenser/acceptpopup.cpp ../PillDispenser/acceptpopup.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \

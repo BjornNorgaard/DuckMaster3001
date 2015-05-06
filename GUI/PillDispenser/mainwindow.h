@@ -7,7 +7,7 @@
 #include <QPushButton>
 #include <string>
 #include <QListWidget>
-#include "Database.hpp"
+#include "database.h"
 #include "rename.h"
 #include "adduser.h"
 

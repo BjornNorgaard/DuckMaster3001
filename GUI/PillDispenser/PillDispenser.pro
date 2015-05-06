@@ -15,14 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     rename.cpp \
-    Database.cpp \
+    database.cpp \
     acceptpopup.cpp \
     errorwindow.cpp \
     adduser.cpp
 
 HEADERS  += mainwindow.h \
     rename.h \
-    Database.hpp \
+    database.h \
     acceptpopup.h \
     errorwindow.h \
     adduser.h

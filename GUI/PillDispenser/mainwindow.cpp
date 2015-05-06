@@ -1,5 +1,3 @@
-#include <QVBoxLayout>
-#include <QPushButton>
 #include <QApplication>
 #include <QMessageBox>
 #include <QListWidget>
@@ -26,10 +24,9 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
 
     lw = new QListWidget(this);
 
-    lw->setStyleSheet("background");
+    lw->setStyleSheet("background-color: white");
     db->createList(lw);
     lw->sortItems(Qt::AscendingOrder);
-    this->setStyleSheet("QComboBox { background-color: blue; }");
 
     lw->setFont(f1);
     personInfo_ = "NaN,NaN,000000-0000";
