@@ -6,66 +6,24 @@
 #include <QFrame>
 #include <QMainWindow>
 #include <QPushButton>
-#include <QStatusBar>
 #include "rename.h"
 
 Rename::Rename(QWidget *parent)
     : QWidget(parent)
 {
-    //Font Definitions
-    QFont f;
-    QFont f1;
+    //Set background color and creating Acceptwindow popup
+
     AW_ = new AcceptPopup;
-    f.setPointSize(25);
-    f1.setPointSize(17);
 
-    //Label definitions and font setups
-    QLabel *name = new QLabel("Firstname:", this);
-    name->setFont(f1);
-    QLabel *age = new QLabel("Lastname:", this);
-    age->setFont(f1);
-    QLabel *occupation = new QLabel("Cpr-Number"
-                                  ":", this);
-    occupation->setFont(f1);
+    //Creating window specific information and layout
+    createWidgets();
+    setStyleSheets();
+    setLayoutGrids();
+    connections();
 
-    le1 = new QLineEdit(this);
-    le1->setFixedSize(300, 50);
-    le1->setFont(f);
-    le2 = new QLineEdit(this);
-    le2->setFixedSize(300, 50);
-    le2->setFont(f);
-    le3 = new QLineEdit(this);
-    le3->setFixedSize(300, 50);
-    le3->setFont(f);
+    //Setting layout
+    setLayout(BiggestGrid);
 
-    back = new QPushButton("Back", this);
-    connect(back, SIGNAL(clicked()), this , SLOT(closeCurrentWindow()));
-
-    accept = new QPushButton("Accept", this);
-    connect(accept, SIGNAL(clicked()), this , SLOT(openNewWindow()));
-
-    QGridLayout *smallGrid = new QGridLayout();
-    QGridLayout *mainGrid = new QGridLayout();
-
-    smallGrid->addWidget(back, 0, 0);
-    smallGrid->addWidget(accept, 0, 1);
-
-    mainGrid->addWidget(name, 0, 0);
-    mainGrid->addWidget(le1, 0, 1);
-    mainGrid->addWidget(age, 1, 0);
-    mainGrid->addWidget(le2, 1, 1);
-    mainGrid->addWidget(occupation, 2, 0);
-    mainGrid->addWidget(le3, 2, 1);
-    mainGrid->addLayout(smallGrid,3,1);
-
-
-    setLayout(mainGrid);
-
-}
-
-void Rename::closeCurrentWindow()
-{
-    this->close();
 }
 
 void setParent(QWidget *p)
@@ -73,6 +31,120 @@ void setParent(QWidget *p)
 
 }
 
+void Rename::setLayoutGrids()
+{
+    smallGrid->addWidget(back,0,0);
+    smallGrid->addWidget(accept, 0, 1);
+
+    grid->addWidget(LfirstName, 0, 0);
+    grid->addWidget(le1, 0, 1);
+    grid->addWidget(LlastName, 1, 0);
+    grid->addWidget(le2, 1, 1);
+    grid->addWidget(Lcpr, 2, 0);
+    grid->addWidget(le3, 2, 1);
+    grid->addLayout(smallGrid, 3, 1);
+
+    BiggestGrid->addWidget(LEditUser, 0, 0);
+    BiggestGrid->addLayout(grid, 1, 0);
+}
+
+//Setting the stylesheets for the various elements
+void Rename::setStyleSheets()
+{
+    this->setStyleSheet("background: #97BDD6;");
+
+    /*-------------------------------------*/
+    /*-------------- QLabels --------------*/
+    /*-------------------------------------*/
+
+    LfirstName->setStyleSheet("color: #ffffff;"
+                             "font-size: 20pt;");
+
+    LlastName->setStyleSheet("color: #ffffff;"
+                            "font-size: 20pt;");
+
+    Lcpr->setStyleSheet("color: #ffffff;"
+                       "font-size: 20pt;");
+
+    LEditUser->setStyleSheet("color: #266873;"
+                              "font-size: 30pt;");
+
+    /*-------------------------------------*/
+    /*------------ QListEdits -------------*/
+    /*-------------------------------------*/
+
+    le1->setStyleSheet("background: white;"
+                       " border-radius: 7px;"
+                       " border-style: solid;"
+                       " border-color: black;"
+                       " border-width: 1;"
+                       " font-size:20pt;");
+
+    le2->setStyleSheet("background: white;"
+                       " border-radius: 7px;"
+                       " border-style: solid;"
+                       " border-color: black;"
+                       " border-width: 1;"
+                       " font-size:20pt;");
+
+    le3->setStyleSheet("background: white;"
+                       " border-radius: 7px;"
+                       " border-style: solid;"
+                       " border-color: black;"
+                       " border-width: 1;"
+                       " font-size:20pt;");
+
+    /*-------------------------------------*/
+    /*----------- QPushButtons ------------*/
+    /*-------------------------------------*/
+
+    back->setStyleSheet("background: lightgray");
+
+    accept->setStyleSheet("background: lightgray");
+}
+
+void Rename::createWidgets()
+{
+    LfirstName = new QLabel("Firstname:", this);
+    LlastName = new QLabel("Lastname:", this);
+    Lcpr = new QLabel("Cpr-Num:", this);
+    LEditUser = new QLabel("Create User", this);
+
+    le1 = new QLineEdit();
+    le2 = new QLineEdit();
+    le3 = new QLineEdit();
+
+    le1->setFixedSize(300, 50);
+    le2->setFixedSize(300, 50);
+    le3->setFixedSize(300, 50);
+
+    back = new QPushButton("Back", this);
+    accept = new QPushButton("Accept", this);
+
+    back->setFixedSize(145, 50);
+    accept->setFixedSize(145, 50);
+
+    BiggestGrid = new QGridLayout();
+    grid = new QGridLayout();
+    smallGrid = new QGridLayout();
+}
+
+void Rename::closeCurrentWindow()
+{
+    //Clearing lineedits
+    le1->clear();
+    le2->clear();
+    le3->clear();
+
+    this->close();
+}
+
+void Rename::setList(QListWidget* lw)
+{
+    lw_ = lw;
+}
+
+//Slot that setups and opens a new window
 void Rename::openNewWindow()
 {
     this->close();
@@ -82,14 +154,40 @@ void Rename::openNewWindow()
     AW_->setWindowModality(Qt::WindowModal);
     AW_->move(470, 320);
     AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+
+    //Clearing lineedits
+    le1->clear();
+    le2->clear();
+    le3->clear();
+
+    //Show window
     AW_->show();
 }
 
 //Takes a string with full personinfo
-//And splits it up for use
+//And splits it up for use in editing name
+void Rename::title(int windowType)
+{
+    windowType_ = windowType;
+
+    if(windowType == ADDUSER)
+    {
+        LEditUser->setText("Create User");
+    } else {
+        LEditUser->setText("Edit User");
+    }
+}
+
+void Rename::connections()
+{
+    connect(accept, SIGNAL(clicked()), this, SLOT(openNewWindow()));
+    connect(back, SIGNAL(clicked()), this , SLOT(closeCurrentWindow()));
+}
+
 void Rename::setInfo(QString name)
 {
     //Creates a list of strings for use
+    //QFont f1;
     //with firstname, lastname and cpr
     QStringList list = name.split(",");
 
@@ -118,12 +216,23 @@ QString Rename::capitalize(const QString &str)
     QString tmp = str;
     // if you want to ensure all other letters are lowercase:
     tmp = tmp.toLower();
-   tmp[0] = str[0].toUpper();
-   return tmp;
+    tmp[0] = str[0].toUpper();
+    return tmp;
 }
 
 Rename::~Rename()
 {
-
+    delete AW_;
+    delete LfirstName;
+    delete LlastName;
+    delete Lcpr;
+    delete le1;
+    delete le2;
+    delete le3;
+    delete accept;
+    delete back;
+    delete BiggestGrid;
+    delete grid;
+    delete smallGrid;
 }
 

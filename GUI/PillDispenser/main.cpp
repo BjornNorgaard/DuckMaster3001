@@ -13,12 +13,7 @@ int main(int argc, char *argv[])
     db->createPerson("220192-1697", "Martin", "Carpentier");
 
     MainWindow window(0, db);
-    QPalette Pal(QApplication::palette());
 
-    // set l background
-    //Pal.setColor(QPalette::Background, Qt::darkBlue);
-    window.setAutoFillBackground(true);
-    window.setPalette(Pal);
     window.move(100, 50);
     window.resize(1024, 600);
     //window.showFullScreen();

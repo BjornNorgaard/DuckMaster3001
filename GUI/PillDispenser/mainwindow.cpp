@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
 {
     //Window Definitions
     R = new Rename();
-    add_ = new AddUser();
+    err_ = new ErrorWindow(this);
 
 
     db_ = db;
@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
     hbox = new QHBoxLayout(this);
     fSmallButton.setPointSize(15);
     f1.setPointSize(23);
-
 
     lw = new QListWidget(this);
 
@@ -38,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
     removeButton();
     renameButton();
     addUserButton();
+
+    this->setStyleSheet("QPushButton{ color: blue}:");
 
     vbox->setSpacing(1);
     vbox->addStretch(3);
@@ -62,12 +63,17 @@ MainWindow::~MainWindow()
 
     //Custom_Windows
     delete R;
-    delete add_;
     delete db_;
     delete lw;
     delete lwit;
     delete vbox;
     delete hbox;
+}
+
+//Unselects the list on click
+void MainWindow::unselect()
+{
+    lw = NULL;
 }
 
 //Sets the variable fokus on the currently
@@ -88,18 +94,35 @@ void MainWindow::dispenseButton()
     dispense->setFixedSize(300, 150);
     dispense->setFont(f);
     vbox->addWidget(dispense);
-    dispense->setStyleSheet("background-color: lightGray;");
+    dispense->setStyleSheet("background-color: lightGray;"
+                            "padding:5px;");
 
 
     connect(dispense, SIGNAL(clicked()), this, SLOT(dispenseButtonClicked()));
 
 }
 
+
+//Send message to user equal to
+//Pills having to be dispensed
+//for current selected user
 void MainWindow::dispenseButtonClicked()
 {
-    //Send message to user equal to
-    //Pills having to be dispensed
-    //for current selected user
+    if(lwit == NULL)
+    {
+        err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+        err_->setWindowModality(Qt::WindowModal);
+        err_->move(400, 300);
+        err_->show();
+
+        //Open Window telling user
+        //to choose a user
+    } else {
+        lw->selectionModel()->reset();
+
+        delete lwit;
+        lwit = NULL;
+    }
 }
 
 void MainWindow::changePillsButton()
@@ -136,6 +159,8 @@ void MainWindow::removeButtonClicked()
         //Open Window telling user
         //to choose a user
     } else {
+        lw->selectionModel()->reset();
+
         delete lwit;
         lwit = NULL;
     }
@@ -147,6 +172,8 @@ void MainWindow::removeButtonClicked()
 
 void MainWindow::renameButton()
 {
+
+
     rename = new QPushButton("Rename", this);
     rename->setFixedSize(300, 70);
     rename->setFont(fSmallButton);
@@ -158,11 +185,23 @@ void MainWindow::renameButton()
 
 void MainWindow::renameButtonClicked()
 {
-    R->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
-    R->setWindowModality(Qt::WindowModal);
-    R->move(400, 300);
-    R->setInfo(personInfo_);
-    R->show();
+    if(lwit == NULL)
+    {
+
+
+        //Open Window telling user
+        //to choose a user
+    } else {
+        //lw->selectionModel()->reset();
+
+        R->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+        R->setWindowModality(Qt::WindowModal);
+        R->move(400, 300);
+        R->setInfo(personInfo_);
+        R->title(RENAMEUSER);
+        R->show();
+    }
+
 }
 
 void MainWindow::addUserButton()
@@ -178,10 +217,11 @@ void MainWindow::addUserButton()
 
 void MainWindow::addUserButtonClicked()
 {
-    add_->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
-    add_->setWindowModality(Qt::WindowModal);
-    add_->setList(lw);
-    add_->move(400, 300);
-    add_->show();
+    R->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    R->setWindowModality(Qt::WindowModal);
+    R->setList(lw);
+    R->move(400, 300);
+    R->title(ADDUSER);
+    R->show();
     //add_->activateWindow();
 }

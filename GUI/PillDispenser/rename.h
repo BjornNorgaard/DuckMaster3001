@@ -7,14 +7,22 @@
 #include <QString>
 #include "acceptpopup.h"
 
+enum {
+    ADDUSER,
+    RENAMEUSER
+};
+
 class Rename : public QWidget
 {
     Q_OBJECT
 
 public:
     explicit Rename(QWidget *parent = 0);
+
     void setInfo(QString);
     void setParent(QWidget *p);
+    void setList(QListWidget* lw);
+    void title(int i);
 
     ~Rename();
 
@@ -23,11 +31,20 @@ private slots:
     void openNewWindow();
 
 private:
+    QLabel *LEditUser;
+    QLabel *Lcpr;
+    QLabel *LlastName;
+    QLabel *LfirstName;
+
     QFont f_;
     QPushButton *back;
     QPushButton *accept;
     AcceptPopup *AW_;
-
+    QGridLayout *BiggestGrid;
+    QGridLayout *grid;
+    QGridLayout *smallGrid;
+    QListWidget *lw_;
+    int windowType_;
 
     //Text edit line pointers
     QLineEdit *le1;
@@ -42,6 +59,11 @@ private:
 
     //Methods
     QString capitalize(const QString &str);
+    void createWidgets();
+    void setStyleSheets();
+    void setLayoutGrids();
+    void connections();
+
 };
 
 #endif // RENAME_H

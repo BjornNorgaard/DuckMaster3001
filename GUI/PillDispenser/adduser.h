@@ -9,6 +9,7 @@
 #include "acceptpopup.h"
 
 
+
 //Class that contains the addUser
 //Window interface
 class AddUser : public QWidget
@@ -33,6 +34,8 @@ private:
     QLineEdit *le1;
     QLineEdit *le2;
     QLineEdit *le3;
+
+    void setStyleSheets();
 };
 
 #endif // ADDUSER_H

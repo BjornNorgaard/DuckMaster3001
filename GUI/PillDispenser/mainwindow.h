@@ -8,8 +8,8 @@
 #include <string>
 #include <QListWidget>
 #include "database.h"
+#include "errorwindow.h"
 #include "rename.h"
-#include "adduser.h"
 
 class MainWindow : public QWidget
 {
@@ -27,6 +27,11 @@ private:
     void removeButton();
     void changePillsButton();
 
+    void createWidgets();
+    void setStyleSheets();
+    void setLayoutGrids();
+    void connections();
+
     //ButtonDefinitions
     QPushButton *remove;
     QPushButton *rename;
@@ -36,9 +41,9 @@ private:
 
     //Custom_Windows
     Rename *R;
-    AddUser *add_;
     QString personInfo_;
     Database* db_;
+    ErrorWindow* err_;
     QListWidget *lw;
     QListWidgetItem *lwit;
     QVBoxLayout *vbox;
@@ -55,6 +60,7 @@ private slots:
     void changePillsButtonClicked();
     //List click
     void setItem(QListWidgetItem*);
+    void unselect();
 };
 
 #endif // MAINWINDOW_H

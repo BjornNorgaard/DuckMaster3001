@@ -18,13 +18,11 @@ SOURCES += main.cpp\
     database.cpp \
     acceptpopup.cpp \
     errorwindow.cpp \
-    adduser.cpp
 
 HEADERS  += mainwindow.h \
     rename.h \
     database.h \
     acceptpopup.h \
     errorwindow.h \
-    adduser.h
 
 FORMS    += mainwindow.ui

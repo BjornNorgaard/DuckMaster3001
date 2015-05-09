@@ -53,24 +53,20 @@ SOURCES       = ../PillDispenser/main.cpp \
 		../PillDispenser/rename.cpp \
 		../PillDispenser/database.cpp \
 		../PillDispenser/acceptpopup.cpp \
-		../PillDispenser/errorwindow.cpp \
-		../PillDispenser/adduser.cpp moc_mainwindow.cpp \
+		../PillDispenser/errorwindow.cpp moc_mainwindow.cpp \
 		moc_rename.cpp \
 		moc_acceptpopup.cpp \
-		moc_errorwindow.cpp \
-		moc_adduser.cpp
+		moc_errorwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		rename.o \
 		database.o \
 		acceptpopup.o \
 		errorwindow.o \
-		adduser.o \
 		moc_mainwindow.o \
 		moc_rename.o \
 		moc_acceptpopup.o \
-		moc_errorwindow.o \
-		moc_adduser.o
+		moc_errorwindow.o
 DIST          = /home/ymer123/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/ymer123/Qt/5.4/gcc_64/mkspecs/common/shell-unix.conf \
 		/home/ymer123/Qt/5.4/gcc_64/mkspecs/common/unix.conf \
@@ -194,14 +190,12 @@ DIST          = /home/ymer123/Qt/5.4/gcc_64/mkspecs/features/spec_pre.prf \
 		../PillDispenser/rename.h \
 		../PillDispenser/database.h \
 		../PillDispenser/acceptpopup.h \
-		../PillDispenser/errorwindow.h \
-		../PillDispenser/adduser.h ../PillDispenser/main.cpp \
+		../PillDispenser/errorwindow.h ../PillDispenser/main.cpp \
 		../PillDispenser/mainwindow.cpp \
 		../PillDispenser/rename.cpp \
 		../PillDispenser/database.cpp \
 		../PillDispenser/acceptpopup.cpp \
-		../PillDispenser/errorwindow.cpp \
-		../PillDispenser/adduser.cpp
+		../PillDispenser/errorwindow.cpp
 QMAKE_TARGET  = PillDispenser
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = PillDispenser
@@ -495,8 +489,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../PillDispenser/mainwindow.h ../PillDispenser/rename.h ../PillDispenser/database.h ../PillDispenser/acceptpopup.h ../PillDispenser/errorwindow.h ../PillDispenser/adduser.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../PillDispenser/main.cpp ../PillDispenser/mainwindow.cpp ../PillDispenser/rename.cpp ../PillDispenser/database.cpp ../PillDispenser/acceptpopup.cpp ../PillDispenser/errorwindow.cpp ../PillDispenser/adduser.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../PillDispenser/mainwindow.h ../PillDispenser/rename.h ../PillDispenser/database.h ../PillDispenser/acceptpopup.h ../PillDispenser/errorwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../PillDispenser/main.cpp ../PillDispenser/mainwindow.cpp ../PillDispenser/rename.cpp ../PillDispenser/database.cpp ../PillDispenser/acceptpopup.cpp ../PillDispenser/errorwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../PillDispenser/mainwindow.ui $(DISTDIR)/
 
 
@@ -520,9 +514,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_rename.cpp moc_acceptpopup.cpp moc_errorwindow.cpp moc_adduser.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_rename.cpp moc_acceptpopup.cpp moc_errorwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_rename.cpp moc_acceptpopup.cpp moc_errorwindow.cpp moc_adduser.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_rename.cpp moc_acceptpopup.cpp moc_errorwindow.cpp
 moc_mainwindow.cpp: /home/ymer123/Qt/5.4/gcc_64/include/QtGui/QFont \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfont.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qwindowdefs.h \
@@ -666,6 +660,10 @@ moc_mainwindow.cpp: /home/ymer123/Qt/5.4/gcc_64/include/QtGui/QFont \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/qsqlquery.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QString \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QVariant \
+		../PillDispenser/errorwindow.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
 		../PillDispenser/rename.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLineEdit \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlineedit.h \
@@ -674,11 +672,7 @@ moc_mainwindow.cpp: /home/ymer123/Qt/5.4/gcc_64/include/QtGui/QFont \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpen.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextoption.h \
 		../PillDispenser/acceptpopup.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout \
-		../PillDispenser/adduser.h \
 		../PillDispenser/mainwindow.h
 	/home/ymer123/Qt/5.4/gcc_64/bin/moc $(DEFINES) -I/home/ymer123/Qt/5.4/gcc_64/mkspecs/linux-g++ -I/home/ymer123/Dokumenter/gitFiler/DuckMaster3001/GUI/PillDispenser -I/home/ymer123/Qt/5.4/gcc_64/include -I/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets -I/home/ymer123/Qt/5.4/gcc_64/include/QtGui -I/home/ymer123/Qt/5.4/gcc_64/include/QtSql -I/home/ymer123/Qt/5.4/gcc_64/include/QtCore -I. ../PillDispenser/mainwindow.h -o moc_mainwindow.cpp
 
@@ -1064,122 +1058,30 @@ moc_errorwindow.cpp: /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfiledevice.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qvector2d.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtouchdevice.h \
-		../PillDispenser/errorwindow.h
-	/home/ymer123/Qt/5.4/gcc_64/bin/moc $(DEFINES) -I/home/ymer123/Qt/5.4/gcc_64/mkspecs/linux-g++ -I/home/ymer123/Dokumenter/gitFiler/DuckMaster3001/GUI/PillDispenser -I/home/ymer123/Qt/5.4/gcc_64/include -I/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets -I/home/ymer123/Qt/5.4/gcc_64/include/QtGui -I/home/ymer123/Qt/5.4/gcc_64/include/QtSql -I/home/ymer123/Qt/5.4/gcc_64/include/QtCore -I. ../PillDispenser/errorwindow.h -o moc_errorwindow.cpp
-
-moc_adduser.cpp: /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qwidget.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qglobal.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qconfig.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfeatures.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsystemdetection.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qprocessordetection.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcompilerdetection.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qtypeinfo.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qtypetraits.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsysinfo.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qlogging.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qflags.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qbasicatomic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qgenericatomic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_msvc.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_armv7.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_armv6.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_armv5.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_ia64.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_mips.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_x86.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_gcc.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_unix.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qglobalstatic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmutex.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qnumeric.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qnamespace.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobject.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstring.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qchar.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qbytearray.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qrefcount.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qarraydata.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qlist.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qalgorithms.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qiterator.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qbytearraylist.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcoreevent.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qscopedpointer.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmetatype.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qvarlengtharray.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcontainerfwd.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qisenum.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobject_impl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmargins.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qrect.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsize.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qpoint.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpalette.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qcolor.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qrgb.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qdatastream.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qiodevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qpair.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qbrush.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qvector.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qmatrix.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpolygon.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qregion.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qline.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtransform.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpainterpath.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qimage.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpixmap.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qshareddata.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qhash.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfont.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfontmetrics.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfontinfo.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qcursor.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qkeysequence.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qevent.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qvariant.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmap.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qdebug.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qtextstream.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qlocale.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qset.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qurl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qurlquery.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfile.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfiledevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qvector2d.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtouchdevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/QFont \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QPushButton \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qpushbutton.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractbutton.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qicon.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qframe.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabwidget.h \
+		../PillDispenser/rename.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLineEdit \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlineedit.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextcursor.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextformat.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpen.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextoption.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QString \
+		../PillDispenser/acceptpopup.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QListWidget \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlistwidget.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlistview.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractitemview.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qframe.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1191,24 +1093,14 @@ moc_adduser.cpp: /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractslider.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabbar.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLineEdit \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlineedit.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextcursor.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextformat.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpen.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextoption.h \
-		../PillDispenser/acceptpopup.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h \
-		../PillDispenser/adduser.h
-	/home/ymer123/Qt/5.4/gcc_64/bin/moc $(DEFINES) -I/home/ymer123/Qt/5.4/gcc_64/mkspecs/linux-g++ -I/home/ymer123/Dokumenter/gitFiler/DuckMaster3001/GUI/PillDispenser -I/home/ymer123/Qt/5.4/gcc_64/include -I/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets -I/home/ymer123/Qt/5.4/gcc_64/include/QtGui -I/home/ymer123/Qt/5.4/gcc_64/include/QtSql -I/home/ymer123/Qt/5.4/gcc_64/include/QtCore -I. ../PillDispenser/adduser.h -o moc_adduser.cpp
+		../PillDispenser/errorwindow.h
+	/home/ymer123/Qt/5.4/gcc_64/bin/moc $(DEFINES) -I/home/ymer123/Qt/5.4/gcc_64/mkspecs/linux-g++ -I/home/ymer123/Dokumenter/gitFiler/DuckMaster3001/GUI/PillDispenser -I/home/ymer123/Qt/5.4/gcc_64/include -I/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets -I/home/ymer123/Qt/5.4/gcc_64/include/QtGui -I/home/ymer123/Qt/5.4/gcc_64/include/QtSql -I/home/ymer123/Qt/5.4/gcc_64/include/QtCore -I. ../PillDispenser/errorwindow.h -o moc_errorwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1380,6 +1272,10 @@ main.o: ../PillDispenser/main.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/qsqlquery.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QString \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QVariant \
+		../PillDispenser/errorwindow.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
 		../PillDispenser/rename.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLineEdit \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlineedit.h \
@@ -1388,11 +1284,7 @@ main.o: ../PillDispenser/main.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpen.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextoption.h \
 		../PillDispenser/acceptpopup.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout \
-		../PillDispenser/adduser.h
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../PillDispenser/main.cpp
 
 mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QApplication \
@@ -1549,6 +1441,10 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		/home/ymer123/Qt/5.4/gcc_64/include/QtSql/qsqlquery.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QString \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QVariant \
+		../PillDispenser/errorwindow.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
 		../PillDispenser/rename.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLineEdit \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlineedit.h \
@@ -1557,11 +1453,7 @@ mainwindow.o: ../PillDispenser/mainwindow.cpp /home/ymer123/Qt/5.4/gcc_64/includ
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpen.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextoption.h \
 		../PillDispenser/acceptpopup.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout \
-		../PillDispenser/adduser.h
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../PillDispenser/mainwindow.cpp
 
 rename.o: ../PillDispenser/rename.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout \
@@ -1698,8 +1590,6 @@ rename.o: ../PillDispenser/rename.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidg
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QPushButton \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qpushbutton.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QStatusBar \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qstatusbar.h \
 		../PillDispenser/rename.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QString \
 		../PillDispenser/acceptpopup.h \
@@ -2093,145 +1983,31 @@ errorwindow.o: ../PillDispenser/errorwindow.cpp ../PillDispenser/errorwindow.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfile.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfiledevice.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qvector2d.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtouchdevice.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o errorwindow.o ../PillDispenser/errorwindow.cpp
-
-adduser.o: ../PillDispenser/adduser.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobject.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qnamespace.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qglobal.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qconfig.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfeatures.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsystemdetection.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qprocessordetection.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcompilerdetection.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qtypeinfo.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qtypetraits.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsysinfo.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qlogging.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qflags.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qbasicatomic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_bootstrap.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qgenericatomic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_msvc.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_armv7.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_armv6.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_armv5.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_ia64.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_mips.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_x86.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_cxx11.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_gcc.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qatomic_unix.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qglobalstatic.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmutex.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qnumeric.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstring.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qchar.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qbytearray.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qrefcount.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qarraydata.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstringbuilder.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qlist.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qalgorithms.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qiterator.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qbytearraylist.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcoreevent.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qscopedpointer.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmetatype.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qvarlengtharray.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcontainerfwd.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qisenum.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qobject_impl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qrect.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmargins.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsize.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qpoint.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qwidget.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qwindowdefs.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpaintdevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpalette.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qcolor.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qrgb.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstringlist.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qdatastream.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qiodevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qpair.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qregexp.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qstringmatcher.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qbrush.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qvector.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qmatrix.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpolygon.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qregion.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qline.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtransform.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpainterpath.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qimage.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpixelformat.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpixmap.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsharedpointer.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qshareddata.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qhash.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfont.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfontmetrics.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qfontinfo.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qcursor.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qkeysequence.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qevent.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qvariant.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qmap.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qdebug.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qtextstream.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qlocale.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qset.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qcontiguouscache.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qurl.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qurlquery.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfile.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qfiledevice.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qvector2d.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QPushButton \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qicon.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLabel \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlabel.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qframe.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabwidget.h \
+		../PillDispenser/rename.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QLineEdit \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlineedit.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextcursor.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextformat.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qpen.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextoption.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QTextEdit \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtextedit.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qtextdocument.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QFrame \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QMainWindow \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qmainwindow.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabwidget.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/qicon.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QPushButton \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qpushbutton.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QStatusBar \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qstatusbar.h \
-		../PillDispenser/adduser.h \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QWidget \
-		/home/ymer123/Qt/5.4/gcc_64/include/QtGui/QFont \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/QString \
+		../PillDispenser/acceptpopup.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QListWidget \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlistwidget.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlistview.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -2244,8 +2020,12 @@ adduser.o: ../PillDispenser/adduser.cpp /home/ymer123/Qt/5.4/gcc_64/include/QtWi
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qstyle.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qtabbar.h \
 		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qrubberband.h \
-		../PillDispenser/acceptpopup.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o adduser.o ../PillDispenser/adduser.cpp
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/QGridLayout \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayout.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/ymer123/Qt/5.4/gcc_64/include/QtWidgets/qboxlayout.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o errorwindow.o ../PillDispenser/errorwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
@@ -2258,9 +2038,6 @@ moc_acceptpopup.o: moc_acceptpopup.cpp
 
 moc_errorwindow.o: moc_errorwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_errorwindow.o moc_errorwindow.cpp
-
-moc_adduser.o: moc_adduser.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_adduser.o moc_adduser.cpp
 
 ####### Install
 
