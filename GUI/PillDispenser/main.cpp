@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QPalette>
 #include "mainwindow.h"
+#include "errorwindow.h"
 #include "database.h"
 
 int main(int argc, char *argv[])

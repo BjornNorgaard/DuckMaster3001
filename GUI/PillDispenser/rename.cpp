@@ -8,8 +8,8 @@
 #include <QPushButton>
 #include "rename.h"
 
-Rename::Rename(QWidget *parent)
-    : QWidget(parent)
+Rename::Rename(QWidget *parent, ErrorWindow* err)
+    : QWidget(parent), err_(err)
 {
     //Creating window specific information and layout
     createWidgets();
@@ -156,17 +156,23 @@ void Rename::setList(QListWidget* lw)
 //Slot that setups and opens a new window
 void Rename::openNewWindow()
 {
-    this->close();
+    if(le1->text().toCaseFolded().isEmpty() || le2->text().toCaseFolded().isEmpty() || le3->text().toCaseFolded().isEmpty())
+    {
+
+    } else {
+        //Setting info
+        AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+    }
 
     //Clearing lineedits
     le1->clear();
     le2->clear();
     le3->clear();
 
-    //Setting info
-    AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+
 
     //Show window
+    this->close();
     AW_->show();
 }
 
@@ -238,7 +244,6 @@ Rename::~Rename()
     delete accept;
     delete back;
     delete BiggestGrid;
-    delete grid;
     delete smallGrid;
 }
 

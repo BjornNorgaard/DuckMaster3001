@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QString>
+#include "errorwindow.h"
 #include "acceptpopup.h"
 
 enum {
@@ -17,7 +18,7 @@ class Rename : public QWidget
     Q_OBJECT
 
 public:
-    explicit Rename(QWidget *parent = 0);
+    explicit Rename(QWidget *parent = 0, ErrorWindow *err = new ErrorWindow);
 
     void setInfo(QString);
     void setParent(QWidget *p);
@@ -44,6 +45,7 @@ private:
     QGridLayout *grid;
     QGridLayout *smallGrid;
     QListWidget *lw_;
+    //ErrorWindow *err_;
     int windowType_;
 
     //Text edit line pointers

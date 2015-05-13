@@ -5,49 +5,18 @@
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent, Database *db) :
-    QWidget(parent)
+    QWidget(parent), db_(db)
 {
-    //Window Definitions
-    R = new Rename(this);
-    err_ = new ErrorWindow(this);
-
-
-    db_ = db;
     lwit = NULL;
-
-
-    this->setStyleSheet("background: #97BDD6;");
-    QFont f1;
-    vbox = new QVBoxLayout();
-    hbox = new QHBoxLayout(this);
-    fSmallButton.setPointSize(15);
-    f1.setPointSize(23);
-
-    lw = new QListWidget(this);
-
-    lw->setStyleSheet("background-color: white");
-    db->createList(lw);
-    lw->sortItems(Qt::AscendingOrder);
-
-    lw->setFont(f1);
     personInfo_ = "NaN,NaN,000000-0000";
 
-    dispenseButton();
-    changePillsButton();
-    removeButton();
-    renameButton();
-    addUserButton();
+    createWidgets();
+    setStyleSheets();
+    setLayoutGrids();
+    connections();
 
-    this->setStyleSheet("QPushButton{ color: blue}:");
-
-    vbox->setSpacing(1);
-    vbox->addStretch(3);
-
-    connect(lw, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(setItem(QListWidgetItem*)));
-
-    hbox->addWidget(lw);
-    hbox->addSpacing(5);
-    hbox->addLayout(vbox);
+    db->createList(lw);
+    lw->sortItems(Qt::AscendingOrder);
 
     setLayout(hbox);
 }
@@ -70,6 +39,103 @@ MainWindow::~MainWindow()
     delete hbox;
 }
 
+void MainWindow::createWidgets()
+{
+    //Window Definitions
+    R = new Rename(this);
+    err_ = new ErrorWindow(this);
+
+    //ListWidgets
+    lw = new QListWidget(this);
+
+    //QPushButtons
+    dispense = new QPushButton("Dispense", this);
+    changePills = new QPushButton("Change Pills", this);
+    rename = new QPushButton("Rename", this);
+    remove = new QPushButton("Remove", this);
+    add = new QPushButton("Add User", this);
+
+    //Layouts
+    vbox = new QVBoxLayout();
+    hbox = new QHBoxLayout(this);
+
+
+}
+
+void MainWindow::setStyleSheets()
+{
+    this->setStyleSheet("background: #97BDD6;");
+
+    //Window Styles
+    R->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    R->setWindowModality(Qt::WindowModal);
+    R->move(400, 300);
+    R->title(ADDUSER);
+
+    err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Dialog );
+    err_->setWindowModality(Qt::WindowModal);
+    err_->move(400, 300);
+
+    //QFont
+    QFont f("Arial Black");
+    QFont f1;
+    f1.setPointSize(23);
+    fSmallButton.setPointSize(15);
+
+
+    //QPushButtons
+    dispense->setStyleSheet("background-color: lightGray;"
+                            "padding:5px;");
+    f.setBold(true);
+    f.setPointSize(30);
+    dispense->setFixedSize(300, 150);
+    dispense->setFont(f);
+
+    changePills->setStyleSheet("background-color: lightGray;");
+    changePills->setFixedSize(300, 70);
+    changePills->setFont(fSmallButton);
+
+    remove->setStyleSheet("background-color: lightGray;");
+    remove->setFixedSize(300, 70);
+    remove->setFont(fSmallButton);
+
+    rename->setStyleSheet("background-color: lightGray;");
+    rename->setFixedSize(300, 70);
+    rename->setFont(fSmallButton);
+
+    add->setStyleSheet("background-color: lightGray;");
+    add->setFixedSize(300, 70);
+    add->setFont(fSmallButton);
+
+    //QListWidget
+    lw->setStyleSheet("background-color: white");
+    lw->setFont(f1);
+}
+
+void MainWindow::setLayoutGrids()
+{
+    vbox->addWidget(dispense);
+    vbox->addWidget(changePills);
+    vbox->addWidget(remove);
+    vbox->addWidget(rename);
+    vbox->addWidget(add);
+    vbox->setSpacing(1);
+    vbox->addStretch(3);
+    hbox->addWidget(lw);
+    hbox->addSpacing(5);
+    hbox->addLayout(vbox);
+}
+
+void MainWindow::connections()
+{
+    connect(dispense, SIGNAL(clicked()), this, SLOT(dispenseButtonClicked()));
+    connect(changePills, SIGNAL(clicked()), this, SLOT(changePillsButtonClicked()));
+    connect(remove, SIGNAL(clicked()), this, SLOT(removeButtonClicked()));
+    connect(rename, SIGNAL(clicked()), this, SLOT(renameButtonClicked()));
+    connect(add, SIGNAL(clicked()), this, SLOT(addUserButtonClicked()));
+    connect(lw, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(setItem(QListWidgetItem*)));
+}
+
 //Unselects the list on click
 void MainWindow::unselect()
 {
@@ -84,79 +150,40 @@ void MainWindow::setItem(QListWidgetItem* item)
    lwit = item;
 }
 
-void MainWindow::dispenseButton()
+/*-----------------------------------*/
+/*------------- Slots ---------------*/
+/*-----------------------------------*/
+
+void MainWindow::addUserButtonClicked()
 {
-    QFont f("Arial Black");
-    f.setBold(true);
-    f.setPointSize(30);
-
-    dispense = new QPushButton("Dispense", this);
-    dispense->setFixedSize(300, 150);
-    dispense->setFont(f);
-    vbox->addWidget(dispense);
-    dispense->setStyleSheet("background-color: lightGray;"
-                            "padding:5px;");
-
-
-    connect(dispense, SIGNAL(clicked()), this, SLOT(dispenseButtonClicked()));
-
+    R->setList(lw);
+    R->show();
 }
 
-
-//Send message to user equal to
-//Pills having to be dispensed
-//for current selected user
-void MainWindow::dispenseButtonClicked()
+void MainWindow::renameButtonClicked()
 {
     if(lwit == NULL)
     {
         err_->setErrorType(error::NOUSERERR);
-        err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Dialog );
-        err_->setWindowModality(Qt::WindowModal);
-        err_->move(400, 300);
         err_->show();
-
         //Open Window telling user
         //to choose a user
     } else {
-        lw->selectionModel()->reset();
+        //lw->selectionModel()->reset();
 
-        delete lwit;
-        lwit = NULL;
+        R->setInfo(personInfo_);
+        R->title(RENAMEUSER);
+        R->show();
     }
-}
 
-void MainWindow::changePillsButton()
-{
-    changePills = new QPushButton("Change Pills", this);
-    changePills->setFixedSize(300, 70);
-    changePills->setFont(fSmallButton);
-    vbox->addWidget(changePills);
-    changePills->setStyleSheet("background-color: lightGray;");
-
-    connect(changePills, SIGNAL(clicked()), this, SLOT(changePillsButtonClicked()));
-}
-
-void MainWindow::changePillsButtonClicked()
-{
-
-}
-
-void MainWindow::removeButton()
-{
-    remove = new QPushButton("Remove", this);
-    remove->setFixedSize(300, 70);
-    remove->setFont(fSmallButton);
-    vbox->addWidget(remove);
-    remove->setStyleSheet("background-color: lightGray;");
-
-    connect(remove, SIGNAL(clicked()), this, SLOT(removeButtonClicked()));
 }
 
 void MainWindow::removeButtonClicked()
 {
     if(lwit == NULL)
     {
+        err_->setErrorType(error::NOUSERERR);
+        err_->show();
         //Open Window telling user
         //to choose a user
     } else {
@@ -171,58 +198,27 @@ void MainWindow::removeButtonClicked()
     //object/ class
 }
 
-void MainWindow::renameButton()
+void MainWindow::changePillsButtonClicked()
 {
 
-
-    rename = new QPushButton("Rename", this);
-    rename->setFixedSize(300, 70);
-    rename->setFont(fSmallButton);
-    vbox->addWidget(rename);
-    rename->setStyleSheet("background-color: lightGray;");
-
-    connect(rename, SIGNAL(clicked()), this, SLOT(renameButtonClicked()));
 }
 
-void MainWindow::renameButtonClicked()
+//Send message to user equal to
+//Pills having to be dispensed
+//for current selected user
+void MainWindow::dispenseButtonClicked()
 {
     if(lwit == NULL)
     {
         err_->setErrorType(error::NOUSERERR);
+        err_->show();
 
         //Open Window telling user
         //to choose a user
     } else {
-        //lw->selectionModel()->reset();
+        lw->selectionModel()->reset();
 
-        R->setWindowFlags( Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
-        R->setWindowModality(Qt::WindowModal);
-        R->move(400, 300);
-        R->setInfo(personInfo_);
-        R->title(RENAMEUSER);
-        R->show();
+        delete lwit;
+        lwit = NULL;
     }
-
-}
-
-void MainWindow::addUserButton()
-{
-    add = new QPushButton("Add User", this);
-    add->setFixedSize(300, 70);
-    add->setFont(fSmallButton);
-    vbox->addWidget(add);
-    add->setStyleSheet("background-color: lightGray;");
-
-    connect(add, SIGNAL(clicked()), this, SLOT(addUserButtonClicked()));
-}
-
-void MainWindow::addUserButtonClicked()
-{
-    R->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
-    R->setWindowModality(Qt::WindowModal);
-    R->setList(lw);
-    R->move(400, 300);
-    R->title(ADDUSER);
-    R->show();
-    //add_->activateWindow();
 }
