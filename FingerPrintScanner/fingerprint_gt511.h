@@ -105,6 +105,9 @@ extern bool GT511_SendMessage(uint8_t *pMessage, uint32_t length);
  */
 extern uint32_t GT511_ReceiveMessage(uint8_t *pMessage, uint32_t length);
 
+void init_UART();
+void close_UART();
+
 /**
  * Identifies the different possible modes of the driver when the callback
  * function GT511_UserCallback() is called.
