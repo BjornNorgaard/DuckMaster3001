@@ -9,8 +9,10 @@
 #include "rename.h"
 
 Rename::Rename(QWidget *parent, ErrorWindow* err)
-    : QWidget(parent), err_(err)
+    : QWidget(parent)
 {
+    err_ = err;
+
     //Creating window specific information and layout
     createWidgets();
     setStyleSheets();
@@ -158,22 +160,25 @@ void Rename::openNewWindow()
 {
     if(le1->text().toCaseFolded().isEmpty() || le2->text().toCaseFolded().isEmpty() || le3->text().toCaseFolded().isEmpty())
     {
-
+        err_->setErrorType(error::NOTEXTERR);
+        err_->show();
     } else {
         //Setting info
         AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+
+        //Clearing lineedits
+        le1->clear();
+        le2->clear();
+        le3->clear();
+
+        //Show window
+        this->close();
+        AW_->show();
     }
 
-    //Clearing lineedits
-    le1->clear();
-    le2->clear();
-    le3->clear();
 
 
 
-    //Show window
-    this->close();
-    AW_->show();
 }
 
 //Takes a string with full personinfo

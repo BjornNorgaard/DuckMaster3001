@@ -120,6 +120,10 @@ void ErrorWindow::setErrorType(int errType)
     case error::USEREXIST:
         userExistError();
         break;
+
+    case error::NOTEXTERR:
+        noTextError();
+        break;
     }
 }
 
@@ -186,3 +190,8 @@ void ErrorWindow::userExistError()
     HowToFixText->setText("Create User");
 }
 
+void ErrorWindow::noTextError()
+{
+    WhatHappenedText->setText("No text written in window");
+    HowToFixText->setText("Please write wanted credentials for the user, and then press accept. To go back, press the button labeled back.");
+}

@@ -42,8 +42,8 @@ MainWindow::~MainWindow()
 void MainWindow::createWidgets()
 {
     //Window Definitions
-    R = new Rename(this);
     err_ = new ErrorWindow(this);
+    R = new Rename(this, err_);
 
     //ListWidgets
     lw = new QListWidget(this);
@@ -57,7 +57,7 @@ void MainWindow::createWidgets()
 
     //Layouts
     vbox = new QVBoxLayout();
-    hbox = new QHBoxLayout(this);
+    hbox = new QHBoxLayout();
 
 
 }
@@ -69,12 +69,12 @@ void MainWindow::setStyleSheets()
     //Window Styles
     R->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     R->setWindowModality(Qt::WindowModal);
-    R->move(400, 300);
+    R->move(1024/2, 300);
     R->title(ADDUSER);
 
     err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Dialog );
     err_->setWindowModality(Qt::WindowModal);
-    err_->move(400, 300);
+    err_->move(1024, 300);
 
     //QFont
     QFont f("Arial Black");

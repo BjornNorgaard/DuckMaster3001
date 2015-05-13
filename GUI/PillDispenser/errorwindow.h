@@ -5,12 +5,14 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QMainWindow>
+#include <QGridLayout>
 #include "rename.h"
 
 namespace error
 {
     enum
     {
+        NOTEXTERR,
         REMOVEERR,
         RENAME,
         DISPENSEERR,
@@ -63,6 +65,7 @@ private:
     void invalidNameError();
     void noUserSelectedError();
     void userExistError();
+    void noTextError();
 };
 
 #endif // ERRORWINDOW_H

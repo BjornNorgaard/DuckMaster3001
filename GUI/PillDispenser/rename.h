@@ -13,12 +13,14 @@ enum {
     RENAMEUSER
 };
 
+class ErrorWindow;
+
 class Rename : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Rename(QWidget *parent = 0, ErrorWindow *err = new ErrorWindow);
+    explicit Rename(QWidget *parent = 0, ErrorWindow *err = 0);
 
     void setInfo(QString);
     void setParent(QWidget *p);
@@ -45,7 +47,7 @@ private:
     QGridLayout *grid;
     QGridLayout *smallGrid;
     QListWidget *lw_;
-    //ErrorWindow *err_;
+    ErrorWindow *err_;
     int windowType_;
 
     //Text edit line pointers

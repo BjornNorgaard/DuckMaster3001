@@ -5,8 +5,10 @@ INPUT(
 ./debug\database.o
 ./debug\acceptpopup.o
 ./debug\errorwindow.o
+./debug\idle.o
 ./debug\moc_mainwindow.o
 ./debug\moc_rename.o
 ./debug\moc_acceptpopup.o
 ./debug\moc_errorwindow.o
+./debug\moc_idle.o
 );
