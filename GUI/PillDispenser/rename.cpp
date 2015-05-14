@@ -6,6 +6,8 @@
 #include <QFrame>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QStyle>
+#include <QDesktopWidget>
 #include "rename.h"
 
 Rename::Rename(QWidget *parent, ErrorWindow* err)
@@ -108,9 +110,14 @@ void Rename::createWidgets()
     Qt::WindowFlags flags = AW_->windowFlags();
     AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     AW_->setWindowModality(Qt::WindowModal);
-    AW_->move(470, 320);
 
-
+    AW_->setGeometry(
+     QStyle::alignedRect(
+     Qt::LeftToRight,
+     Qt::AlignCenter,
+     AW_->size(),
+     qApp->desktop()->availableGeometry()
+     ));
 
     //QLabels
     LfirstName = new QLabel("Firstname:", this);

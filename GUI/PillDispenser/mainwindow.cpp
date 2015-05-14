@@ -2,6 +2,8 @@
 #include <QMessageBox>
 #include <QListWidget>
 #include <QFont>
+#include <QStyle>
+#include <QDesktopWidget>
 #include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent, Database *db) :
@@ -69,12 +71,31 @@ void MainWindow::setStyleSheets()
     //Window Styles
     R->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     R->setWindowModality(Qt::WindowModal);
-    R->move(1024/2, 300);
+    //R->move(1024/2, 300);
     R->title(ADDUSER);
+
+    //Center rename window
+    R->setGeometry(
+     QStyle::alignedRect(
+     Qt::LeftToRight,
+     Qt::AlignCenter,
+     R->size(),
+     qApp->desktop()->availableGeometry()
+     ));
+
 
     err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Dialog );
     err_->setWindowModality(Qt::WindowModal);
-    err_->move(1024, 300);
+    //err_->move(1024, 300);
+
+    //Center window on screen
+    err_->setGeometry(
+     QStyle::alignedRect(
+     Qt::LeftToRight,
+     Qt::AlignCenter,
+     err_->size(),
+     qApp->desktop()->availableGeometry()
+     ));
 
     //QFont
     QFont f("Arial Black");
@@ -157,6 +178,7 @@ void MainWindow::setItem(QListWidgetItem* item)
 void MainWindow::addUserButtonClicked()
 {
     R->setList(lw);
+    R->title(ADDUSER);
     R->show();
 }
 
