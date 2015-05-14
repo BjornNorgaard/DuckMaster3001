@@ -1,29 +1,27 @@
 #include "database.h"
 
 Database::Database() {
-    openDB();
 }
 
 Database::~Database() {
-    closeDB();
 }
 
-static void logSQLFailure(const QSqlQuery& query) {
+void Database::logSQLFailure(const QSqlQuery& query) {
     const QSqlError error(query.lastQuery());
     qWarning() << "SQL Query failed" << query.lastQuery();
     qWarning() << error.number() << query.lastError().text();
 }
 
-static bool execQueryAndLogFailure(QSqlQuery& query) {
-    if(!query.exec()) {
+bool Database::execQueryAndLogFailure(QSqlQuery& query) {
+    if (!query.exec()) {
         logSQLFailure(query);
         return false;
     }
     return true;
 }
 
-static bool execQueryAndLogFailure(QSqlQuery& query, const QString& queryString) {
-    if(!query.exec(queryString)) {
+bool Database::execQueryAndLogFailure(QSqlQuery& query, const QString& queryString) {
+    if (!query.exec(queryString)) {
         logSQLFailure(query);
         return false;
     }
@@ -67,72 +65,14 @@ void Database::setupDB() {
     execQueryAndLogFailure(query, "INSERT OR IGNORE INTO groups(group_id, name) VALUES(3, \"Super User\")");
 }
 
-void Database::printPersons() {
-    QSqlQuery query;
-    
-    execQueryAndLogFailure(query, "SELECT * FROM users");
-    qDebug() << "ID:" << "\t" << "Firstname(s)" << "\t" << "Lastname";
-    while (query.next()) {
-        qDebug() << query.value(0).toString() << "\t" << query.value(3).toString() << "\t" << query.value(4).toString();
-    }
-
-}
-
 bool Database::createList(QListWidget*& lw) {
     QSqlQuery query;
 
     //Forstår ikke helt metoden
     execQueryAndLogFailure(query, "SELECT * FROM users");
 
-    while(query.next()) {
+    while (query.next()) {
         lw->addItem(query.value(4).toString() + ", " + query.value(3).toString() + ", " + query.value(2).toString());
     }
-    return true;
-}
-
-bool Database::createPerson(const QString& cpr, const QString& firstname, const QString& lastname) {
-    QSqlQuery query;
-    QVariant user_id;
-
-    // search for cpr
-    query.prepare("SELECT * FROM users WHERE cpr = :cpr");
-    query.bindValue(":cpr", cpr);
-    execQueryAndLogFailure(query);
-    while (query.next()) {
-        if (cpr == query.value(2).toString()) {
-            qWarning() << "Database: User already exists!";
-            return false;
-        }
-    }
-
-    // add person to database
-    query.prepare("INSERT OR IGNORE INTO users(cpr, firstname, lastname) VALUES(:cpr, :firstname, :lastname)");
-    query.bindValue(":cpr", cpr);
-    query.bindValue(":firstname", firstname);
-    query.bindValue(":lastname", lastname);
-    execQueryAndLogFailure(query);
-   
-    // find user_id
-    query.prepare("SELECT * FROM users WHERE cpr = :cpr");
-    query.bindValue(":cpr", cpr);
-    execQueryAndLogFailure(query);
-    while (query.next())
-        user_id = query.value(0).toInt();
-
-    // assign group
-    query.prepare("INSERT OR IGNORE INTO group_members (group_id, user_id) VALUES (1, :user_id)");
-    query.bindValue(":lastname", user_id);
-    execQueryAndLogFailure(query);
-
-    return true;
-}
-
-bool Database::deletePersonById(int id) {
-    QSqlQuery query;
-
-    query.prepare("DELETE FROM users WHERE user_id IS :id");
-    query.bindValue(":id", id);
-    execQueryAndLogFailure(query);
-
     return true;
 }
