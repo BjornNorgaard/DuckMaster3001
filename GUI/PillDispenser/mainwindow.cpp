@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
     QWidget(parent)
 {
     //Window Definitions
-    R = new Rename();
+    R = new Rename(this);
     err_ = new ErrorWindow(this);
 
 
@@ -110,7 +110,8 @@ void MainWindow::dispenseButtonClicked()
 {
     if(lwit == NULL)
     {
-        err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+        err_->setErrorType(error::NOUSERERR);
+        err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Dialog );
         err_->setWindowModality(Qt::WindowModal);
         err_->move(400, 300);
         err_->show();
@@ -187,14 +188,14 @@ void MainWindow::renameButtonClicked()
 {
     if(lwit == NULL)
     {
-
+        err_->setErrorType(error::NOUSERERR);
 
         //Open Window telling user
         //to choose a user
     } else {
         //lw->selectionModel()->reset();
 
-        R->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+        R->setWindowFlags( Qt::CustomizeWindowHint | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
         R->setWindowModality(Qt::WindowModal);
         R->move(400, 300);
         R->setInfo(personInfo_);

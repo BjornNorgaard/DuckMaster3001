@@ -7,15 +7,18 @@
 #include <QMainWindow>
 #include "rename.h"
 
-enum {
-    REMOVEERR,
-    RENAME,
-    DISPENSEERR,
-    INVALIDERR,
-    NOUSERERR,
-    USEREXIST
-};
-
+namespace error
+{
+    enum
+    {
+        REMOVEERR,
+        RENAME,
+        DISPENSEERR,
+        INVALIDERR,
+        NOUSERERR,
+        USEREXIST
+    };
+}
 
 class ErrorWindow : public QWidget
 {

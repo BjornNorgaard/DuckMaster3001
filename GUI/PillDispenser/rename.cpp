@@ -11,10 +11,6 @@
 Rename::Rename(QWidget *parent)
     : QWidget(parent)
 {
-    //Set background color and creating Acceptwindow popup
-
-    AW_ = new AcceptPopup;
-
     //Creating window specific information and layout
     createWidgets();
     setStyleSheets();
@@ -99,17 +95,28 @@ void Rename::setStyleSheets()
     /*-------------------------------------*/
 
     back->setStyleSheet("background: lightgray");
-
     accept->setStyleSheet("background: lightgray");
 }
 
 void Rename::createWidgets()
 {
+    //Set background color and creating Acceptwindow popup and window definitions
+    AW_ = new AcceptPopup;
+    AW_->setParent(this);
+    Qt::WindowFlags flags = AW_->windowFlags();
+    AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    AW_->setWindowModality(Qt::WindowModal);
+    AW_->move(470, 320);
+
+
+
+    //QLabels
     LfirstName = new QLabel("Firstname:", this);
     LlastName = new QLabel("Lastname:", this);
     Lcpr = new QLabel("Cpr-Num:", this);
     LEditUser = new QLabel("Create User", this);
 
+    //QLineEdits
     le1 = new QLineEdit();
     le2 = new QLineEdit();
     le3 = new QLineEdit();
@@ -118,12 +125,14 @@ void Rename::createWidgets()
     le2->setFixedSize(300, 50);
     le3->setFixedSize(300, 50);
 
+    //QPushButtons
     back = new QPushButton("Back", this);
     accept = new QPushButton("Accept", this);
 
     back->setFixedSize(145, 50);
     accept->setFixedSize(145, 50);
 
+    //QGridLayouts
     BiggestGrid = new QGridLayout();
     grid = new QGridLayout();
     smallGrid = new QGridLayout();
@@ -148,17 +157,14 @@ void Rename::setList(QListWidget* lw)
 void Rename::openNewWindow()
 {
     this->close();
-    AW_->setParent(this);
-    Qt::WindowFlags flags = AW_->windowFlags();
-    AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
-    AW_->setWindowModality(Qt::WindowModal);
-    AW_->move(470, 320);
-    AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
 
     //Clearing lineedits
     le1->clear();
     le2->clear();
     le3->clear();
+
+    //Setting info
+    AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
 
     //Show window
     AW_->show();
