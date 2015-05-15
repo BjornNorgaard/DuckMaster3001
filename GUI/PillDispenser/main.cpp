@@ -20,13 +20,13 @@ int main(int argc, char *argv[])
     //Idle window(0);
     window.resize(1024, 600);
 
-    window.setGeometry(
+    /*window.setGeometry(
      QStyle::alignedRect(
      Qt::LeftToRight,
      Qt::AlignCenter,
      window.size(),
      qApp->desktop()->availableGeometry()
-     ));
+     ));*/
 
 
     //window.move(100, 50);

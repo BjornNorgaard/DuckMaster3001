@@ -7,6 +7,8 @@ ErrorWindow::ErrorWindow(QWidget *parent) : QWidget(parent)
     setLayoutGrids();
     connections();
 
+    setFocusProxy(Understand);
+
     setLayout(bigGrid);
 }
 
@@ -45,7 +47,7 @@ void ErrorWindow::createWidgets()
     Spacer2 = new QLabel(" ", this);
 
     //PushButton
-    Understand = new QPushButton("I Understand", this);
+    Understand = new QPushButton("I Understand", 0);
 
 
     //Layouts
@@ -147,7 +149,7 @@ void ErrorWindow::setLayoutGrids()
 
 void ErrorWindow::connections()
 {
-    connect(Understand, SIGNAL(clicked()), this, SLOT(closeCurrentWindow()));
+    connect(Understand, SIGNAL(pressed()), this, SLOT(closeCurrentWindow()));
 }
 
 /*-----------------------------------*/
@@ -193,5 +195,7 @@ void ErrorWindow::userExistError()
 void ErrorWindow::noTextError()
 {
     WhatHappenedText->setText("No text written in window");
-    HowToFixText->setText("Please write wanted credentials for the user, and then press accept. To go back, press the button labeled back.");
+    HowToFixText->setText("Please write wanted credentials for the user.");
+
+    //, and then press accept. To go back, press the button labeled back.
 }

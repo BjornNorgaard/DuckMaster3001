@@ -89,13 +89,13 @@ void MainWindow::setStyleSheets()
     //err_->move(1024, 300);
 
     //Center window on screen
-    err_->setGeometry(
+    /*err_->setGeometry(
      QStyle::alignedRect(
      Qt::LeftToRight,
      Qt::AlignCenter,
      err_->size(),
      qApp->desktop()->availableGeometry()
-     ));
+     ));*/
 
     //QFont
     QFont f("Arial Black");
