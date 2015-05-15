@@ -56,7 +56,7 @@ void Database::setupDB() {
     execQueryAndLogFailure(query, "CREATE TABLE IF NOT EXISTS users(user_id INTEGER PRIMARY KEY AUTOINCREMENT, fingerprint_id BLOB, cpr TEXT, firstname TEXT, lastname TEXT, UNIQUE(cpr))");
     execQueryAndLogFailure(query, "CREATE TABLE IF NOT EXISTS groups(group_id INTEGER, name TEXT, UNIQUE(group_id, name))");
     execQueryAndLogFailure(query, "CREATE TABLE IF NOT EXISTS pills(pill_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)");
-    execQueryAndLogFailure(query, "CREATE TABLE IF NOT EXISTS pill_groups(pill_id INTEGER, user_id INTEGER)");
+    execQueryAndLogFailure(query, "CREATE TABLE IF NOT EXISTS pill_groups(pill_id INTEGER, user_id INTEGER, amount INTEGER)");
     execQueryAndLogFailure(query, "CREATE TABLE IF NOT EXISTS group_members(group_id INTEGER, user_id INTEGER, UNIQUE(user_id))");
 
     // user groups
