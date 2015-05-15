@@ -36,7 +36,7 @@ bool Person::createPerson(const QString& cpr, const QString& firstname, const QS
 bool Person::deletePerson(quint16 id) {
     QSqlQuery query;
 
-    query.prepare("DELETE FROM users WHERE user_id :id");
+    query.prepare("DELETE FROM users WHERE user_id = :id");
     query.bindValue(":id", id);
 
     return Database::execQueryAndLogFailure(query);
