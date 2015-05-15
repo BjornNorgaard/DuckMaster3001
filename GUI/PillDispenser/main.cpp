@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
     ppl->modifyFirstName(3, "Matin");
     ppl->modifyLastName(3, "Ged");
 
-    //MainWindow window(0, db);
-    Idle window(0);
+    MainWindow window(0, db);
+    //Idle window(0);
     window.resize(1024, 600);
 
     window.setGeometry(
