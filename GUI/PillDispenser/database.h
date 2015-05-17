@@ -1,4 +1,4 @@
-#ifdef DATABASE_H
+#ifndef DATABASE_H
 #define DATABASE_H
 
 #include <QDebug>
@@ -11,6 +11,7 @@
 
 class Database : public QObject {
   public:
+    Database();
     ~Database();
 
     static QSqlError openDB();
@@ -24,7 +25,6 @@ class Database : public QObject {
     bool createList(QListWidget*& lw);
 
   private:
-    Database();
 };
 
 #endif //DATABASE_H
