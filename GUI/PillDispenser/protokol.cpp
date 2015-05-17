@@ -1,71 +1,62 @@
 #include "protokol.h"
 
-// Default settings for spi device
-const char* Protokol::device = "/dev/spidev0.1";
-uint8_t Protokol::bits = 8;
-uint32_t Protokol::speed = 10000000;
-uint16_t Protokol::delay = 0;
-uint32_t Protokol::mode = SPI_MODE_3;
+Protokol::Protokol(SPI* interface) : interface_(interface) {}
 
-Protokol::Protokol() {
-    fd = open(device, O_RDWR);
+Protokol::~Protokol() { delete interface_; }
 
-    // Needs error handling badly!!
-    ioctl(fd, SPI_IOC_WR_MODE, &mode);
-    ioctl(fd, SPI_IOC_RD_MODE, &mode);
-
-    ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
-    ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
-
-    ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
-    ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
+unsigned int Protokol::checksum(unsigned int value) {
+    // Two's complement
+    return ~(value + 1);
 }
 
-Protokol::~Protokol() { close(fd); }
+bool Protokol::open() {
+    unsigned int command[2];
 
-uint8_t Protokol::checksum(uint8_t value) {
-    // Checksum implementation
-    return 0;
+    command[0] = PROTOKOL_OPEN;
+    command[1] = checksum(command[0]);
+
+    interface_->transfer(command, 2);
+    interface_->recieve(command, 2);
+    if (command[0] == PROTOKOL_REPLY_ERR && command[1] == checksum(command[1]))
+        return true;
+
+    return false;
 }
 
-void Protokol::transfer(uint8_t* command, uint8_t size) {
-    uint8_t msgSize = size + 2;
-    struct spi_ioc_transfer tr[msgSize];
+bool Protokol::close() {
+    unsigned int command[2];
 
-    // Setup the transmit buffer;
-    uint8_t tx[msgSize];
-    // First the amount of bytes transferred
-    tx[0] = msgSize;
-    // Then the command
-    for (size_t i = 1; i < size + 1; i++) tx[i] = command[i - 1];
-    // Lastly the checksum
-    tx[size + 1] = checksum(1);
+    command[0] = PROTOKOL_CLOSE;
+    command[1] = checksum(command[0]);
 
-    for (size_t i = 0; i < msgSize; i++) {
-        tr[i].tx_buf = reinterpret_cast<unsigned long>(&tx[i]);
-        tr[i].rx_buf = 0;
-        tr[i].len = sizeof(tx[i]);
-        tr[i].delay_usecs = delay;
-        tr[i].speed_hz = speed;
-        tr[i].bits_per_word = bits;
-        tr[i].cs_change = 0;
-    }
+    interface_->transfer(command, 2);
+    interface_->recieve(command, 2);
+    if (command[0] == PROTOKOL_REPLY_ERR && command[1] == checksum(command[1]))
+        return true;
 
-    // Needs error handling
-    ioctl(fd, SPI_IOC_MESSAGE(msgSize), &tr);
+    return false;
 }
 
-bool Protokol::dispensePill(uint8_t id, uint8_t amount) {
-    uint8_t size = 3;
-    uint8_t command[size];
+bool Protokol::dispensePill(unsigned int id, unsigned int amount) {
+    unsigned int size = 6;
+    unsigned int command[size];
 
-    command[0] = 0x01;
-    command[1] = id;
-    command[2] = amount;
+    // Dispense command
+    command[0] = PROTOKOL_DISPENSE;
 
-    transfer(command, size);
+    // Pill identifier
+    command[2] = id;
 
-    // Needs error handling
+    // Amount of pill identifier
+    command[4] = amount;
+
+    // Setup the checksums
+    for (int i = 1; i < size; i + 2)
+        command[i] = checksum(command[i - 1]);
+
+    // Do the transfers
+    for (int i = 0; i < size; i + 2)
+        interface_->transfer(&command[i], 2);
 
     return true;
 }

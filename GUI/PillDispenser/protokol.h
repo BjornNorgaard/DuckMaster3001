@@ -1,32 +1,30 @@
 #ifndef PROTOKOL_H
 #define PROTOKOL_H
 
-#include <stdint.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <getopt.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <linux/types.h>
-#include <linux/spi/spidev.h>
+#include "spi.h"
 
 class Protokol {
-public:
-    Protokol();
+  public:
+    Protokol(SPI* interface = new SPI);
     ~Protokol();
-    bool dispensePill(uint8_t id, uint8_t amount);
+    bool open();
+    bool close();
+    bool dispensePill(unsigned int id, unsigned int amount);
 
-private:
-    void transfer(uint8_t* command, uint8_t size);
-    uint8_t checksum(uint8_t value);
+  private:
+    enum {
+        PROTOKOL_OPEN = 0x01,
+        PROTOKOL_CLOSE = 0x02,
+        PROTOKOL_DISPENSE = 0x03
+    };
 
-    int fd;
-    static const char* device;
-    static uint8_t bits;
-    static uint32_t speed;
-    static uint16_t delay;
-    static uint32_t mode;
+    enum {
+        PROTOKOL_REPLY_ACK = 0x01,
+        PROTOKOL_REPLY_ERR = 0x02
+    };
+
+    unsigned int checksum(unsigned int value);
+    SPI* interface_;
 };
 
 #endif // PROTOKOL_H

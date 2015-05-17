@@ -43,7 +43,7 @@ void Idle::setStyleSheets()
     info->setStyleSheet("color: #ffffff;"
                         "font-size: 40px;"
                         "font: Cantarell;");
-    info->setContentsMargins(20, -100, 0, 0);
+    info->setContentsMargins(20, -50, 0, 0);
     info->setFixedWidth(800);
     info->setWordWrap(true);
 

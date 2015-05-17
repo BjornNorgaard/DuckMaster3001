@@ -1,0 +1,17 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\rename.o
+./release\database.o
+./release\acceptpopup.o
+./release\errorwindow.o
+./release\idle.o
+./release\adduser.o
+./release\person.o
+./release\moc_mainwindow.o
+./release\moc_rename.o
+./release\moc_acceptpopup.o
+./release\moc_errorwindow.o
+./release\moc_idle.o
+./release\moc_adduser.o
+);

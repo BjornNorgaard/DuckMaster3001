@@ -71,22 +71,23 @@ void MainWindow::setStyleSheets()
     //Window Styles
     R->setWindowFlags( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     R->setWindowModality(Qt::WindowModal);
-    //R->move(1024/2, 300);
+    R->move(250, 100);
     R->title(ADDUSER);
 
     //Center rename window
-    R->setGeometry(
+    /*R->setGeometry(
      QStyle::alignedRect(
      Qt::LeftToRight,
      Qt::AlignCenter,
      R->size(),
      qApp->desktop()->availableGeometry()
-     ));
+     ));*/
 
 
     err_->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::FramelessWindowHint | Qt::Dialog );
     err_->setWindowModality(Qt::WindowModal);
-    //err_->move(1024, 300);
+    err_->resize(500, 450);
+    err_->move(250, 50);
 
     //Center window on screen
     /*err_->setGeometry(

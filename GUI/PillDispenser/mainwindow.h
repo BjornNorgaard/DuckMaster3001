@@ -11,6 +11,8 @@
 #include "errorwindow.h"
 #include "rename.h"
 
+class Database;
+
 class MainWindow : public QWidget
 {
     Q_OBJECT
