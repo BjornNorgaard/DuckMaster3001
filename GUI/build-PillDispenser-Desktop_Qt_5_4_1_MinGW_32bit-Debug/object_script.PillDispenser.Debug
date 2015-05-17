@@ -1,0 +1,17 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\rename.o
+./debug\database.o
+./debug\acceptpopup.o
+./debug\errorwindow.o
+./debug\idle.o
+./debug\adduser.o
+./debug\person.o
+./debug\moc_mainwindow.o
+./debug\moc_rename.o
+./debug\moc_acceptpopup.o
+./debug\moc_errorwindow.o
+./debug\moc_idle.o
+./debug\moc_adduser.o
+);

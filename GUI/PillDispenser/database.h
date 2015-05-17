@@ -1,5 +1,5 @@
-#ifndef DATABASE_HPP_
-#define DATABASE_HPP_
+#ifdef DATABASE_H
+#define DATABASE_H
 
 #include <QDebug>
 #include <QSqlDatabase>
@@ -10,22 +10,21 @@
 #include <QVariant>
 
 class Database : public QObject {
-public:
-    Database();
+  public:
     ~Database();
 
     static QSqlError openDB();
     static void closeDB();
     static void setupDB();
 
-    static void printPersons();
-    static bool createPerson(const QString& cpr, const QString& firstname, const QString& lastname);
-    static bool deletePersonById(int id);
-    static bool createList(QListWidget*& lw);
+    static void logSQLFailure(const QSqlQuery& query);
+    static bool execQueryAndLogFailure(QSqlQuery& query);
+    static bool execQueryAndLogFailure(QSqlQuery& query, const QString& queryString);
 
-private:
+    bool createList(QListWidget*& lw);
 
-
+  private:
+    Database();
 };
 
-#endif //DATABASE_HPP_
+#endif //DATABASE_H
