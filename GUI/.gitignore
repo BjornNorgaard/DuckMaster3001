@@ -1,4 +1,4 @@
 Makefile
-db.sqlite
+*.sqlite
 PillDispenser
 PillDispenser.gch/
