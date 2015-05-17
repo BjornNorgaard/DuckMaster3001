@@ -11,20 +11,20 @@ class Pills {
 
     bool addPills(quint16 id, QString& name);
     bool delPills(quint16 id);
-    bool assignPills(quint16 userid, quint16 pillid, quint8 pillamount);
-    bool removePills(quint16 userid, quint16 pillid);
+    bool assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount);
+    bool removePills(quint16 user_id, quint16 pill_id);
 
   private:
     enum {
         SQL_PILL_GROUPS_PILL_ID,
         SQL_PILL_GROUPS_USER_ID,
         SQL_PILL_GROUPS_AMOUNT
-    }
+    };
 
     enum {
         SQL_PILLS_PILL_ID,
         SQL_PILLS_NAME
-    }
+    };
 };
 
 #endif

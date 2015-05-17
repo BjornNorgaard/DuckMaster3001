@@ -21,7 +21,8 @@ SOURCES += database.cpp \
     errorwindow.cpp \
     idle.cpp \
     adduser.cpp \
-    person.cpp
+    person.cpp \
+    pills.cpp
 
 HEADERS  += database.h \
     mainwindow.h \
@@ -30,6 +31,7 @@ HEADERS  += database.h \
     errorwindow.h \
     idle.h \
     adduser.h \
-    person.h
+    person.h \
+    pills.h
 
 FORMS    += mainwindow.ui

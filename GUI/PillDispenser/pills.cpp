@@ -4,6 +4,7 @@ Pills::Pills() {}
 
 Pills::~Pills() {}
 
+
 bool Pills::addPills(quint16 pillid, QString& name) {
     QSqlQuery query;
 
@@ -12,6 +13,7 @@ bool Pills::addPills(quint16 pillid, QString& name) {
     query.bindValue(":name", name);
     return Database::execQueryAndLogFailure(query);
 }
+
 
 bool Pills::delPills(quint16 pillid) {
     QSqlQuery query;
@@ -28,19 +30,19 @@ bool Pills::delPills(quint16 pillid) {
 
     while (query.next()) {
         query.prepare("DELETE FROM pills_groups WHERE user_id = :user_id)");
-        query.bindValue(":user_id", query.value(SQL_PILLS_GROUPS_USER_ID));
+        query.bindValue(":user_id", query.value(SQL_PILL_GROUPS_USER_ID));
         Database::execQueryAndLogFailure(query);
     }
     return true;
 }
 
-bool Pills::assignPills(quint16 userid, quint16 pillid, quint8 pillamount) {
+bool Pills::assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount) {
     QSqlQuery query;
 
     query.prepare("INSERT OR IGNORE INTO pill_groups (pill_id, user_id, amount) VALUES (:pill_id, :user_id, :amount)");
     query.bindValue(":pill_id", pill_id);
-    query.bindValue(":user_id", pill_id);
-    query.bindValue(":amount", amount);
+    query.bindValue(":user_id", user_id);
+    query.bindValue(":amount", pill_amount);
 
     return Database::execQueryAndLogFailure(query);
 }
