@@ -3,7 +3,7 @@ var url = require('url');
 var port = 8000;
 
 var postOptions = {
-	host: '10.30.1.26',
+	host: '10.30.1.14',
 	port: port, 
 	path: '/duckmaster3001_application', 
 	method: 'GET',
@@ -37,7 +37,7 @@ var receive = function() {
 	httpRequest.end();
 	
 	// polling frequency in milliseconds
-	setTimeout(receive, 2000);
+	setTimeout(receive, 1000);
 }
 
 var p = function(output) {
