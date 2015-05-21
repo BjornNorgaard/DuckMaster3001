@@ -1,45 +1,43 @@
 #include "protokol.h"
 
-Protokol::Protokol(SPI* interface) : interface_(interface) {}
+Protokol::Protokol() {}
 
-Protokol::~Protokol() { delete interface_; }
+Protokol::~Protokol() {}
 
-unsigned int Protokol::checksum(unsigned int value) {
+unsigned char Protokol::checksum(unsigned char value) {
     // Two's complement
-    return ~(value + 1);
+    return ~value + 1;
 }
 
 bool Protokol::open() {
-    unsigned int command[2];
+    unsigned char command[2];
 
     command[0] = PROTOKOL_OPEN;
     command[1] = checksum(command[0]);
 
-    interface_->transfer(command, 2);
-    interface_->recieve(command, 2);
-    if (command[0] == PROTOKOL_REPLY_ERR && command[1] == checksum(command[1]))
-        return true;
+    interface_.transfer(command, 2);
+
+    // Needs confimation
 
     return false;
 }
 
 bool Protokol::close() {
-    unsigned int command[2];
+    unsigned char command[2];
 
     command[0] = PROTOKOL_CLOSE;
     command[1] = checksum(command[0]);
 
-    interface_->transfer(command, 2);
-    interface_->recieve(command, 2);
-    if (command[0] == PROTOKOL_REPLY_ERR && command[1] == checksum(command[1]))
-        return true;
+    interface_.transfer(command, 2);
+
+    // Needs confirmation
 
     return false;
 }
 
 bool Protokol::dispensePill(unsigned int id, unsigned int amount) {
     unsigned int size = 6;
-    unsigned int command[size];
+    unsigned char command[size];
 
     // Dispense command
     command[0] = PROTOKOL_DISPENSE;
@@ -55,8 +53,9 @@ bool Protokol::dispensePill(unsigned int id, unsigned int amount) {
         command[i] = checksum(command[i - 1]);
 
     // Do the transfers
-    for (int i = 0; i < size; i + 2)
-        interface_->transfer(&command[i], 2);
+    interface_.transfer(command, 6);
+
+    // Needs confirmation
 
     return true;
 }

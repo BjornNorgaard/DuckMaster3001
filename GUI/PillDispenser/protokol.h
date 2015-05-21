@@ -5,7 +5,7 @@
 
 class Protokol {
   public:
-    Protokol(SPI* interface = new SPI);
+    Protokol();
     ~Protokol();
     bool open();
     bool close();
@@ -14,17 +14,17 @@ class Protokol {
   private:
     enum {
         PROTOKOL_OPEN = 0x01,
-        PROTOKOL_CLOSE = 0x02,
-        PROTOKOL_DISPENSE = 0x03
+        PROTOKOL_CLOSE = 0x0A,
+        PROTOKOL_DISPENSE = 0x14
     };
 
     enum {
-        PROTOKOL_REPLY_ACK = 0x01,
-        PROTOKOL_REPLY_ERR = 0x02
+        PROTOKOL_REPLY_OPEN_OK = 0x01,
+        PROTOKOL_REPLY_OPEN_ERR = 0x02
     };
 
-    unsigned int checksum(unsigned int value);
-    SPI* interface_;
+    unsigned char checksum(unsigned char value);
+    SPI interface_;
 };
 
 #endif // PROTOKOL_H
