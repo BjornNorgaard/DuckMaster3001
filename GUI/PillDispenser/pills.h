@@ -6,7 +6,7 @@
 
 class Pills {
   public:
-    Pills();
+    Pills(Database& db);
     ~Pills();
 
     bool addPills(quint16 id, QString& name);
@@ -25,6 +25,8 @@ class Pills {
         SQL_PILLS_PILL_ID,
         SQL_PILLS_NAME
     };
+
+    Database& db;
 };
 
 #endif

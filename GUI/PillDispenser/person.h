@@ -12,8 +12,7 @@ enum {
 
 class Person {
   public:
-    Person();
-    ~Person();
+    Person(Database& db = Database::getInstance());
 
     bool createPerson(const QString& cpr, const QString& firstname, const QString& lastname);
     bool deletePerson(quint16 id);
@@ -38,18 +37,20 @@ class Person {
     bool getGroup(quint16, quint8& group);
 
   private:
-        enum {
-            SQL_USERS_USER_ID,
-            SQL_USERS_FINGERPRINT_ID,
-            SQL_USERS_CPR,
-            SQL_USERS_FIRSTNAME,
-            SQL_USERS_LASTNAME
-        };
+    enum {
+        SQL_USERS_USER_ID,
+        SQL_USERS_FINGERPRINT_ID,
+        SQL_USERS_CPR,
+        SQL_USERS_FIRSTNAME,
+        SQL_USERS_LASTNAME
+    };
 
-        enum {
-            SQL_GROUPS_GROUP_ID,
-            SQL_GROUPS_USER_ID
-        };
+    enum {
+        SQL_GROUPS_GROUP_ID,
+        SQL_GROUPS_USER_ID
+    };
+
+    Database& db;
 };
 
 #endif // PERSON_H

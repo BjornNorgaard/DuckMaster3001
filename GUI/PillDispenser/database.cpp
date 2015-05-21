@@ -1,17 +1,31 @@
 #include "database.h"
 
 Database::Database() {
+    openDB();
 }
 
 Database::~Database() {
+    closeDB();
 }
 
+/*
+ * Database::logSQLFailure()
+ * Description  :
+ * Precondition :
+ * Postcondition:
+ */
 void Database::logSQLFailure(const QSqlQuery& query) {
     const QSqlError error(query.lastQuery());
     qWarning() << "SQL Query failed" << query.lastQuery();
     qWarning() << error.number() << query.lastError().text();
 }
 
+/*
+ * Database::execQueryAndLogFailure()
+ * Description  :
+ * Precondition :
+ * Postcondition:
+ */
 bool Database::execQueryAndLogFailure(QSqlQuery& query) {
     if (!query.exec()) {
         logSQLFailure(query);
@@ -20,6 +34,12 @@ bool Database::execQueryAndLogFailure(QSqlQuery& query) {
     return true;
 }
 
+/*
+ * Database::execQueryAndLogFailure()
+ * Description  :
+ * Precondition :
+ * Postcondition:
+ */
 bool Database::execQueryAndLogFailure(QSqlQuery& query, const QString& queryString) {
     if (!query.exec(queryString)) {
         logSQLFailure(query);
@@ -28,6 +48,12 @@ bool Database::execQueryAndLogFailure(QSqlQuery& query, const QString& queryStri
     return true;
 }
 
+/*
+ * Database::openDB()
+ * Description  : Opens database connection.
+ * Precondition :
+ * Postcondition:
+ */
 QSqlError Database::openDB() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("./db.sqlite");
@@ -43,12 +69,24 @@ QSqlError Database::openDB() {
     return QSqlError();
 }
 
+/*
+ * Database::closeDB()
+ * Description  : Closes database connection.
+ * Precondition :
+ * Postcondition:
+ */
 void Database::closeDB() {
     QSqlQuery query;
 
     execQueryAndLogFailure(query, "VACUUM");
 }
 
+/*
+ * Database::setupDB()
+ * Description  : Sets up the database even if it exists. 
+ * Precondition :
+ * Postcondition:
+ */
 void Database::setupDB() {
     QSqlQuery query;
 
@@ -63,6 +101,17 @@ void Database::setupDB() {
     execQueryAndLogFailure(query, "INSERT OR IGNORE INTO groups(group_id, name) VALUES(1, \"User\")");
     execQueryAndLogFailure(query, "INSERT OR IGNORE INTO groups(group_id, name) VALUES(2, \"Supporter\")");
     execQueryAndLogFailure(query, "INSERT OR IGNORE INTO groups(group_id, name) VALUES(3, \"Super User\")");
+}
+
+bool Database::isEmpty() {
+    QSqlQuery query;
+
+    execQueryAndLogFailure(query, "SELECT * FROM users");
+    while (query.next()) {
+        return false;
+    }
+
+    return true;
 }
 
 bool Database::createList(QListWidget*& lw) {

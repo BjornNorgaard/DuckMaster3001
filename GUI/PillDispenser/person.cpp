@@ -1,10 +1,6 @@
 #include "person.h"
 
-Person::Person() {
-}
-
-Person::~Person() {
-}
+Person::Person() : this->db(db) {}
 
 bool Person::createPerson(const QString& cpr, const QString& firstname, const QString& lastname) {
     QSqlQuery query;
@@ -20,7 +16,7 @@ bool Person::createPerson(const QString& cpr, const QString& firstname, const QS
     query.bindValue(":cpr", cpr);
     query.bindValue(":firstname", firstname);
     query.bindValue(":lastname", lastname);
-    Database::execQueryAndLogFailure(query);
+    db.execQueryAndLogFailure(query);
 
     if (!findPerson(id, cpr)) {
         qDebug() << "User wasn't added to database!";
@@ -39,7 +35,7 @@ bool Person::deletePerson(quint16 id) {
     query.prepare("DELETE FROM users WHERE user_id = :id");
     query.bindValue(":id", id);
 
-    return Database::execQueryAndLogFailure(query);
+    return db.execQueryAndLogFailure(query);
 }
 
 bool Person::findPerson(quint16& id, const QString& cpr) {
@@ -47,7 +43,7 @@ bool Person::findPerson(quint16& id, const QString& cpr) {
 
     query.prepare("SELECT * FROM users WHERE cpr = :cpr");
     query.bindValue(":cpr", cpr);
-    Database::execQueryAndLogFailure(query);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         if (cpr == query.value(SQL_USERS_CPR).toString()) {
             id = query.value(SQL_USERS_USER_ID).toUInt();
@@ -63,7 +59,7 @@ bool Person::findPerson(quint16& id, const QString& fingerprint, char* throwaway
 
     query.prepare("SELECT * FROM users WHERE fingerprint = :fingerprint");
     query.bindValue(":fingerprint", fingerprint);
-    Database::execQueryAndLogFailure(query);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         if (fingerprint == query.value(SQL_USERS_FINGERPRINT_ID).toString()) {
             id = query.value(SQL_USERS_USER_ID).toUInt();
@@ -81,7 +77,7 @@ bool Person::findPerson(quint16& id, const QString& firstname, const QString& la
     query.bindValue(":firstname", firstname);
     query.bindValue(":lastname", lastname);
 
-    Database::execQueryAndLogFailure(query);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         if (firstname == query.value(SQL_USERS_FIRSTNAME).toString() && lastname == query.value(SQL_USERS_LASTNAME).toString()) {
             id = query.value(SQL_USERS_USER_ID).toUInt();
@@ -99,7 +95,7 @@ bool Person::modifyCpr(quint16 id, const QString cpr) {
     query.bindValue(":cpr", cpr);
     query.bindValue(":id", id);
 
-    return Database::execQueryAndLogFailure(query);
+    return db.execQueryAndLogFailure(query);
 }
 
 bool Person::modifyFirstName(quint16 id, const QString firstname) {
@@ -109,7 +105,7 @@ bool Person::modifyFirstName(quint16 id, const QString firstname) {
     query.bindValue(":firstname", firstname);
     query.bindValue(":id", id);
 
-    return Database::execQueryAndLogFailure(query);
+    return db.execQueryAndLogFailure(query);
 }
 
 bool Person::modifyLastName(quint16 id, const QString lastname) {
@@ -119,7 +115,7 @@ bool Person::modifyLastName(quint16 id, const QString lastname) {
     query.bindValue(":lastname", lastname);
     query.bindValue(":id", id);
 
-    return Database::execQueryAndLogFailure(query);
+    return db.execQueryAndLogFailure(query);
 }
 
 bool Person::modifyFingerprint(quint16 id, const QString fingerprint) {
@@ -129,7 +125,7 @@ bool Person::modifyFingerprint(quint16 id, const QString fingerprint) {
     query.bindValue(":fingerprint", fingerprint);
     query.bindValue(":id", id);
 
-    return Database::execQueryAndLogFailure(query);
+    return db.execQueryAndLogFailure(query);
 }
 
 bool Person::modifyGroup(quint16 id, const quint8 group) {
@@ -138,7 +134,7 @@ bool Person::modifyGroup(quint16 id, const quint8 group) {
     query.prepare("INSERT OR IGNORE INTO group_members (group_id, user_id) VALUES (:group_id, :user_id)");
     query.bindValue(":group_id", group);
     query.bindValue(":user_id", id);
-    return Database::execQueryAndLogFailure(query);
+    return db.execQueryAndLogFailure(query);
 }
 
 bool Person::getCpr(quint16 id, QString& cpr) {
@@ -146,6 +142,7 @@ bool Person::getCpr(quint16 id, QString& cpr) {
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
     query.bindValue(":id", id);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         cpr = query.value(SQL_USERS_CPR).toString();
         return true;
@@ -159,6 +156,7 @@ bool Person::getFingerprint(quint16 id, QString& fingerprint) {
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
     query.bindValue(":id", id);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         fingerprint = query.value(SQL_USERS_FINGERPRINT_ID).toString();
         return true;
@@ -172,6 +170,7 @@ bool Person::getFirstname(quint16 id, QString& firstname) {
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
     query.bindValue(":id", id);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         firstname = query.value(SQL_USERS_FIRSTNAME).toString();
         return true;
@@ -185,6 +184,7 @@ bool Person::getLastname(quint16 id, QString& lastname) {
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
     query.bindValue(":id", id);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         lastname = query.value(SQL_USERS_LASTNAME).toString();
         return true;
@@ -198,6 +198,7 @@ bool Person::getGroup(quint16 id, quint8& group) {
 
     query.prepare("SELECT * FROM groups WHERE user_id = :id");
     query.bindValue(":id", id);
+    db.execQueryAndLogFailure(query);
     while (query.next()) {
         group = query.value(SQL_GROUPS_GROUP_ID).toUInt();
         return true;

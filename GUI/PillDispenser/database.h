@@ -11,20 +11,27 @@
 
 class Database : public QObject {
   public:
-    Database();
     ~Database();
 
-    static QSqlError openDB();
-    static void closeDB();
-    static void setupDB();
+    QSqlError openDB();
+    void closeDB();
+    void setupDB();
+    bool isEmpty();
 
-    static void logSQLFailure(const QSqlQuery& query);
-    static bool execQueryAndLogFailure(QSqlQuery& query);
-    static bool execQueryAndLogFailure(QSqlQuery& query, const QString& queryString);
+    void logSQLFailure(const QSqlQuery& query);
+    bool execQueryAndLogFailure(QSqlQuery& query);
+    bool execQueryAndLogFailure(QSqlQuery& query, const QString& queryString);
 
+    static Database& getInstance() {
+        static Database db;
+        return db;
+    }
+
+    // Deprecated
     bool createList(QListWidget*& lw);
 
   private:
+    Database();
 };
 
 #endif //DATABASE_H
