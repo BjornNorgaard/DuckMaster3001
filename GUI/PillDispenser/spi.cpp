@@ -1,64 +1,77 @@
 #include "spi.h"
 
-// Default settings for spi device
-const char* SPI::device = "/dev/spidev0.1";
-uint8_t SPI::bits = 8;
-uint32_t SPI::speed = 10000000;
-uint16_t SPI::delay = 0;
-uint32_t SPI::mode = SPI_MODE_3;
-
 SPI::SPI() {
-    fd = open(device, O_RDWR);
+    this->device = "/dev/spidev0.1";
+    this->bits = 8;
+    this->speed = 10000000;
+    this->delay = 0;
+    this->mode = SPI_MODE_3;
 
-    // Needs error handling badly!!
-    ioctl(fd, SPI_IOC_WR_MODE, &mode);
-    ioctl(fd, SPI_IOC_RD_MODE, &mode);
-
-    ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
-    ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
-
-    ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
-    ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
+    openSPI();
 }
 
-SPI::~SPI() { close(fd); }
-
-void SPI::transfer(unsigned int* command, unsigned int size) {
-    struct spi_ioc_transfer tr[size];
-
-    // Setup the transmit buffer;
-    //uint8_t tx[size];
-
-    for (size_t i = 0; i < size; i++) {
-        tr[i].tx_buf = reinterpret_cast<unsigned long>(&command[i]);
-        tr[i].rx_buf = 0;
-        tr[i].len = sizeof(command[i]);
-        tr[i].delay_usecs = delay;
-        tr[i].speed_hz = speed;
-        tr[i].bits_per_word = bits;
-        tr[i].cs_change = 0;
-    }
-
-    // Needs error handling
-    ioctl(fd, SPI_IOC_MESSAGE(size), &tr);
+SPI::~SPI() {
+    closeSPI();
 }
 
-void SPI::recieve(unsigned int* command, unsigned int size) {
-    struct spi_ioc_transfer re[size];
+void SPI::openSPI() {
+    this->fd = open(device, O_RDWR);
+    if (fd < 0)
+        std::cout << "Can't open SPI device.";
 
-    // Setup the transmit buffer;
-    //uint8_t rx[size];
+    if (ioctl(fd, SPI_IOC_WR_MODE, &mode) == -1)
+        std::cout << "Can't set SPI mode.";
+    if (ioctl(fd, SPI_IOC_RD_MODE, &mode) == -1)
+        std::cout << "Can't set SPI mode.";
 
-    for (size_t i = 0; i < size; i++) {
-        re[i].tx_buf = 0;
-        re[i].rx_buf = reinterpret_cast<unsigned long>(&command[i]);
-        re[i].len = sizeof(command[i]);
-        re[i].delay_usecs = delay;
-        re[i].speed_hz = speed;
-        re[i].bits_per_word = bits;
-        re[i].cs_change = 0;
-    }
+    if (ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits) == -1)
+        std::cout << "Can't set bits per word.";
+    if (ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits) == -1)
+        std::cout << "Can't set bits per word.";
 
-    // Needs error handling
-    ioctl(fd, SPI_IOC_MESSAGE(size), &re);
+    if (ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) == -1)
+        std::cout << "Can't set max speed.";
+    if (ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed) == -1)
+        std::cout << "Can't set max speed.";
+}
+
+void SPI::closeSPI() {
+    if (close(fd) < 0)
+        std::cout << "Can't close SPI device.";
+}
+
+int SPI::transfer(unsigned char command[], size_t size) {
+    int ret;
+
+    struct spi_ioc_transfer tr;
+    tr.tx_buf = reinterpret_cast<unsigned long>(command);
+    tr.rx_buf = 0;
+    tr.len = size;
+    tr.delay_usecs = delay;
+    tr.speed_hz = speed;
+    tr.bits_per_word = bits;
+    tr.cs_change = 0;
+
+    ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
+    if (ret < 0)
+        std::cout << "Can't send message";
+
+    return ret;
+}
+
+void SPI::recieve(unsigned char command[], size_t size) {
+    int ret;
+
+    struct spi_ioc_transfer tr;
+    tr.tx_buf = 0;
+    tr.rx_buf = reinterpret_cast<unsigned long>(command);
+    tr.len = size;
+    tr.delay_usecs = delay;
+    tr.speed_hz = speed;
+    tr.bits_per_word = bits;
+    tr.cs_change = 0;
+
+    ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
+    if (ret < 0)
+        std::cout << "Can't send message";
 }

@@ -1,30 +1,30 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include <stdint.h>
+#include <iostream>
 #include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <getopt.h>
 #include <fcntl.h>
-//#include <sys/ioctl.h>
-//#include <linux/types.h>
-//#include <linux/spi/spidev.h>
+#include <sys/ioctl.h>
+#include <linux/types.h>
+#include <linux/spi/spidev.h>
 
 class SPI {
   public:
     SPI();
     ~SPI();
-    void transfer(unsigned int* command, unsigned int size);
-    void recieve(unsigned int* command, unsigned int size);
+    int transfer(unsigned char command[], size_t size);
+    void recieve(unsigned char command[], size_t size);
 
   private:
+    void openSPI();
+    void closeSPI();
+
     int fd;
-    static const char* device;
-    static uint8_t bits;
-    static uint32_t speed;
-    static uint16_t delay;
-    static uint32_t mode;
+    const char* device;
+    unsigned char bits;
+    unsigned short delay;
+    unsigned long speed;
+    unsigned long mode;
 };
 
 #endif // SPI_H
