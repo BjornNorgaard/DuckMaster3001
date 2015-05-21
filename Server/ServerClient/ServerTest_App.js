@@ -1,47 +1,61 @@
-var http = require('http');
-var url = require('url');
-var port = 8000;
+/*forklaring af variabler ønske gentaget*/
+var http = require('http');	/*includes*/
+var url = require('url');	/*includes*/
+var port = 8000;			/*port nummer som skal reserveres*/
 
 var postOptions = {
-	host: '10.30.1.26',
-	port: port, 
-	path: '/duckmaster3001_application', 
-	method: 'GET',
+	host: '10.0.0.15',						/*intern ip som enheden er på*/
+	port: port, 							/*indstilling af port*/
+	path: '/duckmaster3001_application', 	/*https://domæne.com/path, hvor /duck... er path på intern ip som er domæne*/
+	method: 'GET',							/*"beskeden" som sendes med denne, vil være en "læse-anmodning"*/
 	header: {
-		'Content-Type': 'text/plain',
-		'Content-Length': 0
+		'Content-Type': 'text/plain',		/*type af besked som skal modtages*/
+		'Content-Length': 0					/*GET sender ikke noget data, derfor 0*/
 	}
 }
 
-var receive = function() {
-	var httpRequest = http.request(postOptions, function(result){
-		var body = "";
-			
-		// Receive part of the data
-		result.on("data", function(data) {
-			p("receiving...");	
-			
-			// assembling full dataset
-			body += data;
-		})
-		
-		// Done receiving data, now saving
-		result.on("end", function() {
-			p("transfer complete!")
-			var msg = JSON.parse(body);
-			
-			console.log(msg);
-		})
-	});
-
-	httpRequest.end();
-	
-	// polling frequency in milliseconds
-	setTimeout(receive, 2000);
-}
-
+/*hjælpefunktion til at udskrie i terminalen*/
 var p = function(output) {
 	console.log(output);
 }
 
+/*modtage funktionen ser ud som følger:*/
+var receive = function() {
+
+	/*call-back funktion som smider function i køen og kalder den med result når den er klar*/
+	var httpRequest = http.request(postOptions, function(result){
+
+		/*variable til at gemme modtaget data i*/
+		var body = "";
+			
+		/*modtager en del af dataen*/
+		result.on("data", function(data) {
+			p("receiving...");	
+			
+			/*opbygger en string med modtaget data*/
+			body += data;
+		})
+		
+		/*færdig med at modtage, gemmer nu*/
+		result.on("end", function() {
+			p("transfer complete!");
+
+			/*gemmer modtaget besked efter konvertering fra JSON til læsebar type*/
+			var msg = JSON.parse(body);
+			
+			/*udskriver modtaget besked*/
+			console.log(msg);
+		})
+	});
+
+	/*færdig med at modtage*/
+	httpRequest.end();
+	
+	/*hvor ofte appen tjekker for nye beskeder.
+	fungere ved at smide funktionen "receive" om 
+	bag i køen sådan at den bliver kaldt om 1 sek.*/
+	setTimeout(receive, 1000);
+}
+
+/*Kald til funktion*/
 receive();
