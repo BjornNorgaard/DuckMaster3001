@@ -2,12 +2,6 @@
 
 Pills::Pills() : this->db(db) {}
 
-/*
- * Pills::addPills()
- * Description  : Adds a pill to the database.
- * Precondition :
- * Postcondition:
- */
 bool Pills::addPills(QString& name) {
     QSqlQuery query;
 
@@ -16,12 +10,6 @@ bool Pills::addPills(QString& name) {
     return db.execQueryAndLogFailure(query);
 }
 
-/*
- * Pills::delPills()
- * Description  : Deletes a 'pill_id' from the database.
- * Precondition :
- * Postcondition:
- */
 bool Pills::delPills(quint16 pillid) {
     QSqlQuery query;
 
@@ -43,12 +31,6 @@ bool Pills::delPills(quint16 pillid) {
     return true;
 }
 
-/*
- * Pills::assignPills()
- * Description  : Assigns an amount 'pill_amount' of 'pill_id' to 'user_id'.
- * Precondition :
- * Postcondition:
- */
 bool Pills::assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount) {
     QSqlQuery query;
 
@@ -60,12 +42,6 @@ bool Pills::assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount) {
     return db.execQueryAndLogFailure(query);
 }
 
-/*
- * Pills::removePills()
- * Description  : Removes a 'pill_id' from 'user_id'.
- * Precondition :
- * Postcondition:
- */
 bool Pills::removePills(quint16 userid, quint16 pillid) {
     QSqlQuery query;
 

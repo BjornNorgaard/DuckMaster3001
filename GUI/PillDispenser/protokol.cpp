@@ -2,8 +2,6 @@
 
 Protokol::Protokol() {}
 
-Protokol::~Protokol() {}
-
 unsigned char Protokol::checksum(unsigned char value) {
     // Two's complement
     return ~value + 1;

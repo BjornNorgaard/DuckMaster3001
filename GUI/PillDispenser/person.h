@@ -34,7 +34,7 @@ class Person {
     bool getFingerprint(quint16 id, QString& fingerprint);
     bool getFirstname(quint16 id, QString& firstname);
     bool getLastname(quint16 id, QString& lastname);
-    bool getGroup(quint16, quint8& group);
+    bool getGroup(quint16 id, quint8& group);
 
   private:
     enum {

@@ -6,7 +6,6 @@
 class Protokol {
   public:
     Protokol();
-    ~Protokol();
     bool open();
     bool close();
     bool dispensePill(unsigned int id, unsigned int amount);
