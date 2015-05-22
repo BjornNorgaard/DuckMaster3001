@@ -30,11 +30,11 @@ class Person {
     bool modifyGroup(quint16 id, const quint8 group);
 
     // Get
-    bool getCpr(quint16 id, QString& cpr);
-    bool getFingerprint(quint16 id, QString& fingerprint);
-    bool getFirstname(quint16 id, QString& firstname);
-    bool getLastname(quint16 id, QString& lastname);
-    bool getGroup(quint16 id, quint8& group);
+    bool getCpr(quint16 id, QString& cpr) const;
+    bool getFingerprint(quint16 id, QString& fingerprint) const;
+    bool getFirstname(quint16 id, QString& firstname) const;
+    bool getLastname(quint16 id, QString& lastname) const;
+    bool getGroup(quint16 id, quint8& group) const;
 
   private:
     enum {

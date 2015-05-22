@@ -10,7 +10,7 @@ class Pills {
 
     bool addPill(QString& name);
     bool delPill(quint16 id);
-    bool getPill(quint16& id, QString& name);
+    bool getPill(quint16& id, QString& name) const;
     bool assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount);
     bool removePills(quint16 user_id, quint16 pill_id);
 
