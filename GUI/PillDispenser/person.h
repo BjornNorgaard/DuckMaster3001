@@ -1,5 +1,5 @@
-#ifndef PERSON_HPP_
-#define PERSON_HPP_
+#ifndef PERSON_H
+#define PERSON_H
 
 #include <QString>
 #include "database.h"

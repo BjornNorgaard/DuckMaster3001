@@ -2,7 +2,7 @@
 
 Pills::Pills() : this->db(db) {}
 
-bool Pills::addPills(QString& name) {
+bool Pills::addPill(QString& name) {
     QSqlQuery query;
 
     query.prepare("INSERT OR IGNORE INTO pills (name) VALUES (:name)");
@@ -10,7 +10,7 @@ bool Pills::addPills(QString& name) {
     return db.execQueryAndLogFailure(query);
 }
 
-bool Pills::delPills(quint16 pillid) {
+bool Pills::delPill(quint16 pillid) {
     QSqlQuery query;
 
     query.prepare("DELETE FROM pills WHERE pill_id = :pillid");
@@ -29,6 +29,19 @@ bool Pills::delPills(quint16 pillid) {
         db.execQueryAndLogFailure(query);
     }
     return true;
+}
+bool Pills::getPill(quint16& id, QString& name) {
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM pills WHERE name = :name");
+    query.bindValue(":name", name);
+    db.execQueryAndLogFailure(query);
+    while (query.next()) {
+        id = query.value(SQL_PILLS_PILL_ID).toUInt();
+        return true;
+    }
+
+    return false;
 }
 
 bool Pills::assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount) {
