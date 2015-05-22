@@ -6,8 +6,7 @@
 
 class Pills {
   public:
-    Pills(Database& db);
-    ~Pills();
+    Pills(Database& db = Database::getInstance());
 
     bool addPills(quint16 id, QString& name);
     bool delPills(quint16 id);
