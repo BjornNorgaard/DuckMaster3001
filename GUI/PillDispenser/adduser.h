@@ -30,6 +30,7 @@ private:
     QFont f_;
     QPushButton *back;
     QPushButton *accept;
+    Person* ppl;
 
     QLineEdit *le1;
     QLineEdit *le2;

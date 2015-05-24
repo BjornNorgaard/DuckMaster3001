@@ -1,6 +1,6 @@
 #include "pills.h"
 
-Pills::Pills() : this->db(db) {}
+Pills::Pills(Database& database) : db(database) {}
 
 bool Pills::addPill(QString& name) {
     QSqlQuery query;
@@ -30,7 +30,8 @@ bool Pills::delPill(quint16 pillid) {
     }
     return true;
 }
-bool Pills::getPill(quint16& id, QString& name) {
+
+bool Pills::getPill(quint16& id, QString& name) const {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM pills WHERE name = :name");

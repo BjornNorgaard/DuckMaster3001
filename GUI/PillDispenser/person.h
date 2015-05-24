@@ -36,6 +36,9 @@ class Person {
     bool getLastname(quint16 id, QString& lastname) const;
     bool getGroup(quint16 id, quint8& group) const;
 
+    // Create list
+    bool createList(QListWidget*& lw);
+
   private:
     enum {
         SQL_USERS_USER_ID,

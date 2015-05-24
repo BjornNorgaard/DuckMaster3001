@@ -77,15 +77,3 @@ bool Database::isEmpty() {
 
     return true;
 }
-
-bool Database::createList(QListWidget*& lw) {
-    QSqlQuery query;
-
-    //Forstår ikke helt metoden
-    execQueryAndLogFailure(query, "SELECT * FROM users");
-
-    while (query.next()) {
-        lw->addItem(query.value(4).toString() + ", " + query.value(3).toString() + ", " + query.value(2).toString());
-    }
-    return true;
-}

@@ -6,8 +6,8 @@
 #include <QDesktopWidget>
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent, Database *db) :
-    QWidget(parent), db_(db)
+MainWindow::MainWindow(QWidget *parent) :
+    QWidget(parent)
 {
     lwit = NULL;
     personInfo_ = "NaN,NaN,000000-0000";
@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db) :
     setLayoutGrids();
     connections();
 
-    db->createList(lw);
+    ppl.createList(lw);
     lw->sortItems(Qt::AscendingOrder);
 
     setLayout(hbox);
@@ -34,7 +34,6 @@ MainWindow::~MainWindow()
 
     //Custom_Windows
     delete R;
-    delete db_;
     delete lw;
     delete lwit;
     delete vbox;
@@ -45,7 +44,7 @@ void MainWindow::createWidgets()
 {
     //Window Definitions
     err_ = new ErrorWindow(this);
-    R = new Rename(this, err_);
+    R = new Rename(this, err_, &ppl);
 
     //ListWidgets
     lw = new QListWidget(this);
@@ -203,6 +202,7 @@ void MainWindow::renameButtonClicked()
 
 void MainWindow::removeButtonClicked()
 {
+
     if(lwit == NULL)
     {
         err_->setErrorType(error::NOUSERERR);
@@ -210,7 +210,11 @@ void MainWindow::removeButtonClicked()
         //Open Window telling user
         //to choose a user
     } else {
+        quint16 id;
+        ppl.findPerson(id, getCpr(personInfo_));
+
         lw->selectionModel()->reset();
+        ppl.deletePerson(id);
 
         delete lwit;
         lwit = NULL;
@@ -241,7 +245,21 @@ void MainWindow::dispenseButtonClicked()
     } else {
         lw->selectionModel()->reset();
 
-        delete lwit;
-        lwit = NULL;
+        pkol_.dispensePill(1, 2);
     }
+}
+
+QString MainWindow::getCpr(QString name)
+{
+    QString cpr;
+
+    //Creates a list of strings for use
+    //QFont f1;
+    //with firstname, lastname and cpr
+    QStringList list = name.split(",");
+    cpr = list[2];
+    cpr = cpr.simplified();
+    cpr.replace( " ", "" );
+
+    return cpr;
 }
