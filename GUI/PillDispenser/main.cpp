@@ -11,13 +11,11 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    //Person *ppl = new Person;
     
 
 
     MainWindow window(0);
     //Idle window(0);
-    window.resize(1024, 600);
 
     /*window.setGeometry(
      QStyle::alignedRect(
@@ -30,7 +28,8 @@ int main(int argc, char *argv[])
 
     //window.move(100, 50);
 
-    //window.showFullScreen();
+    window.showFullScreen();
+    //window.resize(1024, 600);
     window.setWindowTitle("Layouts");
     window.show();
 

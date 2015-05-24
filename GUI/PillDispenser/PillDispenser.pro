@@ -36,6 +36,6 @@ HEADERS  += database.h \
     adduser.h \
     person.h \
     pills.h \
-    changepills.h \
-    protokol.h \
-    spi.h
+    changepills.h #\
+    #protokol.h \
+    #spi.h

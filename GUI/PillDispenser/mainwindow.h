@@ -10,6 +10,7 @@
 #include "person.h"
 #include "errorwindow.h"
 #include "rename.h"
+#include "acceptpopup.h"
 #include "protokol.h"
 
 class Database;
@@ -48,6 +49,7 @@ private:
     QString personInfo_;
     Person ppl;
     Protokol pkol_;
+    AcceptPopup* AP_;
     ErrorWindow* err_;
     QListWidget *lw;
     QListWidgetItem *lwit;

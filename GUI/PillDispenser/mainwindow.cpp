@@ -194,8 +194,10 @@ void MainWindow::renameButtonClicked()
         //lw->selectionModel()->reset();
 
         R->setInfo(personInfo_);
+        R->setList(lw);
         R->title(RENAMEUSER);
         R->show();
+        lwit = NULL;
     }
 
 }
