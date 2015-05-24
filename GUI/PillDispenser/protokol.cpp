@@ -4,7 +4,7 @@ Protokol::Protokol() {}
 
 unsigned char Protokol::checksum(unsigned char value) {
     // Two's complement
-    return ~value + 1;
+    return ~(value) + 1;
 }
 
 bool Protokol::open() {
@@ -34,7 +34,7 @@ bool Protokol::close() {
 }
 
 bool Protokol::dispensePill(unsigned int id, unsigned int amount) {
-    unsigned int size = 6;
+    size_t size = 6;
     unsigned char command[size];
 
     // Dispense command
@@ -47,8 +47,8 @@ bool Protokol::dispensePill(unsigned int id, unsigned int amount) {
     command[4] = amount;
 
     // Setup the checksums
-    for (int i = 1; i < size; i + 2)
-        command[i] = checksum(command[i - 1]);
+    for (size_t i = 1; i < size; i = i + 2)
+      command[i] = checksum(command[i - 1]);
 
     // Do the transfers
     interface_.transfer(command, 6);
