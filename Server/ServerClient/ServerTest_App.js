@@ -4,7 +4,7 @@ var url = require('url');	/*includes*/
 var port = 8000;			/*port nummer som skal reserveres*/
 
 var postOptions = {
-	host: '10.0.0.15',						/*intern ip som enheden er på*/
+	host: '192.168.43.197',						/*intern ip som enheden er på*/
 	port: port, 							/*indstilling af port*/
 	path: '/duckmaster3001_application', 	/*https://domæne.com/path, hvor /duck... er path på intern ip som er domæne*/
 	method: 'GET',							/*"beskeden" som sendes med denne, vil være en "læse-anmodning"*/
