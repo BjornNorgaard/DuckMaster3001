@@ -1,4 +1,3 @@
-/*nærmere forklaring af variabler ønskes, spørg Jensen*/
 var http = require('http');	/*includes*/
 var url = require('url');	/*includes*/
 var port = 8000;			/*port nummer som skal reserveres*/

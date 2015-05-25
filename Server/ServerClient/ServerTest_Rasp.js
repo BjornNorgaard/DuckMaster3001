@@ -1,4 +1,3 @@
-/*Nærmere forklaring af variabler ønskes, spørg Jensen*/
 var http = require('http');	/*includes*/
 var url = require('url');	/*includes*/
 var port = 8000;			/*port nummer som skal reserveres*/
@@ -22,7 +21,7 @@ var msgDerp = JSON.stringify(besked);
 
 /*Nærmere forklaring af variabler ønskes her:*/
 var postOptions = {
-	host: '192.168.43.197',						/*intern ip, som enheden er på*/
+	host: '192.168.43.197',					/*intern ip, som enheden er på*/
 	port: port, 
 	path: '/duckmaster3001_raspberry', 		/*https://domæne.com/path, hvor /duck... er path på intern ip som er domæne*/
 	method: 'POST', 						/*hvad denne postOption skal kunne, post = sende*/
