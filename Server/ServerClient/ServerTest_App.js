@@ -3,7 +3,7 @@ var url = require('url');	/*includes*/
 var port = 8000;			/*port nummer som skal reserveres*/
 
 var postOptions = {
-	host: '192.168.43.197',					/*intern ip som enheden er på*/
+	host: '10.0.0.15',					/*intern ip som enheden er på*/
 	port: port, 							/*indstilling af port*/
 	path: '/duckmaster3001_application', 	/*https://domæne.com/path, hvor /duck... er path på intern ip som er domæne*/
 	method: 'GET',							/*"beskeden" som sendes med denne, vil være en "læse-anmodning"*/
@@ -50,19 +50,10 @@ var receive = function() {
 	/*færdig med at modtage*/
 	httpRequest.end();
 	
-<<<<<<< HEAD
-	// polling frequency in milliseconds
-	setTimeout(receive, 1000);
-}
-
-var p = function(output) {
-	console.log(output);
-=======
 	/*hvor ofte appen tjekker for nye beskeder.
 	fungere ved at smide funktionen "receive" om 
 	bag i køen sådan at den bliver kaldt om 1 sek.*/
 	setTimeout(receive, 1000);
->>>>>>> 4476ca4355fa90779803eeb39fbeb93e136039e7
 }
 
 /*Kald til funktion*/
