@@ -11,7 +11,7 @@
 #include "errorwindow.h"
 #include "rename.h"
 #include "acceptpopup.h"
-#include "protokol.h"
+//#include "protokol.h"
 
 class Database;
 
@@ -48,7 +48,7 @@ private:
     Rename *R;
     QString personInfo_;
     Person ppl;
-    Protokol pkol_;
+    //Protokol pkol_;
     AcceptPopup* AP_;
     ErrorWindow* err_;
     QListWidget *lw;

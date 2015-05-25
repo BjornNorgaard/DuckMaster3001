@@ -7,13 +7,15 @@
 #include "idle.h"
 #include "database.h"
 #include "person.h"
+//#include "setupwindow.h"
+
+
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    
 
-
+    //SetupWindow window;
     MainWindow window(0);
     //Idle window(0);
 
@@ -29,9 +31,9 @@ int main(int argc, char *argv[])
     //window.move(100, 50);
 
     window.showFullScreen();
-    //window.resize(1024, 600);
+    window.resize(1024, 600);
     window.setWindowTitle("Layouts");
-    window.show();
+    //window.show();
 
     return app.exec();
 }

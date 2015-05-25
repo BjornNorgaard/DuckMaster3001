@@ -90,9 +90,12 @@ void ErrorWindow::setStyleSheets()
     /*-------------------------------------*/
     /*----------- QPushButtons ------------*/
     /*-------------------------------------*/
+    QFont f1;
+    f1.setPointSize(14);
 
     Understand->setStyleSheet("background: lightgray");
     Understand->setFixedSize(200, 75);
+    Understand->setFont(f1);
 }
 
 void ErrorWindow::setErrorType(int errType)

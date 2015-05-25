@@ -204,7 +204,6 @@ void MainWindow::renameButtonClicked()
 
 void MainWindow::removeButtonClicked()
 {
-
     if(lwit == NULL)
     {
         err_->setErrorType(error::NOUSERERR);
@@ -247,7 +246,7 @@ void MainWindow::dispenseButtonClicked()
     } else {
         lw->selectionModel()->reset();
 
-        pkol_.dispensePill(1, 2);
+        //pkol_.dispensePill(1, 2);
     }
 }
 

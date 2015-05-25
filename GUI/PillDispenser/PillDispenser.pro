@@ -23,9 +23,10 @@ SOURCES += database.cpp \
     adduser.cpp \
     person.cpp \
     pills.cpp \
-    changepills.cpp \
-    protokol.cpp \
-    spi.cpp
+    changepills.cpp #\
+    #fingerprintreader.cpp \
+    #protokol.cpp \
+    #spi.cpp
 
 HEADERS  += database.h \
     mainwindow.h \
@@ -37,5 +38,6 @@ HEADERS  += database.h \
     person.h \
     pills.h \
     changepills.h #\
+    #fingerprintreader.h
     #protokol.h \
     #spi.h

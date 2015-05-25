@@ -98,8 +98,13 @@ void Rename::setStyleSheets()
     /*----------- QPushButtons ------------*/
     /*-------------------------------------*/
 
+    QFont f1;
+    f1.setPointSize(14);
+
     back->setStyleSheet("background: lightgray");
+    back->setFont(f1);
     accept->setStyleSheet("background: lightgray");
+    accept->setFont(f1);
 }
 
 void Rename::createWidgets(Person* ppl)
@@ -111,13 +116,7 @@ void Rename::createWidgets(Person* ppl)
     AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
     AW_->setWindowModality(Qt::WindowModal);
 
-    AW_->setGeometry(
-     QStyle::alignedRect(
-     Qt::LeftToRight,
-     Qt::AlignCenter,
-     AW_->size(),
-     qApp->desktop()->availableGeometry()
-     ));
+    AW_->move(250, 100);
 
     //QLabels
     LfirstName = new QLabel("Firstname:", this);

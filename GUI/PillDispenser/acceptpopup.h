@@ -33,14 +33,30 @@ private:
     QPushButton* back;
     QPushButton* accept;
 
+    QLabel *spacing;
+    QLabel *sure;
+    QLabel *firstName;
+    QLabel *lastName;
+    QLabel *cpr;
     QLabel *actualName;
     QLabel *actualLastName;
     QLabel *actualCpr;
 
     Person* ppl_;
 
+    //Adding 3 grids for layout customization
+    QGridLayout *bottomGrid;
+    QGridLayout *topGrid;
+    QGridLayout *mainGrid;
+    QGridLayout *buttonGrid;
+
     int type_;
     quint16 id;
+
+    void createWidgets();
+    void setStyleSheets();
+    void setLayoutGrids();
+    void connections();
 
 signals:
 

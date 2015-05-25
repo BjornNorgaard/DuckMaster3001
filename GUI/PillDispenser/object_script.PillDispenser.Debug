@@ -10,6 +10,7 @@ INPUT(
 ./debug\person.o
 ./debug\pills.o
 ./debug\changepills.o
+./debug\setupwindow.o
 ./debug\moc_mainwindow.o
 ./debug\moc_rename.o
 ./debug\moc_acceptpopup.o
@@ -17,4 +18,5 @@ INPUT(
 ./debug\moc_idle.o
 ./debug\moc_adduser.o
 ./debug\moc_changepills.o
+./debug\moc_setupwindow.o
 );
