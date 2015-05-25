@@ -21,11 +21,7 @@ var msgDerp = JSON.stringify(besked);
 
 /*Nærmere forklaring af variabler ønskes her:*/
 var postOptions = {
-<<<<<<< HEAD
-	host: '10.30.1.14',
-=======
 	host: '192.168.43.197',					/*intern ip, som enheden er på*/
->>>>>>> 4476ca4355fa90779803eeb39fbeb93e136039e7
 	port: port, 
 	path: '/duckmaster3001_raspberry', 		/*https://domæne.com/path, hvor /duck... er path på intern ip som er domæne*/
 	method: 'POST', 						/*hvad denne postOption skal kunne, post = sende*/
