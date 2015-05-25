@@ -7,6 +7,8 @@ ErrorWindow::ErrorWindow(QWidget *parent) : QWidget(parent)
     setLayoutGrids();
     connections();
 
+    setFocusProxy(Understand);
+
     setLayout(bigGrid);
 }
 
@@ -28,7 +30,7 @@ ErrorWindow::~ErrorWindow()
 
 void ErrorWindow::closeCurrentWindow()
 {
-
+    this->close();
 }
 
 void ErrorWindow::createWidgets()
@@ -45,8 +47,8 @@ void ErrorWindow::createWidgets()
     Spacer2 = new QLabel(" ", this);
 
     //PushButton
-    Understand = new QPushButton("I Understand", this);
-    Understand->setFixedSize(200, 75);
+    Understand = new QPushButton("I Understand", 0);
+
 
     //Layouts
     smallGrid = new QGridLayout();
@@ -67,55 +69,62 @@ void ErrorWindow::setStyleSheets()
     errorText->setStyleSheet("color: #ffffff;"
                              "font-size: 20pt;");
 
-    WhatHappened->setStyleSheet("color: #ffffff;"
+    WhatHappened->setStyleSheet("color: #266873;"
                                 "font-size: 20pt;"
                                 "text-decoration: underline;");
 
     WhatHappenedText->setStyleSheet("color: #ffffff;"
                                     "font-size: 20pt;");
+    WhatHappenedText->setFixedWidth(500);
+    WhatHappenedText->setWordWrap(true);
 
-    HowToFix->setStyleSheet("color: #ffffff;"
+    HowToFix->setStyleSheet("color: #266873;"
                             "font-size: 20pt;"
                             "text-decoration: underline;");
 
     HowToFixText->setStyleSheet("color: #ffffff;"
                                 "font-size: 20pt;");
-
+    HowToFixText->setFixedWidth(500);
+    HowToFixText->setWordWrap(true);
 
     /*-------------------------------------*/
     /*----------- QPushButtons ------------*/
     /*-------------------------------------*/
 
     Understand->setStyleSheet("background: lightgray");
-
+    Understand->setFixedSize(200, 75);
 }
 
 void ErrorWindow::setErrorType(int errType)
 {
     switch(errType)
     {
-    case REMOVEERR:
+    case error::REMOVEERR:
         removeError();
         break;
 
-    case RENAME:
+    case error::RENAME:
         renameError();
         break;
 
-    case DISPENSEERR:
+    case error::DISPENSEERR:
         dispenseError();
         break;
 
-    case INVALIDERR:
+    case error::INVALIDERR:
         invalidNameError();
         break;
 
-    case NOUSERERR:
+    case error::NOUSERERR:
         noUserSelectedError();
         break;
 
-    case USEREXIST:
+    case error::USEREXIST:
         userExistError();
+        break;
+
+    case error::NOTEXTERR:
+        noTextError();
         break;
     }
 }
@@ -140,7 +149,7 @@ void ErrorWindow::setLayoutGrids()
 
 void ErrorWindow::connections()
 {
-
+    connect(Understand, SIGNAL(pressed()), this, SLOT(closeCurrentWindow()));
 }
 
 /*-----------------------------------*/
@@ -149,31 +158,44 @@ void ErrorWindow::connections()
 
 void ErrorWindow::removeError()
 {
-
+    WhatHappenedText->setText("Create User");
+    HowToFixText->setText("Create User");
 }
 
 void ErrorWindow::renameError()
 {
-
+    WhatHappenedText->setText("Create User");
+    HowToFixText->setText("Create User");
 }
 
 void ErrorWindow::dispenseError()
 {
-
+    WhatHappenedText->setText("No user selected from the list on the left side of the buttons");
+    HowToFixText->setText("Select user on the list and then click on your desired button");
 }
 
 void ErrorWindow::invalidNameError()
 {
-
+    WhatHappenedText->setText("Create User");
+    HowToFixText->setText("Create User");
 }
 
 void ErrorWindow::noUserSelectedError()
 {
-
+    WhatHappenedText->setText("No user selected from the list on the left side of the buttons");
+    HowToFixText->setText("Select user on the list and then click on your desired button");
 }
 
 void ErrorWindow::userExistError()
 {
-
+    WhatHappenedText->setText("Create User");
+    HowToFixText->setText("Create User");
 }
 
+void ErrorWindow::noTextError()
+{
+    WhatHappenedText->setText("No text written in window");
+    HowToFixText->setText("Please write wanted credentials for the user.");
+
+    //, and then press accept. To go back, press the button labeled back.
+}

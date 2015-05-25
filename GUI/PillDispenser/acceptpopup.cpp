@@ -1,7 +1,8 @@
 #include "acceptpopup.h"
 
-AcceptPopup::AcceptPopup(QWidget *parent, chooseWindow ch) : QWidget(parent)
+AcceptPopup::AcceptPopup(QWidget *parent, int choose, Person* ppl) : QWidget(parent), ppl_(ppl)
 {
+
     //Creating custom fonts
     QFont f("Arial Black");
     QFont f1;
@@ -75,8 +76,30 @@ void AcceptPopup::setParent(QWidget *p)
 
 void AcceptPopup::acceptCurrentWindow()
 {
+    Person obj;
     this->close();
-    lw_->addItem(actualLastName->text() + ", " + actualName->text() + ", " + actualCpr->text());
+    //obj.createPerson(actualCpr->text(), actualName->text(), actualLastName->text());
+    //ppl_->createPerson(actualCpr->text(), actualName->text(), actualLastName->text());
+    //lw_->addItem(actualLastName->text() + ", " + actualName->text() + ", " + actualCpr->text());
+
+    if(type_ == editUser)
+    {
+        delete lw_->selectedItems().takeFirst();
+
+        //Adds edited user to list
+        lw_->addItem(actualLastName->text() + ", " + actualName->text() + ", " + actualCpr->text());
+
+        //modifies name in database
+        ppl_->modifyFirstName(id, actualName->text());
+        ppl_->modifyLastName(id, actualLastName->text());
+        ppl_->modifyCpr(id, actualCpr->text());
+
+    } else if(type_ == createUser) {
+        if(ppl_->createPerson(actualCpr->text(), actualName->text(), actualLastName->text()))
+            lw_->addItem(actualLastName->text() + ", " + actualName->text() + ", " + actualCpr->text());
+    }
+
+    lw_->sortItems(Qt::AscendingOrder);
 }
 
 void AcceptPopup::closeCurrentWindow()
@@ -94,6 +117,8 @@ void AcceptPopup::setNames(QString fn, QString ln, QString cpr)
     actualName->setText(capitalize(fn));
     actualCpr->clear();
     actualCpr->setText(capitalize(cpr));
+
+    ppl_->findPerson(id, cpr);
 }
 
 QString AcceptPopup::capitalize(const QString &str)
@@ -103,6 +128,16 @@ QString AcceptPopup::capitalize(const QString &str)
     tmp = tmp.toLower();
     tmp[0] = str[0].toUpper();
     return tmp;
+}
+
+void AcceptPopup::setType(QString type)
+{
+    if(type == "Edit User")
+        type_ = editUser;
+    else if(type  == "Create User")
+        type_ = createUser;
+    else
+        type_ = deleteUser;
 }
 
 AcceptPopup::~AcceptPopup()

@@ -6,17 +6,17 @@
 #include <QFrame>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QStyle>
+#include <QDesktopWidget>
 #include "rename.h"
 
-Rename::Rename(QWidget *parent)
+Rename::Rename(QWidget *parent, ErrorWindow* err, Person* ppl)
     : QWidget(parent)
 {
-    //Set background color and creating Acceptwindow popup
-
-    AW_ = new AcceptPopup;
+    err_ = err;
 
     //Creating window specific information and layout
-    createWidgets();
+    createWidgets(ppl);
     setStyleSheets();
     setLayoutGrids();
     connections();
@@ -99,17 +99,33 @@ void Rename::setStyleSheets()
     /*-------------------------------------*/
 
     back->setStyleSheet("background: lightgray");
-
     accept->setStyleSheet("background: lightgray");
 }
 
-void Rename::createWidgets()
+void Rename::createWidgets(Person* ppl)
 {
+    //Set background color and creating Acceptwindow popup and window definitions
+    AW_ = new AcceptPopup(0, 0, ppl);
+    AW_->setParent(this);
+    Qt::WindowFlags flags = AW_->windowFlags();
+    AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
+    AW_->setWindowModality(Qt::WindowModal);
+
+    AW_->setGeometry(
+     QStyle::alignedRect(
+     Qt::LeftToRight,
+     Qt::AlignCenter,
+     AW_->size(),
+     qApp->desktop()->availableGeometry()
+     ));
+
+    //QLabels
     LfirstName = new QLabel("Firstname:", this);
     LlastName = new QLabel("Lastname:", this);
     Lcpr = new QLabel("Cpr-Num:", this);
     LEditUser = new QLabel("Create User", this);
 
+    //QLineEdits
     le1 = new QLineEdit();
     le2 = new QLineEdit();
     le3 = new QLineEdit();
@@ -118,12 +134,14 @@ void Rename::createWidgets()
     le2->setFixedSize(300, 50);
     le3->setFixedSize(300, 50);
 
+    //QPushButtons
     back = new QPushButton("Back", this);
     accept = new QPushButton("Accept", this);
 
     back->setFixedSize(145, 50);
     accept->setFixedSize(145, 50);
 
+    //QGridLayouts
     BiggestGrid = new QGridLayout();
     grid = new QGridLayout();
     smallGrid = new QGridLayout();
@@ -147,21 +165,30 @@ void Rename::setList(QListWidget* lw)
 //Slot that setups and opens a new window
 void Rename::openNewWindow()
 {
-    this->close();
-    AW_->setParent(this);
-    Qt::WindowFlags flags = AW_->windowFlags();
-    AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
-    AW_->setWindowModality(Qt::WindowModal);
-    AW_->move(470, 320);
-    AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+    if(le1->text().toCaseFolded().isEmpty() || le2->text().toCaseFolded().isEmpty() || le3->text().toCaseFolded().isEmpty())
+    {
+        err_->setErrorType(error::NOTEXTERR);
+        err_->show();
+    } else {
+        //Setting info
+        AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+        AW_->setList(lw_);
 
-    //Clearing lineedits
-    le1->clear();
-    le2->clear();
-    le3->clear();
+        AW_->setType(LEditUser->text());
 
-    //Show window
-    AW_->show();
+        //Clearing lineedits
+        le1->clear();
+        le2->clear();
+        le3->clear();
+
+        //Show window
+        this->close();
+        AW_->show();
+    }
+
+
+
+
 }
 
 //Takes a string with full personinfo
@@ -232,7 +259,6 @@ Rename::~Rename()
     delete accept;
     delete back;
     delete BiggestGrid;
-    delete grid;
     delete smallGrid;
 }
 

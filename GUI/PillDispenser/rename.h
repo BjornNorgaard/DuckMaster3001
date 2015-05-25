@@ -5,19 +5,23 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QString>
+#include "errorwindow.h"
 #include "acceptpopup.h"
+#include "person.h"
 
 enum {
     ADDUSER,
     RENAMEUSER
 };
 
+class ErrorWindow;
+
 class Rename : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Rename(QWidget *parent = 0);
+    explicit Rename(QWidget *parent = 0, ErrorWindow *err = 0, Person* ppl = 0);
 
     void setInfo(QString);
     void setParent(QWidget *p);
@@ -44,6 +48,7 @@ private:
     QGridLayout *grid;
     QGridLayout *smallGrid;
     QListWidget *lw_;
+    ErrorWindow *err_;
     int windowType_;
 
     //Text edit line pointers
@@ -59,7 +64,7 @@ private:
 
     //Methods
     QString capitalize(const QString &str);
-    void createWidgets();
+    void createWidgets(Person *ppl);
     void setStyleSheets();
     void setLayoutGrids();
     void connections();

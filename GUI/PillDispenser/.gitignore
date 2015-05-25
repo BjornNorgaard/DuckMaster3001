@@ -1,0 +1,4 @@
+Makefile
+*.sqlite
+PillDispenser
+PillDispenser.gch/

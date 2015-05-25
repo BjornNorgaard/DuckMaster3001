@@ -5,17 +5,22 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QMainWindow>
+#include <QGridLayout>
 #include "rename.h"
 
-enum {
-    REMOVEERR,
-    RENAME,
-    DISPENSEERR,
-    INVALIDERR,
-    NOUSERERR,
-    USEREXIST
-};
-
+namespace error
+{
+    enum
+    {
+        NOTEXTERR,
+        REMOVEERR,
+        RENAME,
+        DISPENSEERR,
+        INVALIDERR,
+        NOUSERERR,
+        USEREXIST
+    };
+}
 
 class ErrorWindow : public QWidget
 {
@@ -60,6 +65,7 @@ private:
     void invalidNameError();
     void noUserSelectedError();
     void userExistError();
+    void noTextError();
 };
 
 #endif // ERRORWINDOW_H

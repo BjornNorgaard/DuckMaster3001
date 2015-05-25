@@ -7,16 +7,20 @@
 #include <QPushButton>
 #include <string>
 #include <QListWidget>
-#include "database.h"
+#include "person.h"
 #include "errorwindow.h"
 #include "rename.h"
+#include "acceptpopup.h"
+#include "protokol.h"
+
+class Database;
 
 class MainWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0, Database *db = new Database);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private:
@@ -26,6 +30,7 @@ private:
     void addUserButton();
     void removeButton();
     void changePillsButton();
+    QString getCpr(QString name);
 
     void createWidgets();
     void setStyleSheets();
@@ -42,7 +47,9 @@ private:
     //Custom_Windows
     Rename *R;
     QString personInfo_;
-    Database* db_;
+    Person ppl;
+    Protokol pkol_;
+    AcceptPopup* AP_;
     ErrorWindow* err_;
     QListWidget *lw;
     QListWidgetItem *lwit;

@@ -11,18 +11,31 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = PillDispenser
 TEMPLATE = app
 
+PRECOMPILED_HEADER += database.h
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
+SOURCES += database.cpp \
+    main.cpp\
+    mainwindow.cpp \
     rename.cpp \
-    database.cpp \
     acceptpopup.cpp \
     errorwindow.cpp \
+    idle.cpp \
+    adduser.cpp \
+    person.cpp \
+    pills.cpp \
+    changepills.cpp \
+    protokol.cpp \
+    spi.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += database.h \
+    mainwindow.h \
     rename.h \
-    database.h \
     acceptpopup.h \
     errorwindow.h \
-
-FORMS    += mainwindow.ui
+    idle.h \
+    adduser.h \
+    person.h \
+    pills.h \
+    changepills.h #\
+    #protokol.h \
+    #spi.h

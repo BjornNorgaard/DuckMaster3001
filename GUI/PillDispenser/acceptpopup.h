@@ -6,8 +6,9 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QGridLayout>
+#include "person.h"
 
-enum chooseWindow {
+enum {
     deleteUser,
     editUser,
     createUser
@@ -17,12 +18,13 @@ class AcceptPopup : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AcceptPopup(QWidget *parent = 0, chooseWindow ch = deleteUser);
+    explicit AcceptPopup(QWidget *parent = 0, int choose = 0, Person* ppl = 0);
     void setParent(QWidget *p);
     void setNames(const QString, const QString, const QString);
     QString capitalize(const QString &str);
     void setList(QListWidget* lw);
-    void setFunctionality(chooseWindow);
+    void setFunctionality(int func);
+    void setType(QString type);
     ~AcceptPopup();
 
 private:
@@ -35,7 +37,10 @@ private:
     QLabel *actualLastName;
     QLabel *actualCpr;
 
-    chooseWindow ch;
+    Person* ppl_;
+
+    int type_;
+    quint16 id;
 
 signals:
 
