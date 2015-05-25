@@ -23,7 +23,9 @@ SOURCES += database.cpp \
     adduser.cpp \
     person.cpp \
     pills.cpp \
-    changepills.cpp
+    changepills.cpp \
+    protokol.cpp \
+    spi.cpp
 
 HEADERS  += database.h \
     mainwindow.h \
@@ -34,6 +36,6 @@ HEADERS  += database.h \
     adduser.h \
     person.h \
     pills.h \
-    changepills.h
-
-FORMS    += mainwindow.ui
+    changepills.h #\
+    #protokol.h \
+    #spi.h

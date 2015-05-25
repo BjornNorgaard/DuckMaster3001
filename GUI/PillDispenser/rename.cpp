@@ -10,13 +10,13 @@
 #include <QDesktopWidget>
 #include "rename.h"
 
-Rename::Rename(QWidget *parent, ErrorWindow* err)
+Rename::Rename(QWidget *parent, ErrorWindow* err, Person* ppl)
     : QWidget(parent)
 {
     err_ = err;
 
     //Creating window specific information and layout
-    createWidgets();
+    createWidgets(ppl);
     setStyleSheets();
     setLayoutGrids();
     connections();
@@ -102,10 +102,10 @@ void Rename::setStyleSheets()
     accept->setStyleSheet("background: lightgray");
 }
 
-void Rename::createWidgets()
+void Rename::createWidgets(Person* ppl)
 {
     //Set background color and creating Acceptwindow popup and window definitions
-    AW_ = new AcceptPopup;
+    AW_ = new AcceptPopup(0, 0, ppl);
     AW_->setParent(this);
     Qt::WindowFlags flags = AW_->windowFlags();
     AW_->setWindowFlags(flags | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog );
@@ -172,6 +172,9 @@ void Rename::openNewWindow()
     } else {
         //Setting info
         AW_->setNames(le1->text().toCaseFolded(),le2->text().toCaseFolded(),le3->text().toCaseFolded());
+        AW_->setList(lw_);
+
+        AW_->setType(LEditUser->text());
 
         //Clearing lineedits
         le1->clear();

@@ -8,24 +8,12 @@ Database::~Database() {
     closeDB();
 }
 
-/*
- * Database::logSQLFailure()
- * Description  :
- * Precondition :
- * Postcondition:
- */
 void Database::logSQLFailure(const QSqlQuery& query) {
     const QSqlError error(query.lastQuery());
     qWarning() << "SQL Query failed" << query.lastQuery();
     qWarning() << error.number() << query.lastError().text();
 }
 
-/*
- * Database::execQueryAndLogFailure()
- * Description  :
- * Precondition :
- * Postcondition:
- */
 bool Database::execQueryAndLogFailure(QSqlQuery& query) {
     if (!query.exec()) {
         logSQLFailure(query);
@@ -34,12 +22,6 @@ bool Database::execQueryAndLogFailure(QSqlQuery& query) {
     return true;
 }
 
-/*
- * Database::execQueryAndLogFailure()
- * Description  :
- * Precondition :
- * Postcondition:
- */
 bool Database::execQueryAndLogFailure(QSqlQuery& query, const QString& queryString) {
     if (!query.exec(queryString)) {
         logSQLFailure(query);
@@ -48,12 +30,6 @@ bool Database::execQueryAndLogFailure(QSqlQuery& query, const QString& queryStri
     return true;
 }
 
-/*
- * Database::openDB()
- * Description  : Opens database connection.
- * Precondition :
- * Postcondition:
- */
 QSqlError Database::openDB() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("./db.sqlite");
@@ -69,24 +45,12 @@ QSqlError Database::openDB() {
     return QSqlError();
 }
 
-/*
- * Database::closeDB()
- * Description  : Closes database connection.
- * Precondition :
- * Postcondition:
- */
 void Database::closeDB() {
     QSqlQuery query;
 
     execQueryAndLogFailure(query, "VACUUM");
 }
 
-/*
- * Database::setupDB()
- * Description  : Sets up the database even if it exists. 
- * Precondition :
- * Postcondition:
- */
 void Database::setupDB() {
     QSqlQuery query;
 
@@ -111,17 +75,5 @@ bool Database::isEmpty() {
         return false;
     }
 
-    return true;
-}
-
-bool Database::createList(QListWidget*& lw) {
-    QSqlQuery query;
-
-    //Forstår ikke helt metoden
-    execQueryAndLogFailure(query, "SELECT * FROM users");
-
-    while (query.next()) {
-        lw->addItem(query.value(4).toString() + ", " + query.value(3).toString() + ", " + query.value(2).toString());
-    }
     return true;
 }

@@ -27,9 +27,6 @@ class Database : public QObject {
         return db;
     }
 
-    // Deprecated
-    bool createList(QListWidget*& lw);
-
   private:
     Database();
 };

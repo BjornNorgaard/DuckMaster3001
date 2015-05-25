@@ -1,5 +1,5 @@
-#ifndef PERSON_HPP_
-#define PERSON_HPP_
+#ifndef PERSON_H
+#define PERSON_H
 
 #include <QString>
 #include "database.h"
@@ -30,11 +30,14 @@ class Person {
     bool modifyGroup(quint16 id, const quint8 group);
 
     // Get
-    bool getCpr(quint16 id, QString& cpr);
-    bool getFingerprint(quint16 id, QString& fingerprint);
-    bool getFirstname(quint16 id, QString& firstname);
-    bool getLastname(quint16 id, QString& lastname);
-    bool getGroup(quint16, quint8& group);
+    bool getCpr(quint16 id, QString& cpr) const;
+    bool getFingerprint(quint16 id, QString& fingerprint) const;
+    bool getFirstname(quint16 id, QString& firstname) const;
+    bool getLastname(quint16 id, QString& lastname) const;
+    bool getGroup(quint16 id, quint8& group) const;
+
+    // Create list
+    bool createList(QListWidget*& lw);
 
   private:
     enum {

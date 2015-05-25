@@ -12,8 +12,8 @@ class SPI {
   public:
     SPI();
     ~SPI();
-    int transfer(unsigned char command[], size_t size);
-    void recieve(unsigned char command[], size_t size);
+    int transfer(unsigned char* command, size_t size);
+    int recieve(unsigned char* command, size_t size);
 
   private:
     void openSPI();

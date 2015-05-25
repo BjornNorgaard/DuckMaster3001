@@ -1,14 +1,8 @@
 #include "pills.h"
 
-Pills::Pills() : this->db(db) {}
+Pills::Pills(Database& database) : db(database) {}
 
-/*
- * Pills::addPills()
- * Description  : Adds a pill to the database.
- * Precondition :
- * Postcondition:
- */
-bool Pills::addPills(QString& name) {
+bool Pills::addPill(QString& name) {
     QSqlQuery query;
 
     query.prepare("INSERT OR IGNORE INTO pills (name) VALUES (:name)");
@@ -16,13 +10,7 @@ bool Pills::addPills(QString& name) {
     return db.execQueryAndLogFailure(query);
 }
 
-/*
- * Pills::delPills()
- * Description  : Deletes a 'pill_id' from the database.
- * Precondition :
- * Postcondition:
- */
-bool Pills::delPills(quint16 pillid) {
+bool Pills::delPill(quint16 pillid) {
     QSqlQuery query;
 
     query.prepare("DELETE FROM pills WHERE pill_id = :pillid");
@@ -43,12 +31,20 @@ bool Pills::delPills(quint16 pillid) {
     return true;
 }
 
-/*
- * Pills::assignPills()
- * Description  : Assigns an amount 'pill_amount' of 'pill_id' to 'user_id'.
- * Precondition :
- * Postcondition:
- */
+bool Pills::getPill(quint16& id, QString& name) const {
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM pills WHERE name = :name");
+    query.bindValue(":name", name);
+    db.execQueryAndLogFailure(query);
+    while (query.next()) {
+        id = query.value(SQL_PILLS_PILL_ID).toUInt();
+        return true;
+    }
+
+    return false;
+}
+
 bool Pills::assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount) {
     QSqlQuery query;
 
@@ -60,12 +56,6 @@ bool Pills::assignPills(quint16 user_id, quint16 pill_id, quint8 pill_amount) {
     return db.execQueryAndLogFailure(query);
 }
 
-/*
- * Pills::removePills()
- * Description  : Removes a 'pill_id' from 'user_id'.
- * Precondition :
- * Postcondition:
- */
 bool Pills::removePills(quint16 userid, quint16 pillid) {
     QSqlQuery query;
 

@@ -1,10 +1,11 @@
 #include "person.h"
 
-Person::Person() : this->db(db) {}
+Person::Person(Database& database) : db(database) {}
 
 bool Person::createPerson(const QString& cpr, const QString& firstname, const QString& lastname) {
     QSqlQuery query;
     quint16 id;
+
 
     if (findPerson(id, cpr)) {
         qDebug() << "User already exists in database!";
@@ -26,6 +27,17 @@ bool Person::createPerson(const QString& cpr, const QString& firstname, const QS
     // Assign group
     modifyGroup(id, GRP_USER);
 
+    return true;
+}
+
+bool Person::createList(QListWidget*& lw) {
+    QSqlQuery query;
+
+    db.execQueryAndLogFailure(query, "SELECT * FROM users");
+
+    while (query.next()) {
+        lw->addItem(query.value(4).toString() + ", " + query.value(3).toString() + ", " + query.value(2).toString());
+    }
     return true;
 }
 
@@ -137,7 +149,7 @@ bool Person::modifyGroup(quint16 id, const quint8 group) {
     return db.execQueryAndLogFailure(query);
 }
 
-bool Person::getCpr(quint16 id, QString& cpr) {
+bool Person::getCpr(quint16 id, QString& cpr) const {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
@@ -151,7 +163,7 @@ bool Person::getCpr(quint16 id, QString& cpr) {
     return false;
 }
 
-bool Person::getFingerprint(quint16 id, QString& fingerprint) {
+bool Person::getFingerprint(quint16 id, QString& fingerprint) const {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
@@ -165,7 +177,7 @@ bool Person::getFingerprint(quint16 id, QString& fingerprint) {
     return false;
 }
 
-bool Person::getFirstname(quint16 id, QString& firstname) {
+bool Person::getFirstname(quint16 id, QString& firstname) const {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
@@ -179,7 +191,7 @@ bool Person::getFirstname(quint16 id, QString& firstname) {
     return false;
 }
 
-bool Person::getLastname(quint16 id, QString& lastname) {
+bool Person::getLastname(quint16 id, QString& lastname) const {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM users WHERE user_id = :id");
@@ -193,7 +205,7 @@ bool Person::getLastname(quint16 id, QString& lastname) {
     return false;
 }
 
-bool Person::getGroup(quint16 id, quint8& group) {
+bool Person::getGroup(quint16 id, quint8& group) const {
     QSqlQuery query;
 
     query.prepare("SELECT * FROM groups WHERE user_id = :id");

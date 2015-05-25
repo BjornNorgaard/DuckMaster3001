@@ -40,7 +40,7 @@ void SPI::closeSPI() {
         std::cout << "Can't close SPI device.";
 }
 
-int SPI::transfer(unsigned char command[], size_t size) {
+int SPI::transfer(unsigned char* command, size_t size) {
     int ret;
 
     struct spi_ioc_transfer tr;
@@ -53,13 +53,13 @@ int SPI::transfer(unsigned char command[], size_t size) {
     tr.cs_change = 0;
 
     ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
-    if (ret < 0)
+    if (ret < 1)
         std::cout << "Can't send message";
 
     return ret;
 }
 
-void SPI::recieve(unsigned char command[], size_t size) {
+int SPI::recieve(unsigned char* command, size_t size) {
     int ret;
 
     struct spi_ioc_transfer tr;
@@ -72,6 +72,8 @@ void SPI::recieve(unsigned char command[], size_t size) {
     tr.cs_change = 0;
 
     ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
-    if (ret < 0)
+    if (ret < 1)
         std::cout << "Can't send message";
+
+    return ret;
 }
