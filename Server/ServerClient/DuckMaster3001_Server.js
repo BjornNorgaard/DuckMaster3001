@@ -31,9 +31,7 @@ var derpFunc = function(request, response) {
 				body += data;
 			})
 			
-			// Done receiving data, now saving
-			/*færdig med at modtage data, nu skal beskeden konverteres
-			fra JSON til noget vi bedre kan læse og så udskrives beskeden*/
+			/*færdig med at modtage data, nu skal beskeden konverteres fra JSON til noget vi bedre kan læse og så udskrives beskeden*/
 			request.on("end", function() {
 
 				/*den modtagne besked konverteres og gemmes i msg*/
@@ -70,8 +68,7 @@ var derpFunc = function(request, response) {
 				sendData = msgLog.shift();
 			}
 			
-			/*melder tilbage at alt gik godt (200 = OK) og at det den får skal læses som 
-			noget af typen JSON*/
+			/*melder tilbage at alt gik godt (200 = OK) og at det den får skal læses som noget af typen JSON*/
 			response.writeHeader(200, {"Content-Type": "application/json"});
 
 			/*data konverteres til JSON og sendes*/
